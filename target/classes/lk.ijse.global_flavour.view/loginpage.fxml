@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.LoginPageController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="500.0" prefWidth="700.0">
+         <center>
+            <AnchorPane prefHeight="500.0" prefWidth="329.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="586.0" fitWidth="352.0" opacity="0.1" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../lk.ijse.global_flavour.assets/login_page/background-5463418_1920.jpg" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="txtLogUserName" layoutX="90.0" layoutY="196.0" prefHeight="40.0" prefWidth="187.0" promptText="User Name" style="-fx-background-color: transperan; -fx-border-color: #99004d; -fx-border-width: 0px 0px 2px 0px;">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField fx:id="txtLogPassword" layoutX="90.0" layoutY="263.0" prefHeight="40.0" prefWidth="187.0" promptText="Password" style="-fx-background-color: transperan; -fx-border-color: #99004d; -fx-border-width: 0px 0px 2px 0px;">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </PasswordField>
+                  <Label layoutX="110.0" layoutY="128.0" prefHeight="36.0" prefWidth="135.0" text="User Login" textFill="#54003e" textOverrun="WORD_ELLIPSIS">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="82.0" fitWidth="75.0" layoutX="141.0" layoutY="31.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../lk.ijse.global_flavour.assets/login_page/man.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="62.0" layoutY="205.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../lk.ijse.global_flavour.assets/login_page/user.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="65.0" layoutY="272.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../lk.ijse.global_flavour.assets/login_page/lock.png" />
+                     </image>
+                  </ImageView>
+                  <Hyperlink layoutX="184.0" layoutY="448.0" text="Forgot Your Password?" />
+                  <JFXButton buttonType="RAISED" layoutX="135.0" layoutY="340.0" text="Login">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXHamburger layoutX="290.0" layoutY="-6.0" prefHeight="40.0" prefWidth="64.0" />
+               </children>
+            </AnchorPane>
+         </center>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <left>
+            <AnchorPane prefHeight="490.0" prefWidth="336.0" style="-fx-background-color: B57E25;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="67.0" layoutY="251.0" prefHeight="57.0" prefWidth="222.0" text="Spice Flavour">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="BLACK" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../lk.ijse.global_flavour.assets/login_page/peppers-25384_1280.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>

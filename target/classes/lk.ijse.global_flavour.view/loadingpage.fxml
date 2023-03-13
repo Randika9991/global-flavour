@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="loadingAncPane" focusTraversable="true" prefHeight="130.0" prefWidth="237.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.LoadingPageController">
+   <children>
+      <Label layoutX="25.0" layoutY="14.0" prefHeight="26.0" prefWidth="125.0" text="Please Wait.">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="88.0" layoutY="52.0" opacity="0.49" prefHeight="21.0" prefWidth="149.0" text="Loading progress......" />
+      <ImageView fitHeight="37.0" fitWidth="52.0" layoutX="36.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk.ijse.global_flavour.assets/loading_page/progress-icon-gif-22.jpg" />
+         </image>
+      </ImageView>
+      <ProgressBar fx:id="txtProgressbar" layoutX="21.0" layoutY="93.0" prefHeight="21.0" prefWidth="196.0" progress="0.0" style="-fx-accent: B57E25" />
+   </children>
+</AnchorPane>
