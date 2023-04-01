@@ -12,10 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoadingPageController {
+
 
     @FXML
     private ResourceBundle resources;
@@ -38,8 +40,7 @@ public class LoadingPageController {
             try {
                 for (int i = 0; i <= 10; i++) {
                     double x = i * (0.1);
-                    txtProgressbar.setProgress(x);
-
+                   txtProgressbar.setProgress(x);
 
                     try {
                         Thread.sleep(300);

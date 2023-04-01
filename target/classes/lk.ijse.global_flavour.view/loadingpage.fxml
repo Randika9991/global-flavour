@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
@@ -7,19 +8,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loadingAncPane" focusTraversable="true" prefHeight="130.0" prefWidth="237.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.LoadingPageController">
+<AnchorPane fx:id="loadingAncPane" focusTraversable="true" prefHeight="388.0" prefWidth="464.0" style="-fx-background-color: white;" stylesheets="@../lk.ijse.global_flavour.styles/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.LoadingPageController">
+   <styleClass>
+      <String fx:value="adminHomePageButtonStyle" />
+      <String fx:value="dashboard" />
+   </styleClass>
    <children>
-      <Label layoutX="25.0" layoutY="14.0" prefHeight="26.0" prefWidth="125.0" text="Please Wait.">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="88.0" layoutY="52.0" opacity="0.49" prefHeight="21.0" prefWidth="149.0" text="Loading progress......" />
-      <ImageView fitHeight="37.0" fitWidth="52.0" layoutX="36.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="279.0" fitWidth="318.0" layoutX="74.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lk.ijse.global_flavour.assets/loading_page/progress-icon-gif-22.jpg" />
+            <Image url="@../lk.ijse.global_flavour.assets/i want.png" />
          </image>
       </ImageView>
-      <ProgressBar fx:id="txtProgressbar" layoutX="21.0" layoutY="93.0" prefHeight="21.0" prefWidth="196.0" progress="0.0" style="-fx-accent: B57E25" />
+      <ImageView fitHeight="379.0" fitWidth="412.0" layoutX="42.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk.ijse.global_flavour.assets/oie_transparent.png" />
+         </image>
+      </ImageView>
+      <ProgressBar fx:id="txtProgressbar" layoutX="23.0" layoutY="340.0" prefHeight="16.0" prefWidth="419.0" progress="0.0" style="-fx-accent:#404040"/>
+      <Label layoutX="179.0" layoutY="145.0" prefHeight="46.0" prefWidth="107.0" text="spicy " textFill="WHITE">
+         <font>
+            <Font name="Agency FB" size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="207.0" layoutY="195.0" prefHeight="46.0" prefWidth="165.0" text="flavour" textFill="WHITE">
+         <font>
+            <Font name="Agency FB" size="38.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

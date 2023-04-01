@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="adminAncPane" prefHeight="732.0" prefWidth="1421.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.HomeFormController">
+   <children>
+      <ImageView fitHeight="807.0" fitWidth="1360.0" layoutX="48.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-62.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="-13.0">
+         <image>
+            <Image url="@../lk.ijse.global_flavour.assets/high-angle-asian-food-ingredients-with-copy-space.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
