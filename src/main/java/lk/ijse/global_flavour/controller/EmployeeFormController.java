@@ -1,3 +1,6 @@
+//save eka haduwa,deleat,update,serch,
+
+
 package lk.ijse.global_flavour.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -16,6 +19,7 @@ import lk.ijse.global_flavour.dto.tm.AdminSalaryTM;
 import lk.ijse.global_flavour.dto.tm.EmployeeTM;
 import lk.ijse.global_flavour.model.AdminSalaryModel;
 import lk.ijse.global_flavour.model.EmployeeSetAndGetModel;
+import lk.ijse.global_flavour.util.AlertController;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -92,6 +96,104 @@ public class EmployeeFormController {
     @FXML
     private TextField txtsearchEmployee;
 
+    @FXML
+    void buttonSaveOnACT(ActionEvent actionEvent) {
+
+        String employeeId = txtEmpId.getText();
+        String employeeName = txtEmpName.getText();
+        String employeeNic = txtEmpNic.getText();
+        String employeeDOB = String.valueOf(txtEmpDOBBox.getValue());
+        String employeeJobTittle = txtEmpJobTitle.getText();
+        String employeeContact = txtEmpContact.getText();
+        String employeeAddress = txtEmpAddress.getText();
+        String employeeEmail = txtEmpEmail.getText();
+
+        EmployeeSetAndGet cus = new EmployeeSetAndGet(employeeId, employeeName, employeeAddress, employeeDOB,employeeContact,employeeEmail,employeeNic,employeeJobTittle);
+
+        try {
+            boolean isSaved = EmployeeSetAndGetModel.save(cus);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Data added... !").show();
+                onActionGetAllEmployee();
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+        }
+    }
+
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+
+            String employeeId12 = txtEmpId.getText();
+            String name = txtEmpName.getText();
+            String address = txtEmpAddress.getText();
+            String dOB = String.valueOf(txtEmpDOBBox.getValue());
+            String contact = txtEmpContact.getText();
+            String email = txtEmpEmail.getText();
+            String nic = txtEmpNic.getText();
+            String jobTittle = txtEmpJobTitle.getText();
+
+            EmployeeSetAndGet employeeSetAndGet = new EmployeeSetAndGet(employeeId12, name, address, dOB, contact, email, nic, jobTittle);
+            try {
+
+                boolean isUpdated = EmployeeSetAndGetModel.change(employeeSetAndGet);
+                new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+                onActionGetAllEmployee();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            }
+
+    }
+
+    @FXML
+    public void btnDeleteOnAction(ActionEvent actionEvent) {
+
+        if(txtEmpId.getText().isEmpty()){
+
+        }else {
+            boolean ok = AlertController.okconfirmmessage("Are you Sure.\nDo you wont Delete item");
+
+            if(ok){
+                String code = txtEmpId.getText();
+
+                try {
+                    boolean isDeleted = EmployeeSetAndGetModel.delete(code);
+                    if (isDeleted) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
+                        onActionGetAllEmployee();
+                    }
+                } catch (SQLException e) {
+                    new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                }
+            }
+        }
+
+
+
+    }
+
+    @FXML
+    void searchBtnOnClick(ActionEvent event) {
+        String empid = txtsearchEmployee.getText();
+
+        try {
+            EmployeeSetAndGet cust = EmployeeSetAndGetModel.search(empid);
+            if (cust != null) {
+                txtEmpId.setText(cust.getEmployeeId());
+                txtEmpName.setText(cust.getEmployeeName());
+                txtEmpAddress.setText(cust.getAddress());
+                txtEmpDOBBox.setValue(LocalDate.parse(cust.getDOB()));
+                txtEmpContact.setText(cust.getCotactNo());
+                txtEmpEmail.setText(cust.getEmail());
+                txtEmpNic.setText(cust.getNic());
+                txtEmpJobTitle.setText(cust.getJobTittle());
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+        }
+    }
 
     @FXML
     void employeeMarkOnMouse(MouseEvent event) {
@@ -108,82 +210,6 @@ public class EmployeeFormController {
         txtEmpContact.setText(columns.get(5).getCellData(row).toString());
         txtEmpAddress.setText(columns.get(6).getCellData(row).toString());
         txtEmpEmail.setText(columns.get(7).getCellData(row).toString());
-
-    }
-
-    @FXML
-    void buttonSaveOnACT(ActionEvent actionEvent) {
-        String employeeId = txtEmpId.getText();
-        String employeeName = txtEmpName.getText();
-        String employeeNic = txtEmpNic.getText();
-        String employeeDOB = String.valueOf(txtEmpDOBBox.getValue());
-        String employeeJobTittle = txtEmpJobTitle.getText();
-        String employeeContact = txtEmpContact.getText();
-        String employeeAddress = txtEmpAddress.getText();
-        String employeeEmail = txtEmpEmail.getText();
-
-        EmployeeSetAndGet cus = new EmployeeSetAndGet(employeeId, employeeName, employeeAddress, employeeDOB,employeeContact,employeeEmail,employeeNic,employeeJobTittle);
-
-        try {
-//
-            boolean isSaved = EmployeeSetAndGetModel.save(cus);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Data added... !").show();
-                onActionGetAllEmployee();
-
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
-        }
-    }
-
-    @FXML
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
-        String code = txtEmpId.getText();
-
-        try {
-            boolean isDeleted = EmployeeSetAndGetModel.delete(code);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
-                onActionGetAllEmployee();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
-        }
-    }
-
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
-        String employeeId12 = txtEmpId.getText();
-        String name = txtEmpName.getText();
-        String address = txtEmpAddress.getText();
-        String dOB = String.valueOf(txtEmpDOBBox.getValue());
-        String contact = txtEmpContact.getText();
-        String email = txtEmpEmail.getText();
-        String nic = txtEmpNic.getText();
-        String jobTittle = txtEmpJobTitle.getText();
-
-        EmployeeSetAndGet employeeSetAndGet=new EmployeeSetAndGet(employeeId12,name, address, dOB,contact,email,nic,jobTittle);
-        try {
-
-            boolean isUpdated = EmployeeSetAndGetModel.change(employeeSetAndGet);
-            new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
-            onActionGetAllEmployee();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
-        }
-    }
-
-    void onActionGetAllEmployee() {
-        try {
-            ObservableList<EmployeeTM> EmpList = EmployeeSetAndGetModel.getAll();
-            tablEmplyee.setItems(EmpList);
-
-
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happend!").show();
-        }
 
     }
 
@@ -208,42 +234,6 @@ public class EmployeeFormController {
         }
     }
 
-    void setCellValuefactory(){
-        tablEmployeeID.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
-        tablEmployeeName.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
-        tablEmployeeNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
-        tablEmployeeDOB.setCellValueFactory(new PropertyValueFactory<>("DOB"));
-        tablEmployeeJT.setCellValueFactory(new PropertyValueFactory<>("jobTittle"));
-        tablEmployeeContact.setCellValueFactory(new PropertyValueFactory<>("cotactNo"));
-        tablEmployeeAddrsss.setCellValueFactory(new PropertyValueFactory<>("address"));
-        tablEmployeemail.setCellValueFactory(new PropertyValueFactory<>("email"));
-
-
-    }
-
-    @FXML
-    void searchBtnOnClick(ActionEvent event) {
-        String empid = txtsearchEmployee.getText();
-
-        try {
-            EmployeeSetAndGet cust = EmployeeSetAndGetModel.search(empid);
-            if (cust != null) {
-                txtEmpId.setText(cust.getEmployeeId());
-                txtEmpName.setText(cust.getEmployeeName());
-                txtEmpAddress.setText(cust.getAddress());
-                txtEmpDOBBox.setValue(LocalDate.parse(cust.getDOB()));
-                txtEmpContact.setText(cust.getCotactNo());
-                txtEmpEmail.setText(cust.getEmail());
-                txtEmpNic.setText(cust.getNic());
-                txtEmpJobTitle.setText(cust.getJobTittle());
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
-        }
-
-
-    }
-
     @FXML
     void searchEmployeeID(KeyEvent event) throws SQLException {
 
@@ -259,11 +249,7 @@ public class EmployeeFormController {
             tablEmplyee.setItems(filteredData);} else {
             tablEmplyee.setItems(obList);
         }
-
-
-
     }
-
 
     @FXML
     void initialize() {
@@ -271,5 +257,25 @@ public class EmployeeFormController {
         onActionGetAllEmployee();
     }
 
+    void setCellValuefactory(){
+        tablEmployeeID.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+        tablEmployeeName.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
+        tablEmployeeNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        tablEmployeeDOB.setCellValueFactory(new PropertyValueFactory<>("DOB"));
+        tablEmployeeJT.setCellValueFactory(new PropertyValueFactory<>("jobTittle"));
+        tablEmployeeContact.setCellValueFactory(new PropertyValueFactory<>("cotactNo"));
+        tablEmployeeAddrsss.setCellValueFactory(new PropertyValueFactory<>("address"));
+        tablEmployeemail.setCellValueFactory(new PropertyValueFactory<>("email"));
+    }
 
+    void onActionGetAllEmployee() {
+        try {
+            ObservableList<EmployeeTM> EmpList = EmployeeSetAndGetModel.getAll();
+            tablEmplyee.setItems(EmpList);
+
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "something happend!").show();
+        }
+
+    }
 }

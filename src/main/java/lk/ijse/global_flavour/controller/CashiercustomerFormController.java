@@ -15,6 +15,7 @@ import lk.ijse.global_flavour.model.AdminSalaryModel;
 import lk.ijse.global_flavour.model.CashierCustomerModel;
 import lk.ijse.global_flavour.dto.CashierCustomer;
 import lk.ijse.global_flavour.model.ItemModel;
+import lk.ijse.global_flavour.util.AlertController;
 
 import java.sql.SQLException;
 import java.util.function.Predicate;
@@ -34,16 +35,10 @@ public class CashiercustomerFormController {
     private JFXTextField txtCusAddress;
 
     @FXML
-    private JFXTextField txtCusUserName;
-
-    @FXML
     private TableView<CashierCustomerTM> mainCOMCustomer;
 
     @FXML
     private TableColumn<?, ?> COMCusId;
-
-    @FXML
-    private TableColumn<?, ?> COMuserName;
 
     @FXML
     private TableColumn<?, ?> COMCustomName;
@@ -66,21 +61,20 @@ public class CashiercustomerFormController {
     @FXML
     void buttonSaveOnACT(ActionEvent event) {
         String CusId = txtCusId.getText();
-        String UserName = txtCusUserName.getText();
         String CusName = txtCusName.getText();
         String CusContact = txtCusContact.getText();
         String CusAddress = txtCusAddress.getText();
         String CusEmail1 = txtCusEmail1.getText();
 
 
-        CashierCustomer allCustom = new CashierCustomer(CusId, UserName, CusName,CusContact,CusAddress,CusEmail1);
+        CashierCustomer allCustom = new CashierCustomer(CusId, CusName,CusContact,CusAddress,CusEmail1);
 
         try {
-//            boolean isSaved = ItemModel.save(code, description, unitPrice, qtyOnHand);
+//
             boolean isSaved = CashierCustomerModel.save(allCustom);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Item saved!").show();
-               // onActionGetAllItem();
+                onActionGetAllCustom();
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -91,38 +85,46 @@ public class CashiercustomerFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        String CusId = txtCusId.getText();
-        String UserName = txtCusUserName.getText();
-        String CusName = txtCusName.getText();
-        String CusContact = txtCusContact.getText();
-        String CusAddress = txtCusAddress.getText();
-        String CusEmail1 = txtCusEmail1.getText();
 
 
-        CashierCustomer allCustom = new CashierCustomer(CusId, UserName, CusName,CusContact,CusAddress,CusEmail1);
+            String CusId = txtCusId.getText();
+            String CusName = txtCusName.getText();
+            String CusContact = txtCusContact.getText();
+            String CusAddress = txtCusAddress.getText();
+            String CusEmail1 = txtCusEmail1.getText();
 
-        try {
-            boolean isUpdated = CashierCustomerModel.update(allCustom);
-            new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
-            //onActionGetAllItem();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
-        }
+
+            CashierCustomer allCustom = new CashierCustomer(CusId, CusName,CusContact,CusAddress,CusEmail1);
+
+            try {
+                boolean isUpdated = CashierCustomerModel.update(allCustom);
+                new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+                onActionGetAllCustom();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            }
+
 
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        String code = txtCusId.getText();
-        try {
-            boolean isDeleted = CashierCustomerModel.delete(code);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
-                //onActionGetAllItem();
+
+        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+
+        if(ok){
+            String code = txtCusId.getText();
+            try {
+                boolean isDeleted = CashierCustomerModel.delete(code);
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
+                    onActionGetAllCustom();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+
         }
 
     }
@@ -135,7 +137,6 @@ public class CashiercustomerFormController {
             CashierCustomer cust = CashierCustomerModel.search(id);
             if (cust != null) {
                 txtCusId.setText(cust.getCustomerId());
-                txtCusUserName.setText(cust.getUserName());
                 txtCusName.setText(cust.getCustomerName());
                 txtCusContact.setText(cust.getContactNo());
                 txtCusAddress.setText(cust.getAddress());
@@ -166,8 +167,6 @@ public class CashiercustomerFormController {
             mainCOMCustomer.setItems(filteredData);} else {
             mainCOMCustomer.setItems(obList);
         }
-
-
     }
 
     @FXML
@@ -178,27 +177,22 @@ public class CashiercustomerFormController {
         ObservableList<TableColumn<CashierCustomerTM,?>> columns=mainCOMCustomer.getColumns();
 
         txtCusId.setText(columns.get(0).getCellData(row).toString());
-        txtCusUserName.setText(columns.get(1).getCellData(row).toString());
-        txtCusName.setText(columns.get(2).getCellData(row).toString());
-        txtCusContact.setText(columns.get(3).getCellData(row).toString());
-        txtCusAddress.setText(columns.get(4).getCellData(row).toString());
-        txtCusEmail1.setText(columns.get(5).getCellData(row).toString());
+        txtCusName.setText(columns.get(1).getCellData(row).toString());
+        txtCusContact.setText(columns.get(2).getCellData(row).toString());
+        txtCusAddress.setText(columns.get(3).getCellData(row).toString());
+        txtCusEmail1.setText(columns.get(4).getCellData(row).toString());
 
     }
     @FXML
     void initialize() {
         onActionGetAllCustom();
         setCellValuefactory();
-
-
     }
 
     void onActionGetAllCustom() {
         try {
             ObservableList<CashierCustomerTM> supList = CashierCustomerModel.getAll();
             mainCOMCustomer.setItems(supList);
-
-
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "something happend!").show();
         }
@@ -207,7 +201,6 @@ public class CashiercustomerFormController {
 
     void setCellValuefactory(){
         COMCusId.setCellValueFactory(new PropertyValueFactory<>("CustomerId"));
-        COMuserName.setCellValueFactory(new PropertyValueFactory<>("UserName"));
         COMCustomName.setCellValueFactory(new PropertyValueFactory<>("CustomerName"));
         COMCustContact.setCellValueFactory(new PropertyValueFactory<>("ContactNo"));
         COMCustAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));

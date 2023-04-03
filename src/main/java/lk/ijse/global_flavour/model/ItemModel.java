@@ -28,7 +28,9 @@ public class ItemModel {
         }
     }
     public static boolean update(Item supAdd) throws SQLException {
+
         String sql = "UPDATE item SET ItemName = ?, unitPrice = ?, category = ?, QtyONHand = ? WHERE itemCode = ?";
+
         try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
 
             pstm.setString(1, supAdd.getItemName());
@@ -42,11 +44,12 @@ public class ItemModel {
     }
 
     public static boolean delete(String id) throws SQLException {
+
         String sql = "DELETE FROM item WHERE itemCode = ?";
+
         try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
 
             pstm.setString(1, id);
-
             return pstm.executeUpdate() > 0;
         }
     }
@@ -72,6 +75,7 @@ public class ItemModel {
             return null;
         }
     }
+
     public static ObservableList<ItemTM> getAll() throws SQLException {
         String sql = "SELECT * FROM item";
 

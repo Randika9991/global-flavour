@@ -84,10 +84,10 @@ public class AdminDashboardController {
         adminAncPane.getChildren().clear();
         adminAncPane.getChildren().add(load);
         ButtonColourController.btncolor(ItmBtn,adminAncPane);
-
     }
 
     public void btnOnOrder(ActionEvent actionEvent) {
+
     }
 
     @FXML
@@ -96,14 +96,13 @@ public class AdminDashboardController {
         adminAncPane.getChildren().clear();
         adminAncPane.getChildren().add(load);
         ButtonColourController.btncolor(SalaryBtn1,adminAncPane);
-
     }
 
     public void btnOnReport(ActionEvent actionEvent) {
+
     }
     @FXML
     void BackOnAction(ActionEvent event) throws IOException {
-
         Stage stage = new Stage();
         Parent root = null;
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
@@ -111,8 +110,6 @@ public class AdminDashboardController {
         stage.setScene(scene);
         stage.show();
         adminAncPane.getScene().getWindow().hide();
-
-
     }
 
 

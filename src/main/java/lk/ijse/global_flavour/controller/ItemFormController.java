@@ -14,6 +14,7 @@ import lk.ijse.global_flavour.dto.tm.ItemTM;
 import lk.ijse.global_flavour.dto.tm.SuppliersTM;
 import lk.ijse.global_flavour.model.ItemModel;
 import lk.ijse.global_flavour.model.SuppliersModel;
+import lk.ijse.global_flavour.util.AlertController;
 
 import java.sql.SQLException;
 import java.util.function.Predicate;
@@ -61,65 +62,79 @@ public class ItemFormController {
 
     @FXML
     void buttonSaveOnACT(ActionEvent event) {
-        String itemId = txtItemId.getText();
-        String itemName = txtItemName.getText();
-        String itemPri = txtItemPrice.getText();
-        String itemCate = txtItemCatogory.getText();
-        String itemQTY = txtItemQTY.getText();
 
-        Item itemAll = new Item(itemId, itemName, itemPri,itemCate,itemQTY);
+            String itemId = txtItemId.getText();
+            String itemName = txtItemName.getText();
+            String itemPri = txtItemPrice.getText();
+            String itemCate = txtItemCatogory.getText();
+            String itemQTY = txtItemQTY.getText();
 
-        try {
+            Item itemAll = new Item(itemId, itemName, itemPri,itemCate,itemQTY);
+
+            try {
 //            boolean isSaved = ItemModel.save(code, description, unitPrice, qtyOnHand);
-            boolean isSaved = ItemModel.save(itemAll);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Item saved!").show();
-                onActionGetAllItem();
+                boolean isSaved = ItemModel.save(itemAll);
+                if (isSaved) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Item saved!").show();
+                    onActionGetAllItem();
+                }
+            } catch (SQLException e) {
+                System.out.println(e);
+                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
             }
-        } catch (SQLException e) {
-            System.out.println(e);
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
-        }
+
+
 
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
 
-        String code = txtItemId.getText();
-        try {
-            boolean isDeleted = ItemModel.delete(code);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
-                onActionGetAllItem();
+        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+
+        if(ok){
+            String code = txtItemId.getText();
+            try {
+                boolean isDeleted = ItemModel.delete(code);
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "deleted Success!").show();
+                    onActionGetAllItem();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+
         }
 
     }
 
     @FXML
+
     void btnUpdateOnAction(ActionEvent event) {
-        String itemId = txtItemId.getText();
-        String itemName = txtItemName.getText();
-        String itemPri = txtItemPrice.getText();
-        String itemCate = txtItemCatogory.getText();
-        String itemQTY = txtItemQTY.getText();
 
-        Item itemAll = new Item(itemId, itemName, itemPri,itemCate,itemQTY);
+        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Update item");
 
-        try {
-            boolean isUpdated = ItemModel.update(itemAll);
-            new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
-            onActionGetAllItem();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+        if(ok){
+            String itemId = txtItemId.getText();
+            String itemName = txtItemName.getText();
+            String itemPri = txtItemPrice.getText();
+            String itemCate = txtItemCatogory.getText();
+            String itemQTY = txtItemQTY.getText();
+
+            Item itemAll = new Item(itemId, itemName, itemPri,itemCate,itemQTY);
+
+            try {
+                boolean isUpdated = ItemModel.update(itemAll);
+                new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+                onActionGetAllItem();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            }
         }
 
-    }
 
+    }
 
     @FXML
     void itemIdOnAction(ActionEvent event) {

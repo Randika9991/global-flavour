@@ -11,7 +11,6 @@ import lombok.*;
 
 public class CashierCustomerTM {
     private String CustomerId;
-    private String UserName;
     private String CustomerName;
     private String ContactNo;
     private String Address;

@@ -12,11 +12,18 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import lk.ijse.global_flavour.dto.AdminSalary;
+import lk.ijse.global_flavour.dto.Item;
 import lk.ijse.global_flavour.dto.tm.AdminSalaryTM;
 import lk.ijse.global_flavour.dto.tm.EmployeeTM;
+import lk.ijse.global_flavour.dto.tm.ItemTM;
 import lk.ijse.global_flavour.model.AdminSalaryModel;
+import lk.ijse.global_flavour.model.CashierCustomerModel;
+import lk.ijse.global_flavour.model.ItemModel;
+import lk.ijse.global_flavour.util.AlertController;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.function.Predicate;
 
 
 public class AdminSalaryFormController {
@@ -63,24 +70,8 @@ public class AdminSalaryFormController {
     @FXML
     private JFXComboBox CBMPayM;
 
-
     @FXML
-    void SalryTableOnMouse(MouseEvent event) {
-
-            TablePosition pos=TBLsalary.getSelectionModel().getSelectedCells().get(0);
-            int row=pos.getRow();
-
-            ObservableList<TableColumn<AdminSalaryTM,?>> columns=TBLsalary.getColumns();
-
-            COBEmployeEmpId.setValue(columns.get(0).getCellData(row).toString());
-            txtSalaryId.setText(columns.get(1).getCellData(row).toString());
-            txtSalaryAmountId.setText(columns.get(2).getCellData(row).toString());
-            CBMPayM.setValue(columns.get(3).getCellData(row).toString());
-
-    }
-
-    @FXML
-    void salaryDeleteONAct(ActionEvent event) {
+    void salIdOnAction(ActionEvent event) {
 
     }
 
@@ -129,33 +120,74 @@ public class AdminSalaryFormController {
     }
 
     @FXML
+    void salaryDeleteONAct(ActionEvent event) {
+
+        if(txtSalaryId.getText().isEmpty()){
+
+        }else {
+            boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+
+            if(ok){
+                String code = txtSalaryId.getText();
+                try {
+                    boolean isDeleted = AdminSalaryModel.delete(code);
+                    if (isDeleted) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
+                        //onActionGetAllCustom();
+                    }
+                } catch (SQLException e) {
+                    new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                }
+
+            }
+        }
+    }
+
+    @FXML
+    void SalryTableOnMouse(MouseEvent event) {
+
+            TablePosition pos=TBLsalary.getSelectionModel().getSelectedCells().get(0);
+            int row=pos.getRow();
+
+            ObservableList<TableColumn<AdminSalaryTM,?>> columns=TBLsalary.getColumns();
+
+            COBEmployeEmpId.setValue(columns.get(0).getCellData(row).toString());
+            txtSalaryId.setText(columns.get(1).getCellData(row).toString());
+            txtSalaryAmountId.setText(columns.get(2).getCellData(row).toString());
+            CBMPayM.setValue(columns.get(3).getCellData(row).toString());
+
+    }
+
+    @FXML
     void searchSalaryBtnOnClick(ActionEvent event) {
+        String id = txtsearchSalary.getText();
 
-    }
-
-    @FXML
-    void searchSalaryID(KeyEvent event) {
-
-    }
-
-    @FXML
-    public void salIdOnAction(ActionEvent actionEvent) {
-        String salidinput = txtSalaryId.getText();
         try {
-            AdminSalary itSalary = AdminSalaryModel.search(salidinput);
+            AdminSalary itSalary = AdminSalaryModel.search(id);
             if (itSalary != null) {
-
-                System.out.println(itSalary.getEmployId());
-                System.out.println(itSalary.getPayment());
-
                 COBEmployeEmpId.setValue(itSalary.getEmployId());
                 txtSalaryId.setText(itSalary.getSalaryId());
                 txtSalaryAmountId.setText(itSalary.getAmount());
                 CBMPayM.setValue(itSalary.getPayment());
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "something happened!").show();
+        }
+    }
+
+    @FXML
+    void searchSalaryID(KeyEvent event) throws SQLException {
+        String searchValue=txtsearchSalary.getText().trim();
+        ObservableList<AdminSalaryTM>obList= AdminSalaryModel.getAllSalary();
+
+        if (!searchValue.isEmpty()) {
+            ObservableList<AdminSalaryTM> filteredData = obList.filtered(new Predicate<AdminSalaryTM>(){
+                @Override
+                public boolean test(AdminSalaryTM itemTM) {
+                    return String.valueOf(itemTM.getSalaryId()).toLowerCase().contains(searchValue.toLowerCase());        }
+            });
+            COBEmployeEmpId.setItems(filteredData);} else {
+            COBEmployeEmpId.setItems(obList);
         }
     }
 

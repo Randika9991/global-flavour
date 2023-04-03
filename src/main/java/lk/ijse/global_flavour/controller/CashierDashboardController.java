@@ -19,6 +19,9 @@ import java.util.Date;
 public class CashierDashboardController {
 
     @FXML
+    public JFXButton vehicalBtn1;
+
+    @FXML
     private AnchorPane cashieranchorpane;
 
     @FXML
@@ -54,7 +57,6 @@ public class CashierDashboardController {
         cashierAncPane.getChildren().clear();
         cashierAncPane.getChildren().add(load);
         ButtonColourController.btncolor(CustBtn,cashieranchorpane);
-
     }
 
     @FXML
@@ -97,14 +99,20 @@ public class CashierDashboardController {
         stage.show();
         cashierAncPane.getScene().getWindow().hide();
 
+    }
+
+    @FXML
+    public void btnOnVehical(ActionEvent actionEvent) throws IOException {
+        Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashiervehicle_form.fxml"));
+        cashierAncPane.getChildren().clear();
+        cashierAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(vehicalBtn1,cashieranchorpane);
 
     }
 
     @FXML
     void initialize() {
-
         Timenow();
-
     }
     public void Timenow(){
         Thread thread =new Thread(() ->{
@@ -128,5 +136,6 @@ public class CashierDashboardController {
         });
         thread.start();
     }
+
 
 }

@@ -40,7 +40,7 @@
             <TableColumn fx:id="tabColumEmployeID" prefWidth="270.0" text="Employee ID" />
             <TableColumn fx:id="tabColumSalaryID" prefWidth="277.0" text="Salary ID" />
             <TableColumn fx:id="tabColumSalaryAmount" prefWidth="295.0" text="Salary Amount " />
-            <TableColumn fx:id="tabColumPaymentMethord" prefWidth="282.0" style="-fx-text-fill: red; -fx-font-weight: bold;" text="Payment Methord" />
+            <TableColumn fx:id="tabColumPaymentMethord" prefWidth="282.0" style="-fx-font-weight: bold;" text="Payment Methord" />
          </columns>
       </TableView>
       <JFXButton fx:id="btnDeleatSalary" layoutX="1143.0" layoutY="362.0" onAction="#salaryDeleteONAct" prefHeight="31.0" prefWidth="102.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Delete" />
@@ -57,7 +57,7 @@
          </image>
       </ImageView>
       <Button fx:id="searchBtnSalary" layoutX="1208.0" layoutY="39.0" mnemonicParsing="false" onAction="#searchSalaryBtnOnClick" opacity="0.0" prefHeight="31.0" prefWidth="31.0" />
-      <JFXComboBox fx:id="COBEmployeEmpId" focusColor="WHITE" labelFloat="true" layoutX="362.0" layoutY="163.0" prefHeight="43.0" prefWidth="190.0" promptText="Employee Id" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE" />
-      <JFXComboBox fx:id="CBMPayM" focusColor="WHITE" labelFloat="true" layoutX="767.0" layoutY="268.0" prefHeight="31.0" prefWidth="190.0" promptText="Payment Method" unFocusColor="WHITE" />
+      <JFXComboBox fx:id="COBEmployeEmpId" focusColor="#f5f5f5" labelFloat="true" layoutX="362.0" layoutY="163.0" prefHeight="43.0" prefWidth="190.0" promptText="Employee Id" style="-fx-text-fill: white;" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE" />
+      <JFXComboBox fx:id="CBMPayM" focusColor="WHITE" labelFloat="true" layoutX="767.0" layoutY="268.0" prefHeight="31.0" prefWidth="190.0" promptText="Payment Method" style="-fx-text-fill: white;" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE" />
    </children>
 </AnchorPane>

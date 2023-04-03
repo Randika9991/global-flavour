@@ -20,6 +20,7 @@ import lk.ijse.global_flavour.dto.tm.EmployeeTM;
 import lk.ijse.global_flavour.dto.tm.SuppliersTM;
 import lk.ijse.global_flavour.model.EmployeeSetAndGetModel;
 import lk.ijse.global_flavour.model.SuppliersModel;
+import lk.ijse.global_flavour.util.AlertController;
 
 public class SuppliersFormController {
 
@@ -94,36 +95,46 @@ public class SuppliersFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        String SupId = txtsupId.getText();
-        String SupName = txtsupName.getText();
-        String SupAddress = txtsupAddress.getText();
-        String supContact = txtsupContact.getText();
-        String supEmail = txtsupEmail.getText();
 
-        Suppliers itemSup = new Suppliers(SupId, SupName, SupAddress,supEmail,supContact);
+        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Update item");
 
-        try {
-            boolean isUpdated = SuppliersModel.update(itemSup);
-            new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
-            onActionGetAllSuppliers();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+        if(ok) {
+            String SupId = txtsupId.getText();
+            String SupName = txtsupName.getText();
+            String SupAddress = txtsupAddress.getText();
+            String supContact = txtsupContact.getText();
+            String supEmail = txtsupEmail.getText();
+
+            Suppliers itemSup = new Suppliers(SupId, SupName, SupAddress, supEmail, supContact);
+
+            try {
+                boolean isUpdated = SuppliersModel.update(itemSup);
+                new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+                onActionGetAllSuppliers();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            }
         }
 
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        String code = txtsupId.getText();
-        try {
-            boolean isDeleted = SuppliersModel.delete(code);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
-                onActionGetAllSuppliers();
+
+        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+
+        if(ok) {
+            String code = txtsupId.getText();
+            try {
+                boolean isDeleted = SuppliersModel.delete(code);
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
+                    onActionGetAllSuppliers();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
 
     }

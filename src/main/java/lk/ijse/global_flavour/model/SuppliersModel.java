@@ -13,8 +13,10 @@ import java.sql.SQLException;
 
 public class SuppliersModel {
     public static boolean save(Suppliers supAdd) throws SQLException {  //data baes ekata dana set eka
+
         String sql = "INSERT INTO supplier(supId, SupName, Address, email ,contactNo) " +
                 "VALUES(?, ?, ?, ? ,?)";
+
         try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
 
             pstm.setString(1, supAdd.getSupplierId());
@@ -49,7 +51,9 @@ public class SuppliersModel {
     }
 
     public static boolean update(Suppliers supAdd) throws SQLException {
+
         String sql = "UPDATE supplier SET supName = ?, address = ?, email = ?, contactNo = ? WHERE supId = ?";
+
         try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
 
             pstm.setString(1, supAdd.getSupplierName());
@@ -63,11 +67,11 @@ public class SuppliersModel {
     }
 
     public static boolean delete(String id) throws SQLException {
+
         String sql = "DELETE FROM supplier WHERE supId = ?";
+
         try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
-
             pstm.setString(1, id);
-
             return pstm.executeUpdate() > 0;
         }
     }
@@ -78,7 +82,6 @@ public class SuppliersModel {
         try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
 
             ResultSet resultSet = pstm.executeQuery();
-
             ObservableList<SuppliersTM> dataList = FXCollections.observableArrayList();
 
             while (resultSet.next()) {
@@ -93,6 +96,4 @@ public class SuppliersModel {
             return dataList;
         }
     }
-
-
 }

@@ -29,34 +29,28 @@
             <Font size="22.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCusUserName" focusColor="WHITE" labelFloat="true" layoutX="555.0" layoutY="138.0" prefHeight="31.0" prefWidth="187.0" promptText="User Name" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtCusName" focusColor="WHITE" labelFloat="true" layoutX="555.0" layoutY="138.0" prefHeight="31.0" prefWidth="187.0" promptText="Customer Name" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCusName" focusColor="WHITE" labelFloat="true" layoutX="930.0" layoutY="137.0" prefHeight="31.0" prefWidth="187.0" promptText="Customer Name" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtCusContact" focusColor="WHITE" labelFloat="true" layoutX="930.0" layoutY="138.0" prefHeight="31.0" prefWidth="187.0" promptText="ContactNo" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCusContact" focusColor="WHITE" labelFloat="true" layoutX="179.0" layoutY="231.0" prefHeight="31.0" prefWidth="187.0" promptText="ContactNo" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="txtCusAddress" focusColor="WHITE" labelFloat="true" layoutX="555.0" layoutY="231.0" prefHeight="31.0" prefWidth="187.0" promptText="Address" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtCusAddress" focusColor="WHITE" labelFloat="true" layoutX="179.0" layoutY="231.0" prefHeight="31.0" prefWidth="187.0" promptText="Address" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </JFXTextField>
       <TableView fx:id="mainCOMCustomer" layoutX="107.0" layoutY="411.0" onMouseClicked="#supplierOnMouse" prefHeight="333.0" prefWidth="1129.0">
          <columns>
-            <TableColumn fx:id="COMCusId" prefWidth="174.0" text="Customer Id" />
-            <TableColumn fx:id="COMuserName" prefWidth="181.0" text="User Name" />
-            <TableColumn fx:id="COMCustomName" prefWidth="208.0" text="Customer Name" />
-            <TableColumn fx:id="COMCustContact" prefWidth="173.0" text="ContactNo" />
-            <TableColumn fx:id="COMCustAddress" prefWidth="199.0" text="Address" />
-            <TableColumn fx:id="COMCusEmail" prefWidth="193.0" text="Email" />
+            <TableColumn fx:id="COMCusId" prefWidth="211.0" text="Customer Id" />
+            <TableColumn fx:id="COMCustomName" prefWidth="228.0" text="Customer Name" />
+            <TableColumn fx:id="COMCustContact" prefWidth="243.0" text="ContactNo" />
+            <TableColumn fx:id="COMCustAddress" prefWidth="231.0" text="Address" />
+            <TableColumn fx:id="COMCusEmail" prefWidth="215.0" text="Email" />
          </columns>
       </TableView>
       <JFXButton layoutX="1134.0" layoutY="356.0" onAction="#btnDeleteOnAction" prefHeight="31.0" prefWidth="102.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Delete" />
@@ -73,7 +67,7 @@
          </image>
       </ImageView>
       <Button layoutX="1192.0" layoutY="39.0" mnemonicParsing="false" onAction="#CusIdOnActionSerch" opacity="0.0" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 15;" />
-      <JFXTextField fx:id="txtCusEmail1" focusColor="WHITE" labelFloat="true" layoutX="930.0" layoutY="231.0" prefHeight="31.0" prefWidth="187.0" promptText="Email" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtCusEmail1" focusColor="WHITE" labelFloat="true" layoutX="555.0" layoutY="231.0" prefHeight="31.0" prefWidth="187.0" promptText="Email" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font>
