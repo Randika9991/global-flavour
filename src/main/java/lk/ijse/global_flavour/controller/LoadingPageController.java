@@ -52,6 +52,7 @@ public class LoadingPageController {
                 Platform.runLater(() -> {
                     Stage stage = new Stage();
                     Parent root = null;
+                    stage.setTitle("GLOBAL FLAVOUR");
                     try {
                         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
                     } catch (IOException ex) {

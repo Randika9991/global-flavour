@@ -1,3 +1,4 @@
+//all added
 package lk.ijse.global_flavour.controller;
 
 import com.jfoenix.controls.JFXTextField;
@@ -55,12 +56,12 @@ public class CashierVehicleFormController {
         try {
             boolean isSaved = CashierVehicleModel.save(allvehi);
             if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Item saved!").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Vehicle Save Success!");
                 onActionGetAllItem();
             }
         } catch (SQLException e) {
             System.out.println(e);
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -68,9 +69,9 @@ public class CashierVehicleFormController {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
 
-        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Update item");
+        if(txtVehiId.getText().isEmpty()){
 
-        if(ok){
+        }else {
             String vehiId = txtVehiId.getText();
             String vehiNo = txtVehiNo.getText();
             String vehitype = txtVehitype.getText();
@@ -79,35 +80,38 @@ public class CashierVehicleFormController {
 
             try {
                 boolean isUpdated = CashierVehicleModel.update(allvehi);
-                new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Vehicle updated!");
                 onActionGetAllItem();
             } catch (SQLException e) {
                 e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                AlertController.animationMesseagewrong("Error","something went wrong!");
             }
-        }
 
+        }
 
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
 
-        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+        if(txtVehiId.getText().isEmpty()){
 
-        if(ok){
-            String code = txtVehiId.getText();
-            try {
-                boolean isDeleted = CashierVehicleModel.delete(code);
-                if (isDeleted) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
-                    onActionGetAllItem();
+        }else {
+            boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+
+            if(ok){
+                String code = txtVehiId.getText();
+                try {
+                    boolean isDeleted = CashierVehicleModel.delete(code);
+                    if (isDeleted) {
+                        AlertController.animationMesseageCorect("CONFIRMATION","Delete Success!");
+                        onActionGetAllItem();
+                    }
+                } catch (SQLException e) {
+                    AlertController.animationMesseagewrong("Error","something went wrong!");
                 }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
             }
         }
-
     }
 
     @FXML
@@ -123,7 +127,7 @@ public class CashierVehicleFormController {
 
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -176,7 +180,7 @@ public class CashierVehicleFormController {
 
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happend!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }

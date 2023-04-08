@@ -1,3 +1,4 @@
+//all added
 package lk.ijse.global_flavour.controller;
 
 import com.jfoenix.controls.JFXTextField;
@@ -83,12 +84,12 @@ public class SuppliersFormController {
 //            boolean isSaved = ItemModel.save(code, description, unitPrice, qtyOnHand);
             boolean isSaved = SuppliersModel.save(itemSup);
             if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Item saved!").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Supplier Save Success!");
                 onActionGetAllSuppliers();
             }
         } catch (SQLException e) {
             System.out.println(e);
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -96,9 +97,9 @@ public class SuppliersFormController {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
 
-        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Update item");
+        if(txtsupId.getText().isEmpty()){
 
-        if(ok) {
+        }else {
             String SupId = txtsupId.getText();
             String SupName = txtsupName.getText();
             String SupAddress = txtsupAddress.getText();
@@ -109,38 +110,37 @@ public class SuppliersFormController {
 
             try {
                 boolean isUpdated = SuppliersModel.update(itemSup);
-                new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Supplier updated!");
                 onActionGetAllSuppliers();
             } catch (SQLException e) {
                 e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                AlertController.animationMesseagewrong("Error","something went wrong!");
             }
         }
-
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
 
-        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+        if(txtsupId.getText().isEmpty()){
 
-        if(ok) {
-            String code = txtsupId.getText();
-            try {
-                boolean isDeleted = SuppliersModel.delete(code);
-                if (isDeleted) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
-                    onActionGetAllSuppliers();
+        }else {
+            boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+
+            if(ok) {
+                String code = txtsupId.getText();
+                try {
+                    boolean isDeleted = SuppliersModel.delete(code);
+                    if (isDeleted) {
+                        AlertController.animationMesseageCorect("CONFIRMATION","Delete Success!");
+                        onActionGetAllSuppliers();
+                    }
+                } catch (SQLException e) {
+                    AlertController.animationMesseagewrong("Error","something went wrong!");
                 }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
             }
         }
-
     }
-
-
-
 
     @FXML
     void supIdOnAction(ActionEvent event) {
@@ -156,10 +156,8 @@ public class SuppliersFormController {
                 txtsupEmail.setText(cust.getSupplierEmail());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
-
-
     }
 
     @FXML
@@ -193,7 +191,6 @@ public class SuppliersFormController {
             mainCOMSupliar.setItems(filteredData);} else {
             mainCOMSupliar.setItems(obList);
         }
-
     }
 
     public void supIdOnActionSerch(ActionEvent actionEvent) {
@@ -209,9 +206,8 @@ public class SuppliersFormController {
                 txtsupEmail.setText(cust.getSupplierEmail());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
-
     }
 
     @FXML
@@ -228,7 +224,7 @@ public class SuppliersFormController {
 
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happend!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }

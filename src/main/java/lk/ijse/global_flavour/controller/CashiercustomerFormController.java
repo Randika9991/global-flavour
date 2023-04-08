@@ -1,3 +1,4 @@
+//all added
 package lk.ijse.global_flavour.controller;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -73,12 +74,12 @@ public class CashiercustomerFormController {
 //
             boolean isSaved = CashierCustomerModel.save(allCustom);
             if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Item saved!").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Customer Save Success!");
                 onActionGetAllCustom();
             }
         } catch (SQLException e) {
             System.out.println(e);
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -87,6 +88,9 @@ public class CashiercustomerFormController {
     void btnUpdateOnAction(ActionEvent event) {
 
 
+        if(txtCusId.getText().isEmpty()){
+
+        }else {
             String CusId = txtCusId.getText();
             String CusName = txtCusName.getText();
             String CusContact = txtCusContact.getText();
@@ -98,35 +102,37 @@ public class CashiercustomerFormController {
 
             try {
                 boolean isUpdated = CashierCustomerModel.update(allCustom);
-                new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Customer updated!");
                 onActionGetAllCustom();
             } catch (SQLException e) {
                 e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                AlertController.animationMesseagewrong("Error","something went wrong!");
             }
-
-
+        }
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
 
-        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+        if(txtCusId.getText().isEmpty()){
 
-        if(ok){
-            String code = txtCusId.getText();
-            try {
-                boolean isDeleted = CashierCustomerModel.delete(code);
-                if (isDeleted) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
-                    onActionGetAllCustom();
+        }else{
+            boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+
+            if(ok){
+                String code = txtCusId.getText();
+                try {
+                    boolean isDeleted = CashierCustomerModel.delete(code);
+                    if (isDeleted) {
+                        AlertController.animationMesseageCorect("CONFIRMATION","Delete Success!");
+                        onActionGetAllCustom();
+                    }
+                } catch (SQLException e) {
+                    AlertController.animationMesseagewrong("Error","something went wrong!");
                 }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+
             }
-
         }
-
     }
 
     @FXML
@@ -143,7 +149,7 @@ public class CashiercustomerFormController {
                 txtCusEmail1.setText(cust.getEmail());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -194,7 +200,7 @@ public class CashiercustomerFormController {
             ObservableList<CashierCustomerTM> supList = CashierCustomerModel.getAll();
             mainCOMCustomer.setItems(supList);
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happend!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }

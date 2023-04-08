@@ -1,3 +1,5 @@
+//all added
+
 package lk.ijse.global_flavour.controller;
 
 import com.jfoenix.controls.JFXTextField;
@@ -5,17 +7,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.global_flavour.dto.Item;
 import lk.ijse.global_flavour.dto.tm.ItemTM;
-import lk.ijse.global_flavour.dto.tm.SuppliersTM;
 import lk.ijse.global_flavour.model.ItemModel;
-import lk.ijse.global_flavour.model.SuppliersModel;
 import lk.ijse.global_flavour.util.AlertController;
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.function.Predicate;
 
@@ -75,12 +77,14 @@ public class ItemFormController {
 //            boolean isSaved = ItemModel.save(code, description, unitPrice, qtyOnHand);
                 boolean isSaved = ItemModel.save(itemAll);
                 if (isSaved) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Item saved!").show();
+
+                    AlertController.animationMesseageCorect("CONFIRMATION","Item Save Success!");
                     onActionGetAllItem();
                 }
             } catch (SQLException e) {
                 System.out.println(e);
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                AlertController.animationMesseagewrong("Error","something went wrong!");
+
             }
 
 
@@ -88,22 +92,29 @@ public class ItemFormController {
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction(ActionEvent event) throws AWTException {
 
-        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
 
-        if(ok){
-            String code = txtItemId.getText();
-            try {
-                boolean isDeleted = ItemModel.delete(code);
-                if (isDeleted) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "deleted Success!").show();
-                    onActionGetAllItem();
+        if(txtItemId.getText().isEmpty()){
+
+        }else {
+            boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
+
+            if(ok) {
+                String code = txtItemId.getText();
+
+                try {
+                    boolean isDeleted = ItemModel.delete(code);
+                    if (isDeleted) {
+                        AlertController.animationMesseageCorect("CONFIRMATION","Delete Success!");
+
+                        onActionGetAllItem();
+                    }
+                } catch (SQLException e) {
+                    AlertController.animationMesseagewrong("Error","something went wrong!");
                 }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
-            }
 
+            }
         }
 
     }
@@ -112,9 +123,9 @@ public class ItemFormController {
 
     void btnUpdateOnAction(ActionEvent event) {
 
-        boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Update item");
+        if(txtItemId.getText().isEmpty()){
 
-        if(ok){
+        }else {
             String itemId = txtItemId.getText();
             String itemName = txtItemName.getText();
             String itemPri = txtItemPrice.getText();
@@ -125,15 +136,13 @@ public class ItemFormController {
 
             try {
                 boolean isUpdated = ItemModel.update(itemAll);
-                new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Item updated!");
                 onActionGetAllItem();
             } catch (SQLException e) {
-                e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+
+                AlertController.animationMesseagewrong("Error","something went wrong!");
             }
         }
-
-
     }
 
     @FXML
@@ -150,7 +159,7 @@ public class ItemFormController {
                 txtItemQTY.setText(cust.getQty());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -168,7 +177,7 @@ public class ItemFormController {
                 txtItemQTY.setText(cust.getQty());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -221,7 +230,7 @@ public class ItemFormController {
 
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happend!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }

@@ -57,11 +57,11 @@
             <ComboBox fx:id="cmbAdminCashiar" layoutX="175.0" layoutY="34.0" prefHeight="34.0" prefWidth="106.0" promptText="Admin/Cashier" style="-fx-background-color: transperan; -fx-border-color: #0F0E0E; -fx-border-width: 0px 0px 3px 0px;" />
          </children>
       </AnchorPane>
-      <ImageView fitHeight="44.0" fitWidth="57.0" layoutX="811.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="44.0" fitWidth="57.0" layoutX="914.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../lk.ijse.global_flavour.assets/icons8-back-arrow-100.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="866.0" layoutY="22.0" onAction="#buttonOnAction" prefHeight="44.0" prefWidth="92.0" style="-fx-border-width: 1px 1px 1px 1px; -fx-border-color: white;" text=" back" textFill="#f5f5f5" />
+      <JFXButton layoutX="914.0" layoutY="16.0" onAction="#buttonOnAction" opacity="0.0" prefHeight="40.0" prefWidth="44.0" style="-fx-border-width: 1px 1px 1px 1px; -fx-border-color: white;" textFill="#f5f5f5" />
    </children>
 </AnchorPane>

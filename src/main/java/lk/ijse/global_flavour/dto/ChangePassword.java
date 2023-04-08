@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 
-public class LoginSetAndGet {
+public class ChangePassword {
     private String usrname;
     private String empid;
     private String password;

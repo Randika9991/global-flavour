@@ -1,3 +1,5 @@
+//all added
+
 package lk.ijse.global_flavour.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -88,13 +90,12 @@ public class AdminSalaryFormController {
 //
             boolean isSaved = AdminSalaryModel.save(cus);
             if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Data added... !").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Salary Save Success!");
                 onActionGetAllSallary();
 
             }
         } catch (SQLException e) {
-            System.out.println(e);
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -110,11 +111,11 @@ public class AdminSalaryFormController {
         try {
 
             boolean isUpdated = AdminSalaryModel.change(addSalary);
-            new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+            AlertController.animationMesseageCorect("CONFIRMATION","Salary updated!");
             onActionGetAllSallary();
         } catch (SQLException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -132,11 +133,11 @@ public class AdminSalaryFormController {
                 try {
                     boolean isDeleted = AdminSalaryModel.delete(code);
                     if (isDeleted) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
+                        AlertController.animationMesseageCorect("CONFIRMATION","Delete Success!");
                         //onActionGetAllCustom();
                     }
                 } catch (SQLException e) {
-                    new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                    AlertController.animationMesseagewrong("Error","something went wrong!");
                 }
 
             }
@@ -171,7 +172,7 @@ public class AdminSalaryFormController {
                 CBMPayM.setValue(itSalary.getPayment());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
 
@@ -210,7 +211,7 @@ public class AdminSalaryFormController {
             TBLsalary.setItems(EmpList);
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happend!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
     void onActionGetAllEmployeeaddToSalary() {
@@ -221,7 +222,7 @@ public class AdminSalaryFormController {
             COBEmployeEmpId.getItems().addAll(EmpList);
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happend!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
 }

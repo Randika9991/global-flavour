@@ -14,14 +14,36 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import lk.ijse.global_flavour.dto.LoginSetAndGet;
 import lk.ijse.global_flavour.model.LoginSetAndGetModel;
+import lk.ijse.global_flavour.util.AlertController;
 
 import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-
 
 public class LoginPageController {
+
+    public static String emailShirePasswordConrollerAndChangePasswordController;
+    public static String adminShireChangePasswordController;
+    public static String nameShireChangePasswordController;
+
+
+    public static String getAdminShireChangePasswordController() {
+        return adminShireChangePasswordController;
+    }
+
+    public static String getNameShireChangePasswordController() {
+        return nameShireChangePasswordController;
+    }
+
+    public String getEmail() {
+//        if(nameShirePasswordConroller.equals(null)){
+//            return "";
+//        }
+        return emailShirePasswordConrollerAndChangePasswordController;
+    }
+
+    int i = 0;
+
     @FXML
     private PasswordField txtLogPassword;
 
@@ -38,13 +60,16 @@ public class LoginPageController {
     private TextField txtLoginUserName;
 
     @FXML
-    void loginPageOnAction(ActionEvent event) throws IOException{
+    void loginPageOnAction(ActionEvent event) throws IOException, AWTException {
+
         String name = txtUserName.getText();
+
 
         String admincashiar = String.valueOf(COMAdminCashierlogin.getValue());
         String admincashiarUserInput = new String();
         String passwordUserInput = new String();
         String nameUserInput = new String();
+        String emailUserInput = new String();
 
         try {
             LoginSetAndGet logSetGet = LoginSetAndGetModel.search(name);
@@ -52,46 +77,82 @@ public class LoginPageController {
                 admincashiarUserInput=logSetGet.getJobtitel();
                 passwordUserInput=logSetGet.getPassword();
                 nameUserInput=logSetGet.getUsrname();
+                emailUserInput=logSetGet.getEmail();
+
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "something happened!").show();
         }
-        if(admincashiar.equals(admincashiarUserInput)){
-            if(txtUserName.getText().equals(nameUserInput)){
-                if(txtLogPassword.getText().equals(passwordUserInput)){
-                    if(admincashiar.equals("Admin")){
-                        Stage stage = new Stage();
-                        Parent root = null;
-                        root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/admindashboard.fxml"));
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
-                        loginAncPane.getScene().getWindow().hide();
-                    }else {
-                        Stage stage = new Stage();
-                        Parent root = null;
-                        root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashierdashboard.fxml"));
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
-                        loginAncPane.getScene().getWindow().hide();
-                    }
-                }else if(txtLogPassword.getText().isEmpty()){
-                    new Alert(Alert.AlertType.ERROR, "Please Enter Password! ").show();
-                }else {
-                    new Alert(Alert.AlertType.ERROR, "Fogot your Password! Change password or Create new Account").show();
-                }
-            }else if (nameUserInput.isEmpty()){
-                new Alert(Alert.AlertType.ERROR, "can't find Youser name or password.").show();
-            }else {
-                new Alert(Alert.AlertType.ERROR, "Pleaes Enter Corret name.").show();
-            }
+        if(txtUserName.getText().isEmpty()&&txtLogPassword.getText().isEmpty()&&COMAdminCashierlogin.getValue()!="Admin"&&COMAdminCashierlogin.getValue()!="Cashier"){
+            AlertController.animationMesseagewrong("Error","your not added any data.Please try again!");
         }else {
-            new Alert(Alert.AlertType.ERROR, "Please Change Admin or Cashiar, can't find Youser name or password ").show();
+            if(txtUserName.getText().isEmpty()&&txtLogPassword.getText().isEmpty()){
+                AlertController.animationMesseagewrong("Error","Please Enter user name and password!");
+            }else if (COMAdminCashierlogin.getValue()!="Admin"&&COMAdminCashierlogin.getValue()!="Cashier"){
+                AlertController.animationMesseagewrong("Error","Please Change admin or Cashier!");
+            }else {
+                if(admincashiarUserInput.equals("Admin")||admincashiarUserInput.equals("Cashier")){
+                    if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)&&txtLogPassword.getText().equals(passwordUserInput)){
+                        if(admincashiar.equals("Admin")){
+                            AlertController.notificationBar("SPICY FLAVOUR ","Login Success!");
+                            Stage stage = new Stage();
+                            Parent root = null;
+                            stage.setTitle("GLOBAL FLAVOUR");
+                            root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/admindashboard.fxml"));
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                            loginAncPane.getScene().getWindow().hide();
+                        }else {
+                            Stage stage = new Stage();
+                            Parent root = null;
+                            root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashierdashboard.fxml"));
+                            Scene scene = new Scene(root);
+                            stage.setTitle("GLOBAL FLAVOUR");
+                            stage.setScene(scene);
+                            stage.show();
+                            loginAncPane.getScene().getWindow().hide();
+                        }
+                    }else if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)&&txtLogPassword.getText().isEmpty()){
+
+                        AlertController.animationMesseagewrong("Error","Please Enter password!");
+                    }else if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)&&txtLogPassword.getText()!=(passwordUserInput)){
+                        i++;
+
+                        if(i==4){
+                            i=0;
+                            emailShirePasswordConrollerAndChangePasswordController=emailUserInput;
+                            adminShireChangePasswordController=admincashiarUserInput;
+                            nameShireChangePasswordController=nameUserInput;
+
+                            boolean ok = AlertController.okconfirmmessage("forgot your password. Do you want change password");
+
+
+                            if(ok){
+                                Stage stage = new Stage();
+                                Parent root = null;
+                                root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/fogotpassworld.fxml"));
+                                Scene scene = new Scene(root);
+                                stage.setScene(scene);
+                                stage.show();
+                                loginAncPane.getScene().getWindow().hide();
+
+                            }
+                        }else {
+                            AlertController.animationMesseagewrong("Error","Wrong Password Please try again!");
+                        }
+
+                    }
+                }
+            }
         }
     }
 
     public void forgotYourPasswordOnAction(javafx.event.ActionEvent actionEvent) throws IOException {
+        emailShirePasswordConrollerAndChangePasswordController="";
+        adminShireChangePasswordController="";
+        nameShireChangePasswordController="";
+
         Stage stage = new Stage();
         Parent root = null;
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/fogotpassworld.fxml"));
@@ -112,6 +173,7 @@ public class LoginPageController {
         loginAncPane.getScene().getWindow().hide();
     }
 
+
     @FXML
     void initialize() {
         assert loginAncPane != null : "fx:id=\"loginAncPane\" was not injected: check your FXML file 'loginpage.fxml'.";
@@ -120,4 +182,5 @@ public class LoginPageController {
         assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'loginpage.fxml'.";
         COMAdminCashierlogin.getItems().addAll("Admin","Cashier");
     }
+
 }

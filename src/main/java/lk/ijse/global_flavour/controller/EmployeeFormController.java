@@ -1,5 +1,4 @@
-//save eka haduwa,deleat,update,serch,
-
+//all added
 
 package lk.ijse.global_flavour.controller;
 
@@ -113,18 +112,21 @@ public class EmployeeFormController {
         try {
             boolean isSaved = EmployeeSetAndGetModel.save(cus);
             if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Data added... !").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Employee Save Success!");
                 onActionGetAllEmployee();
 
             }
         } catch (SQLException e) {
             System.out.println(e);
-            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
 
+        if(txtEmpId.getText().isEmpty()){
+
+        }else {
             String employeeId12 = txtEmpId.getText();
             String name = txtEmpName.getText();
             String address = txtEmpAddress.getText();
@@ -138,13 +140,13 @@ public class EmployeeFormController {
             try {
 
                 boolean isUpdated = EmployeeSetAndGetModel.change(employeeSetAndGet);
-                new Alert(Alert.AlertType.CONFIRMATION, "Item updated!").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","Employee updated!");
                 onActionGetAllEmployee();
             } catch (SQLException e) {
                 e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                AlertController.animationMesseagewrong("Error","something went wrong!");
             }
-
+        }
     }
 
     @FXML
@@ -161,11 +163,11 @@ public class EmployeeFormController {
                 try {
                     boolean isDeleted = EmployeeSetAndGetModel.delete(code);
                     if (isDeleted) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
+                        AlertController.animationMesseageCorect("CONFIRMATION","Delete Success!");
                         onActionGetAllEmployee();
                     }
                 } catch (SQLException e) {
-                    new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                    AlertController.animationMesseagewrong("Error","something went wrong!");
                 }
             }
         }
@@ -191,7 +193,7 @@ public class EmployeeFormController {
                 txtEmpJobTitle.setText(cust.getJobTittle());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
 
@@ -230,7 +232,7 @@ public class EmployeeFormController {
                 txtEmpJobTitle.setText(cust.getJobTittle());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happened!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
 
@@ -274,7 +276,7 @@ public class EmployeeFormController {
             tablEmplyee.setItems(EmpList);
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "something happend!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
