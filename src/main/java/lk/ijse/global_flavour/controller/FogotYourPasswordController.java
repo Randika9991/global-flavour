@@ -19,11 +19,28 @@ import lk.ijse.global_flavour.model.LoginSetAndGetModel;
 import lk.ijse.global_flavour.util.AlertController;
 
 import javax.mail.MessagingException;
+import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Random;
 
 public class FogotYourPasswordController {
+
+    public static String emailShireChangePasswordController;
+    public static String adminShireChangePasswordController;
+    public static String nameShireChangePasswordController;
+
+    public static String getEmailShireChangePasswordController2() {
+        return emailShireChangePasswordController;
+    }
+
+    public static String getAdminShireChangePasswordController2() {
+        return adminShireChangePasswordController;
+    }
+
+    public static String getNameShireChangePasswordController2() {
+        return nameShireChangePasswordController;
+    }
 
     LoginPageController loginPageController=new LoginPageController();
 
@@ -55,9 +72,12 @@ public class FogotYourPasswordController {
         randomnum = rand.nextInt(9000);
         randomnum +=1000;
 
-//        "kumarasirirandika0706@gmail.com"
+//      "kumarasirirandika0706@gmail.com"
 
         String emailinput = txtEnteremail.getText();
+        String adminCashiInput = new String();
+        String youserInput=new String();
+
 
         if(loginPageController.getEmail().isEmpty()){
             String emailUserInput = new String();
@@ -66,19 +86,28 @@ public class FogotYourPasswordController {
                 if (logSetGet != null) {
 
                     emailUserInput=logSetGet.getEmail();
+                    adminCashiInput=logSetGet.getJobtitel();
+                    youserInput=logSetGet.getUsrname();
+
+
 
                 }
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "something happened!").show();
             }
             if(emailUserInput.equals(txtEnteremail.getText())){
+                emailShireChangePasswordController=emailinput;
+                adminShireChangePasswordController=adminCashiInput;
+                nameShireChangePasswordController=youserInput;
+
                 try {
                     EmailController.sendEmail(txtEnteremail.getText(), "Test Email", randomnum+" Your OTP code here");
                     System.out.println("Email sent successfully.");
+                    AlertController.notificationBar("SPICY FLAVOUR","Check Your Email OTP Send Success !");
 
                     txtadd.setVisible(true);
 
-                } catch (MessagingException e) {
+                } catch (MessagingException | AWTException e) {
                     e.printStackTrace();
                 }
             }else {
@@ -93,10 +122,11 @@ public class FogotYourPasswordController {
                     try {
                         EmailController.sendEmail(loginPageController.getEmail(), "Test Email", randomnum+" Your OTP code here");
                         System.out.println("Email sent successfully.");
+                        AlertController.notificationBar("SPICY FLAVOUR","Check Your Email OTP Send Success !");
 
                         txtadd.setVisible(true);
 
-                    } catch (MessagingException e) {
+                    } catch (MessagingException | AWTException e) {
                         e.printStackTrace();
                     }
                 }else {
@@ -116,7 +146,8 @@ public class FogotYourPasswordController {
         if (randomnum==addotp) {
             txtChangePassword.setVisible(true);
         }else {
-            new Alert(Alert.AlertType.CONFIRMATION,"Wrong OTP").show();
+            AlertController.animationMesseagewrong("Error","Wrong OTP Please Try again!");
+
         }
 
     }

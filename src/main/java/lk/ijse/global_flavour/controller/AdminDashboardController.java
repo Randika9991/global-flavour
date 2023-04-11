@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class AdminDashboardController {
 
+
     @FXML
     private Label lblTime;
 
@@ -86,7 +87,11 @@ public class AdminDashboardController {
         ButtonColourController.btncolor(ItmBtn,adminAncPane);
     }
 
-    public void btnOnOrder(ActionEvent actionEvent) {
+    public void btnOnOrder(ActionEvent actionEvent) throws IOException {
+        Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/order_form.fxml"));
+        adminAncPane.getChildren().clear();
+        adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(OrderBtn,adminAncPane);
 
     }
 

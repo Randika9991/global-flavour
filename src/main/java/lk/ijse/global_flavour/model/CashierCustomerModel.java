@@ -8,9 +8,12 @@ import lk.ijse.global_flavour.dto.Item;
 import lk.ijse.global_flavour.dto.tm.CashierCustomerTM;
 import lk.ijse.global_flavour.dto.tm.ItemTM;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CashierCustomerModel {
     public static boolean save(CashierCustomer cashiAdd) throws SQLException {  //data baes ekata dana set eka
@@ -94,5 +97,16 @@ public class CashierCustomerModel {
             }
             return dataList;
         }
+    }
+    public static List<String> loadIds() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+        ResultSet resultSet = con.createStatement().executeQuery("SELECT custId FROM customer");
+
+        List<String> data = new ArrayList<>();
+
+        while (resultSet.next()) {
+            data.add(resultSet.getString(1));
+        }
+        return data;
     }
 }

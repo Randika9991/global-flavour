@@ -8,9 +8,12 @@ import lk.ijse.global_flavour.dto.Suppliers;
 import lk.ijse.global_flavour.dto.tm.ItemTM;
 import lk.ijse.global_flavour.dto.tm.SuppliersTM;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemModel {
     public static boolean save(Item itmAdd) throws SQLException {  //data baes ekata dana set eka
@@ -96,5 +99,17 @@ public class ItemModel {
             }
             return dataList;
         }
+    }
+
+    public static List<String> loadCodes() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+        ResultSet resultSet = con.createStatement().executeQuery("SELECT itemCode FROM item");
+
+        List<String> data =new ArrayList<>();
+
+        while (resultSet.next()) {
+            data.add(resultSet.getString(1));
+        }
+        return data;
     }
 }
