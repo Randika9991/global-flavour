@@ -63,7 +63,12 @@
                         <Font size="13.0" />
                      </font>
                   </Hyperlink>
-                  <Button fx:id="btnShowPassword" layoutX="351.0" layoutY="236.0" mnemonicParsing="false" onAction="#ShowPasswordOnAction" onMouseEntered="#OnMousePassword" onMouseExited="#OnMousePWDExt" prefHeight="40.0" prefWidth="81.0" text="show" />
+                  <ImageView fitHeight="31.0" fitWidth="26.0" layoutX="355.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../lk.ijse.global_flavour.assets/icons8-eye-96.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnShowPassword" layoutX="354.0" layoutY="236.0" mnemonicParsing="false" onAction="#ShowPasswordOnAction" onMouseEntered="#OnMousePassword" onMouseExited="#OnMousePWDExt" opacity="0.0" prefHeight="20.0" prefWidth="13.0" text="show" />
                   <TextField fx:id="txtPassword2" layoutX="84.0" layoutY="230.0" prefHeight="40.0" prefWidth="267.0" promptText="Password" style="-fx-background-color: transperan; -fx-border-color: #0F0E0E; -fx-border-width: 0px 0px 0px 3px;">
                      <font>
                         <Font name="System Bold" size="20.0" />

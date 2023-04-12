@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -55,6 +56,28 @@
                </font>
             </TextField>
             <ComboBox fx:id="cmbAdminCashiar" layoutX="175.0" layoutY="34.0" prefHeight="34.0" prefWidth="106.0" promptText="Admin/Cashier" style="-fx-background-color: transperan; -fx-border-color: #0F0E0E; -fx-border-width: 0px 0px 3px 0px;" />
+            <TextField fx:id="txtPassword2" layoutX="89.0" layoutY="223.0" prefHeight="40.0" prefWidth="267.0" promptText="Enter password" style="-fx-background-color: transperan; -fx-border-color: #0F0E0E; -fx-border-width: 0px 0px 0px 3px;">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtConfirmPassword2" layoutX="89.0" layoutY="290.0" prefHeight="40.0" prefWidth="267.0" promptText="Confirm password" style="-fx-background-color: transperan; -fx-border-color: #0F0E0E; -fx-border-width: 0px 0px 0px 3px;">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </TextField>
+            <ImageView fitHeight="31.0" fitWidth="26.0" layoutX="365.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../lk.ijse.global_flavour.assets/icons8-eye-96.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnSPSWEnt" layoutX="364.0" layoutY="235.0" mnemonicParsing="false" onAction="#ShowPasswordEntOnAction" onMouseEntered="#OnMouseEnterPWD" onMouseExited="#OnMouseEnterPWDExt" opacity="0.0" prefHeight="20.0" prefWidth="13.0" text="show" />
+            <ImageView fitHeight="31.0" fitWidth="26.0" layoutX="365.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../lk.ijse.global_flavour.assets/icons8-eye-96.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnSPSConform" layoutX="364.0" layoutY="299.0" mnemonicParsing="false" onAction="#ShowConformPasswordOnAction" onMouseEntered="#OnMouseConfrmPWD" onMouseExited="#OnMouseConfrmPWDExt" opacity="0.0" prefHeight="20.0" prefWidth="13.0" text="show" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="44.0" fitWidth="57.0" layoutX="914.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">

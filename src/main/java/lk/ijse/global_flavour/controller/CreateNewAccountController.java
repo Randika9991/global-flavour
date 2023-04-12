@@ -6,10 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.global_flavour.dto.LoginSetAndGet;
@@ -26,6 +24,11 @@ import java.sql.SQLException;
 public class CreateNewAccountController {
 
     public TextField txtEnterName1;
+    public TextField txtPassword2;
+    public TextField txtConfirmPassword2;
+    public Button btnSPSWEnt;
+    public Button btnSPSConform;
+
 
     @FXML
     private ComboBox cmbAdminCashiar;
@@ -46,8 +49,6 @@ public class CreateNewAccountController {
     private AnchorPane txtcreateAcount;
 
     public void CreateOnAction(ActionEvent actionEvent) throws IOException {
-
-
 
             if (cmbAdminCashiar.getValue().equals("Admin") || cmbAdminCashiar.getValue().equals("Cashier")) {
                 if (txtEnterName.getText().isEmpty() && txtEnteremail.getText().isEmpty() && txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty()) {
@@ -156,6 +157,37 @@ public class CreateNewAccountController {
         assert cmbAdminCashiar != null : "fx:id=\"cmbAdminCashiar\" was not injected: check your FXML file 'createnewaccount.fxml'.";
 
         cmbAdminCashiar.getItems().addAll("Admin","Cashier");
+        txtPassword2.setVisible(false);
+        txtConfirmPassword2.setVisible(false);
     }
 
+    public void ShowPasswordEntOnAction(ActionEvent actionEvent) {
+    }
+
+    public void ShowConformPasswordOnAction(ActionEvent actionEvent) {
+    }
+
+    public void OnMouseEnterPWD(MouseEvent mouseEvent){
+        txtPassword.setVisible(false);
+        txtPassword2.setText(txtPassword.getText());
+        txtPassword2.setVisible(true);
+    }
+
+    public void OnMouseEnterPWDExt(MouseEvent mouseEvent){
+        txtPassword.setVisible(true);
+        txtPassword.setText(txtPassword2.getText());
+        txtPassword2.setVisible(false);
+    }
+
+    public void OnMouseConfrmPWD(MouseEvent mouseEvent) {
+        txtConfirmPassword.setVisible(false);
+        txtConfirmPassword2.setText(txtConfirmPassword.getText());
+        txtConfirmPassword2.setVisible(true);
+    }
+
+    public void OnMouseConfrmPWDExt(MouseEvent mouseEvent) {
+        txtConfirmPassword.setVisible(true);
+        txtConfirmPassword.setText(txtConfirmPassword2.getText());
+        txtConfirmPassword2.setVisible(false);
+    }
 }
