@@ -1,10 +1,15 @@
 package lk.ijse.global_flavour.model;
 
 import lk.ijse.global_flavour.db.DBConnection;
+import lk.ijse.global_flavour.dto.OrderCartDTO;
+import lk.ijse.global_flavour.util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 public class OrderModel {
     public static String getNextOrderId() throws SQLException {
@@ -29,4 +34,33 @@ public class OrderModel {
         }
         return "D001";
     }
+
+
+        public static boolean save(String oId, String cId, double payment, LocalDate date, LocalTime time, List<OrderCartDTO> orderDTOList) throws SQLException {
+            for(OrderCartDTO dto : orderDTOList) {
+                if(!save(oId,cId,payment,date,time,dto)) {
+
+                    return false;
+
+                }
+                break;
+            }
+            return true;
+        }
+        private static boolean save(String oId,String cId, double payment,LocalDate date,LocalTime time,OrderCartDTO dto) throws SQLException {
+
+            String sql = "INSERT INTO orders(orderId, custId, payment,time,date,deliveryStatus) VALUES(?, ?, ?, ?, ?,?)";
+
+            return CrudUtil.execute(
+                    sql,
+                    oId,
+                    cId,
+                    payment,
+                    time,
+                    date,
+                    dto.getDeliverStatus()
+
+            );
+        }
 }
+

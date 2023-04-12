@@ -33,14 +33,14 @@
          <columns>
             <TableColumn fx:id="colItemCode" prefWidth="133.0" text="Item Code" />
             <TableColumn fx:id="COlItemName" prefWidth="150.0" text="Item Name" />
-            <TableColumn fx:id="colItemCategory" prefWidth="219.0" text="Category" />
+            <TableColumn fx:id="colItemCategory" prefWidth="219.0" text="description" />
             <TableColumn fx:id="colItemQty" prefWidth="148.0" text="Qty" />
             <TableColumn fx:id="colItemUnitPrice" prefWidth="176.0" text="Unit Price" />
             <TableColumn fx:id="colItemTotal" minWidth="0.0" prefWidth="146.0" text="Total" />
             <TableColumn fx:id="colAction" minWidth="0.0" prefWidth="156.0" text="Action" />
          </columns>
       </TableView>
-      <JFXButton layoutX="552.0" layoutY="149.0" onAction="#btnNewCustomerOnAction" prefHeight="33.0" prefWidth="102.0" style="-fx-background-radius: 10; -fx-background-color: #2ecc71; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="   New" textFill="WHITE">
+      <JFXButton fx:id="btnNewCustom" layoutX="552.0" layoutY="149.0" onAction="#btnNewCustomerOnAction" prefHeight="33.0" prefWidth="102.0" style="-fx-background-radius: 10; -fx-background-color: #2ecc71; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="   New" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -110,7 +110,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="754.0" layoutY="214.0" text="Category:" textFill="WHITE">
+      <Label layoutX="754.0" layoutY="214.0" text="description" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

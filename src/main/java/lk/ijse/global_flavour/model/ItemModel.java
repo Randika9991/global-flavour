@@ -4,9 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lk.ijse.global_flavour.db.DBConnection;
 import lk.ijse.global_flavour.dto.Item;
+import lk.ijse.global_flavour.dto.OrderCartDTO;
 import lk.ijse.global_flavour.dto.Suppliers;
 import lk.ijse.global_flavour.dto.tm.ItemTM;
 import lk.ijse.global_flavour.dto.tm.SuppliersTM;
+import lk.ijse.global_flavour.util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -111,5 +113,25 @@ public class ItemModel {
             data.add(resultSet.getString(1));
         }
         return data;
+    }
+
+    public static boolean updateQty(List<OrderCartDTO> orderDTOList) throws SQLException {
+        for(OrderCartDTO dto : orderDTOList){
+            if(!updateQty(dto)){
+                return false;
+            }
+
+        }
+        return true;
+    }
+
+    private static boolean updateQty(OrderCartDTO dto) throws SQLException {
+        String sql = "UPDATE item SET qtyOnHand = (qtyOnHand - ?) WHERE itemCode = ?";
+        return CrudUtil.execute(
+                sql,
+                dto.getQty(),
+                dto.getCode()
+        );
+
     }
 }

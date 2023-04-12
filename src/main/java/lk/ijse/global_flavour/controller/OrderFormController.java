@@ -1,26 +1,37 @@
+//category change description
+
 package lk.ijse.global_flavour.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.global_flavour.dto.CashierCustomer;
 import lk.ijse.global_flavour.dto.Item;
+import lk.ijse.global_flavour.dto.OrderCartDTO;
 import lk.ijse.global_flavour.dto.tm.CartTM;
+import lk.ijse.global_flavour.dto.tm.OrderTM;
 import lk.ijse.global_flavour.model.CashierCustomerModel;
 import lk.ijse.global_flavour.model.ItemModel;
 import lk.ijse.global_flavour.model.OrderModel;
+import lk.ijse.global_flavour.model.PlaceOrderModel;
+import lk.ijse.global_flavour.util.ButtonColourController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -34,7 +45,10 @@ public class OrderFormController implements Initializable {
     private JFXTextField txtQty;
 
     @FXML
-    private TableView<CartTM> mainCOMItem;
+    private JFXButton btnNewCustom;
+
+    @FXML
+    private TableView<OrderTM> mainCOMItem;
 
     @FXML
     private TableColumn<?, ?> colItemCode;
@@ -87,7 +101,8 @@ public class OrderFormController implements Initializable {
     @FXML
     private Label lblNetTotal;
 
-    private ObservableList<CartTM> obList = FXCollections.observableArrayList();
+    private ObservableList<OrderTM> obList = FXCollections.observableArrayList();
+
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -98,13 +113,13 @@ public class OrderFormController implements Initializable {
         setCellValueFactory();
     }
     void setCellValueFactory() {
-        colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
-        COlItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        COlItemName.setCellValueFactory(new PropertyValueFactory<>("description"));
         colItemCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colItemQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colItemUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colItemTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
-        colAction.setCellValueFactory(new PropertyValueFactory<>("Action"));
+        colAction.setCellValueFactory(new PropertyValueFactory<>("btn"));
     }
     private void generateNextOrderId() {
         try {
@@ -209,7 +224,7 @@ public class OrderFormController implements Initializable {
                 }
             }
         }
-        CartTM tm = new CartTM(code,itemName, category, qty, unitPrice, total, btnRemove);
+        OrderTM tm = new OrderTM(code,itemName, category, qty, unitPrice, total, btnRemove);
 
         obList.add(tm);
         mainCOMItem.setItems(obList);
@@ -246,13 +261,41 @@ public class OrderFormController implements Initializable {
     }
 
     @FXML
-    void btnNewCustomerOnAction(ActionEvent event) {
-
+    void btnNewCustomerOnAction(ActionEvent event) throws IOException {
+        Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashiercustomer_form.fxml"));
+        adminAncPane.getChildren().add(load);
     }
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
+        String oId = lblOrderId.getText();
+        String cId = String.valueOf(cmbCustomerId.getValue());
+        double payment = Double.parseDouble(lblNetTotal.getText());
 
+        List<OrderCartDTO> orderDTOList = new ArrayList<>();
+        OrderTM orderTM = null;
+        for (int i = 0; i < mainCOMItem.getItems().size(); i++) {
+            orderTM = obList.get(i);
+            OrderCartDTO cartDTO = new OrderCartDTO(
+                    orderTM.getCode(),
+                    orderTM.getQty(),
+                    orderTM.getUnitPrice()
+            );
+            orderDTOList.add(cartDTO);
+        }
+
+        try {
+            boolean isSaved = PlaceOrderModel.placeOrder(oId,cId,payment,orderDTOList,orderTM);
+            if(isSaved) {
+                generateNextOrderId();
+                new Alert(Alert.AlertType.ERROR, "selected...").show();
+           }
+       }
+        catch(Exception e) {
+           e.printStackTrace();
+            System.out.println(e);
+           new Alert(Alert.AlertType.ERROR, "SQL Error").show();
+       }
     }
 
     @FXML

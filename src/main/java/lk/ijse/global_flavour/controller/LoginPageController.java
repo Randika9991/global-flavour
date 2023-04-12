@@ -2,12 +2,15 @@ package lk.ijse.global_flavour.controller;
 
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
@@ -30,17 +33,10 @@ public class LoginPageController {
     public static String getAdminShireChangePasswordController() {
         return adminShireChangePasswordController;
     }
-
     public static String getNameShireChangePasswordController() {
         return nameShireChangePasswordController;
     }
-
-    public String getEmail() {
-//        if(nameShirePasswordConroller.equals(null)){
-//            return "";
-//        }
-        return emailShirePasswordConrollerAndChangePasswordController;
-    }
+    public String getEmail() { return emailShirePasswordConrollerAndChangePasswordController;}
 
     int i = 0;
 
@@ -57,7 +53,18 @@ public class LoginPageController {
     private AnchorPane loginAncPane;
 
     @FXML
-    private TextField txtLoginUserName;
+    private JFXToggleButton showPasswordButton;
+
+    @FXML
+    public Button btnShowPassword;
+
+    @FXML
+    private TextField txtPassword2;
+
+    @FXML
+    void ShowPasswordOnAction(ActionEvent event) {
+        /////////////////////////////////////////////////////////////////////////
+    }
 
     @FXML
     void loginPageOnAction(ActionEvent event) throws IOException, AWTException {
@@ -163,6 +170,7 @@ public class LoginPageController {
 
     }
 
+
     public void dontHaveAccountOnActon(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Parent root = null;
@@ -181,6 +189,22 @@ public class LoginPageController {
         assert COMAdminCashierlogin != null : "fx:id=\"COMAdminCashierlogin\" was not injected: check your FXML file 'loginpage.fxml'.";
         assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'loginpage.fxml'.";
         COMAdminCashierlogin.getItems().addAll("Admin","Cashier");
+        txtPassword2.setVisible(false);
+
     }
 
+    public void OnMousePassword(MouseEvent mouseEvent) {
+        txtLogPassword.setVisible(false);
+        txtPassword2.setText(txtLogPassword.getText());
+        txtPassword2.setVisible(true);
+
+    }
+
+    public void OnMousePWDExt(MouseEvent mouseEvent) {
+        txtLogPassword.setVisible(true);
+        txtLogPassword.setText(txtPassword2.getText());
+        txtPassword2.setVisible(false);
+
+
+    }
 }
