@@ -21,7 +21,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-3.0" prefHeight="761.0" prefWidth="332.0" styleClass="adminDashBordLeftSlide" stylesheets="@../lk.ijse.global_flavour.styles/style.css" AnchorPane.bottomAnchor="1.0">
+      <AnchorPane layoutX="-3.0" prefHeight="768.0" prefWidth="332.0" styleClass="adminDashBordLeftSlide" stylesheets="@../lk.ijse.global_flavour.styles/style.css" AnchorPane.bottomAnchor="-7.0">
          <children>
             <JFXButton fx:id="HomeBtn" layoutX="74.0" layoutY="206.0" onAction="#btnOnHome" prefHeight="44.0" prefWidth="183.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Home ">
                <font>

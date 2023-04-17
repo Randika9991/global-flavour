@@ -14,14 +14,14 @@
    <children>
       <AnchorPane fx:id="cashierAncPane" layoutX="248.0" layoutY="-2.0" prefHeight="728.0" prefWidth="1217.0">
          <children>
-            <ImageView fitHeight="761.0" fitWidth="1255.0" layoutX="5.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="-28.7608642578125" AnchorPane.topAnchor="1.0">
+            <ImageView fitHeight="761.0" fitWidth="1255.0" layoutX="13.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="-36.7608642578125" AnchorPane.topAnchor="1.0">
                <image>
                   <Image url="@../lk.ijse.global_flavour.assets/top-view-indian-seasonings-spices-table.jpg" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="-3.0" prefHeight="761.0" prefWidth="332.0" styleClass="adminDashBordLeftSlide" stylesheets="@../lk.ijse.global_flavour.styles/style.css">
+      <AnchorPane layoutY="-3.0" prefHeight="761.0" prefWidth="332.0" styleClass="adminDashBordLeftSlide" stylesheets="@../lk.ijse.global_flavour.styles/style.css" AnchorPane.bottomAnchor="-3.0">
          <children>
             <JFXButton fx:id="HomeBtn" layoutX="81.0" layoutY="230.0" onAction="#btnOnHome" prefHeight="45.0" prefWidth="215.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Home ">
                <font>
@@ -58,17 +58,17 @@
                   <Image url="@../lk.ijse.global_flavour.assets/icons8-log-out.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="deliverBtn" layoutX="82.0" layoutY="565.0" onAction="#btnOnDeliver" prefHeight="45.0" prefWidth="215.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Delivery">
+            <JFXButton fx:id="deliverBtn" layoutX="81.0" layoutY="565.0" onAction="#btnOnDeliver" prefHeight="45.0" prefWidth="215.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Delivery">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="ItmBtn" layoutX="84.0" layoutY="358.0" onAction="#btnOnItem" prefHeight="45.0" prefWidth="215.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Item">
+            <JFXButton fx:id="ItmBtn" layoutX="81.0" layoutY="358.0" onAction="#btnOnItem" prefHeight="45.0" prefWidth="215.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Item">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="OrderBtn" layoutX="82.0" layoutY="428.0" onAction="#btnOnOrder" prefHeight="45.0" prefWidth="215.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Orders">
+            <JFXButton fx:id="OrderBtn" layoutX="81.0" layoutY="428.0" onAction="#btnOnOrder" prefHeight="45.0" prefWidth="215.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Orders">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>

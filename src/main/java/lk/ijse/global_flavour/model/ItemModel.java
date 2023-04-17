@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import lk.ijse.global_flavour.db.DBConnection;
 import lk.ijse.global_flavour.dto.Item;
 import lk.ijse.global_flavour.dto.OrderCartDTO;
+import lk.ijse.global_flavour.dto.PlaceSupplyLoad;
 import lk.ijse.global_flavour.dto.Suppliers;
 import lk.ijse.global_flavour.dto.tm.ItemTM;
 import lk.ijse.global_flavour.dto.tm.SuppliersTM;
@@ -133,5 +134,39 @@ public class ItemModel {
                 dto.getCode()
         );
 
+    }
+
+    public static Item findById(String itemcode) throws SQLException {
+        String sql = "SELECT * FROM item WHERE itemCode=?";
+
+        ResultSet resultSet = CrudUtil.execute(sql,itemcode);
+        if(resultSet.next()){
+            return (new Item(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5)
+            ));
+        }
+        return null;
+    }
+
+    public static boolean addQty(List<PlaceSupplyLoad> placeSupplyLoadList) throws SQLException {
+        for(PlaceSupplyLoad placeSupplyLoad : placeSupplyLoadList) {
+            if(!addQty(placeSupplyLoad)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private static boolean addQty(PlaceSupplyLoad placeSupplyLoad) throws SQLException {
+        String sql = "UPDATE item SET qtyOnHand = (qtyOnHand + ?) WHERE itemCode = ?";
+
+        return CrudUtil.execute(
+                sql,
+                placeSupplyLoad.getSuppqty(),
+                placeSupplyLoad.getItemcode()
+        );
     }
 }

@@ -8,11 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import lk.ijse.global_flavour.util.ButtonColourController;
+import lk.ijse.global_flavour.util.TimeAndDateController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -90,7 +92,7 @@ public class AdminDashboardController {
         Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/order_form.fxml"));
         adminAncPane.getChildren().clear();
         adminAncPane.getChildren().add(load);
-        ButtonColourController.btncolor(ItmBtn,adminAncPane);
+        ButtonColourController.btncolor(OrderBtn,adminAncPane);
 
     }
 
@@ -109,6 +111,7 @@ public class AdminDashboardController {
     void BackOnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Parent root = null;
+        stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -122,31 +125,8 @@ public class AdminDashboardController {
         assert adminAncPane != null : "fx:id=\"adminAncPane\" was not injected: check your FXML file 'admindashboard.fxml'.";
         assert txtDate != null : "fx:id=\"txtDate\" was not injected: check your FXML file 'admindashboard.fxml'.";
 
-        Timenow();
+        TimeAndDateController timeobject = new TimeAndDateController();
+        timeobject.timenow(lblTime,lblDate);
     }
-    public void Timenow(){
-        Thread thread =new Thread(() ->{
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MMMM,  dd, yyyy");
-            while (true){
-                try{
-                    Thread.sleep(1000);
-
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-                final String timenow = sdf.format(new Date());
-                String timenow1 = sdf1.format(new Date());
-
-                Platform.runLater(() ->{
-                    lblTime.setText(timenow);
-                    lblDate.setText(timenow1);
-                });
-            }
-        });
-        thread.start();
-    }
-
-
 }
 

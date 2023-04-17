@@ -18,9 +18,7 @@ public class ButtonColourController {
                             AnchorPane newAnchorPane = (AnchorPane) node;
                             if (newAnchorPane.getId().equals("adminAncPane")) {
                                 btn.setStyle("-fx-background-color: #ffffff; -fx-effect:  dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10); -fx-background-radius :  15");
-                            } else if(newAnchorPane.getId().equals("cashieranchorpane")){
-                                btn.setStyle("-fx-background-color: #ffffff; -fx-effect:  dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10); -fx-background-radius :  15");
-                            }else{
+                            } else{
                                 btn.setStyle("-fx-background-color: white;");
                             }
                         }

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.global_flavour.dto.FogotYourPassword;
@@ -26,7 +27,7 @@ import java.util.Random;
 
 public class FogotYourPasswordController {
 
-    public static String emailShireChangePasswordController;
+    public static String emailShireChangePasswordController="";
     public static String adminShireChangePasswordController;
     public static String nameShireChangePasswordController;
 
@@ -157,6 +158,7 @@ public class FogotYourPasswordController {
 
         Stage stage = new Stage();
         Parent root = null;
+        stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -169,13 +171,12 @@ public class FogotYourPasswordController {
     public void ChangePasswordOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Parent root = null;
+        stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/changepassword.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         fogotPassword.getScene().getWindow().hide();
-
-
     }
 
     @FXML

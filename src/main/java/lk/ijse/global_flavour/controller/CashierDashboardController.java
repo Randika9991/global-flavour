@@ -8,9 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.global_flavour.util.ButtonColourController;
+import lk.ijse.global_flavour.util.TimeAndDateController;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -106,6 +108,7 @@ public class CashierDashboardController {
     void BackOnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Parent root = null;
+        stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -125,30 +128,7 @@ public class CashierDashboardController {
 
     @FXML
     void initialize() {
-        Timenow();
+        TimeAndDateController timeobject = new TimeAndDateController();
+        timeobject.timenow(lblTime,lblDate);
     }
-    public void Timenow(){
-        Thread thread =new Thread(() ->{
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MMMM,  dd, yyyy");
-            while (true){
-                try{
-                    Thread.sleep(1000);
-
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-                final String timenow = sdf.format(new Date());
-                String timenow1 = sdf1.format(new Date());
-
-                Platform.runLater(() ->{
-                    lblTime.setText(timenow);
-                    lblDate.setText(timenow1);
-                });
-            }
-        });
-        thread.start();
-    }
-
-
 }

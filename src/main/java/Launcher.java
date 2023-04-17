@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -16,6 +17,7 @@ public class Launcher extends Application {
         Parent load = FXMLLoader.load(resource);
 
         stage.setScene(new Scene(load));
+        stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         stage.setTitle("GLOBAL FLAVOUR");
         stage.centerOnScreen();
         stage.show();

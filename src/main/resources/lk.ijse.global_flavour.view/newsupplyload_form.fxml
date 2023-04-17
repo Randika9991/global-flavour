@@ -120,7 +120,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="supplyqty" focusColor="WHITE" labelFloat="true" layoutX="679.0" layoutY="312.0" prefHeight="30.0" prefWidth="142.0" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="supplyqty" focusColor="WHITE" labelFloat="true" layoutX="679.0" layoutY="312.0" onMouseClicked="#supplyqtyOnMouseClicked" prefHeight="30.0" prefWidth="142.0" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -135,7 +135,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="supplyqty1" focusColor="WHITE" labelFloat="true" layoutX="561.0" layoutY="699.0" prefHeight="30.0" prefWidth="142.0" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txttotalprice" focusColor="WHITE" labelFloat="true" layoutX="561.0" layoutY="699.0" onMouseClicked="#txttotalpriceOnMouseClicked" prefHeight="30.0" prefWidth="142.0" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="20.0" />
          </font>

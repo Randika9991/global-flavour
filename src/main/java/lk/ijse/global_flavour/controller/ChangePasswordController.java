@@ -49,7 +49,7 @@ public class ChangePasswordController {
     @FXML
     void SaveOnAction(ActionEvent event) {
 
-        if(FogotYourPasswordController.getEmailShireChangePasswordController2().isEmpty()){
+        if(fogotYourPasswordController.getEmailShireChangePasswordController2().isEmpty()){
             String userName = getNameShireChangePasswordController();
             String empId = null;
             String Password = txtPassword.getText();
@@ -82,7 +82,7 @@ public class ChangePasswordController {
                 }
             }
         }else {
-            String userName = FogotYourPasswordController.getNameShireChangePasswordController2();
+            String userName = fogotYourPasswordController.getNameShireChangePasswordController2();
             String empId = null;
             String Password = txtPassword.getText();
             String email = FogotYourPasswordController.getEmailShireChangePasswordController2();
@@ -136,7 +136,7 @@ public class ChangePasswordController {
     @FXML
     void initialize() {
 
-        if(FogotYourPasswordController.getEmailShireChangePasswordController2().isEmpty()){
+        if(fogotYourPasswordController.getEmailShireChangePasswordController2().isEmpty()){
             lblAdminCashiar.setText(getAdminShireChangePasswordController());
             lblEmail.setText(getNameShireChangePasswordController());
             lblName1.setText(loginPageController.getEmail());

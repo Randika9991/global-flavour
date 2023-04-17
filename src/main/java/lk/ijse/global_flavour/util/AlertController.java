@@ -55,12 +55,12 @@ public class AlertController {
 //            alert.getDialogPane().setMinSize(300, 150); // Set the minimum size of the alert dialog pane
 //            alert.getDialogPane().setMaxSize(300, 150); // Set the maximum size of the alert dialog pane
         //alert.getDialogPane().setStyle("-fx-background-color: #F8D7DA;"); // Set the background color of the alert dialog pane
-        alert.getDialogPane().setStyle("-fx-background-color: linear-gradient(to top right  ,#77c2bb,white,white,white,w,#77c2bb);");
+        alert.getDialogPane().setStyle("-fx-background-color: linear-gradient(to top right  ,#043b38,white);");
         alert.getDialogPane().setHeaderText(null); // Remove the header text from the alert dialog pane
 
 
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-ok.gif"));
+        stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-help-100.png"));
         ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(okButton,cancelButton);

@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -53,6 +54,7 @@ public class LoadingPageController {
                     Stage stage = new Stage();
                     Parent root = null;
                     stage.setTitle("GLOBAL FLAVOUR");
+                    stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
                     try {
                         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
                     } catch (IOException ex) {
