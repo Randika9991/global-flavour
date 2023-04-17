@@ -55,7 +55,12 @@ public class CashierDashboardController {
     private JFXButton BtnSupplierLoad;
 
     @FXML
-    void SupplierLoadOnAction(ActionEvent event) {
+    void SupplierLoadOnAction(ActionEvent event) throws IOException {
+        Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/newsupplyload_form.fxml"));
+        cashierAncPane.getChildren().clear();
+        cashierAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(BtnSupplierLoad,cashieranchorpane);
+
 
     }
 
