@@ -55,7 +55,7 @@
           <TableColumn fx:id="COMSupName" prefWidth="213.0" text="Supplier Name" />
             <TableColumn fx:id="COMSupAddress" prefWidth="245.0" text="Address" />
             <TableColumn fx:id="COMSupContact" prefWidth="231.0" text="Contact" />
-            <TableColumn fx:id="COMSupEmail" prefWidth="224.0" text="E-mail" />
+            <TableColumn fx:id="COMSupEmail" prefWidth="224.0" style="-fx-font-weight: bold;" text="E-mail" />
         </columns>
       </TableView>
       <JFXButton layoutX="1143.0" layoutY="357.0" onAction="#btnDeleteOnAction" prefHeight="31.0" prefWidth="102.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Delete" />

@@ -62,7 +62,7 @@
             <TableColumn fx:id="tablEmployeeJT" prefWidth="175.0" text="Job Title" />
             <TableColumn fx:id="tablEmployeeContact" prefWidth="141.0" text="Contact" />
             <TableColumn fx:id="tablEmployeeAddrsss" prefWidth="135.0" text="Address" />
-            <TableColumn fx:id="tablEmployeemail" prefWidth="135.0" style="-fx-text-fill: red; -fx-font-weight: bold;" text="E-mail" />
+            <TableColumn fx:id="tablEmployeemail" prefWidth="135.0" style="-fx-font-weight: bold;" text="E-mail" />
         </columns>
       </TableView>
       <JFXButton layoutX="1144.0" layoutY="361.0" onAction="#btnDeleteOnAction" prefHeight="31.0" prefWidth="102.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Delete" />

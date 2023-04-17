@@ -11,12 +11,12 @@
 
 <AnchorPane fx:id="fogotPassword" prefHeight="455.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.FogotYourPasswordController">
    <children>
-      <ImageView fitHeight="467.0" fitWidth="529.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-2.243255615234375">
+      <ImageView fitHeight="492.0" fitWidth="541.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-1.0">
          <image>
             <Image url="@../lk.ijse.global_flavour.assets/fogotyourpassword.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="39.0" layoutY="65.0" prefHeight="329.0" prefWidth="452.0" styleClass="loginPageleLeftSlide" stylesheets="@../lk.ijse.global_flavour.styles/style.css">
+      <AnchorPane layoutX="45.0" layoutY="71.0" prefHeight="329.0" prefWidth="452.0" styleClass="loginPageleLeftSlide" stylesheets="@../lk.ijse.global_flavour.styles/style.css">
          <children>
             <Separator layoutX="41.0" layoutY="173.0" prefHeight="0.0" prefWidth="285.0" AnchorPane.bottomAnchor="153.0" />
             <TextField fx:id="txtEnteremail" layoutX="55.0" layoutY="130.0" prefHeight="40.0" prefWidth="267.0" promptText="Enter Emaile" style="-fx-background-color: transperan; -fx-border-color: #0F0E0E; -fx-border-width: 0px 0px 0px 3px;" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="130.0">
@@ -40,6 +40,6 @@
          </image>
       </ImageView>
       <JFXButton layoutX="447.0" layoutY="14.0" onAction="#buttonOnAction" opacity="0.0" prefHeight="44.0" prefWidth="44.0" style="-fx-border-width: 1px 1px 1px 1px; -fx-border-color: white;" text=" back" textFill="#f5f5f5" />
-      <Hyperlink fx:id="txtChangePassword" layoutX="358.0" layoutY="408.0" onAction="#ChangePasswordOnAction" prefHeight="29.0" prefWidth="133.0" text="Change password" />
+      <Hyperlink fx:id="txtChangePassword" layoutX="363.0" layoutY="408.0" onAction="#ChangePasswordOnAction" prefHeight="29.0" prefWidth="133.0" text="Change password" />
    </children>
 </AnchorPane>

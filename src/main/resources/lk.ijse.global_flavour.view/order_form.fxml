@@ -165,8 +165,13 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <JFXRadioButton fx:id="radioButton" layoutX="551.0" layoutY="98.0" onAction="#radioButtonOnAction" style="-fx-text-fill: white;" text="Deliver" />
+      <JFXRadioButton fx:id="radioButton" layoutX="551.0" layoutY="98.0" onAction="#radioButtonOnAction" style="-fx-text-fill: white;" text=" " />
       <Label layoutX="1104.0" layoutY="214.0" text="Qty:" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="576.0" layoutY="83.0" prefHeight="48.0" prefWidth="83.0" text="Deliver" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

@@ -50,7 +50,7 @@
             <TableColumn fx:id="COMCustomName" prefWidth="228.0" text="Customer Name" />
             <TableColumn fx:id="COMCustContact" prefWidth="243.0" text="ContactNo" />
             <TableColumn fx:id="COMCustAddress" prefWidth="231.0" text="Address" />
-            <TableColumn fx:id="COMCusEmail" prefWidth="215.0" text="Email" />
+            <TableColumn fx:id="COMCusEmail" prefWidth="215.0" style="-fx-font-weight: bold;" text="Email" />
          </columns>
       </TableView>
       <JFXButton layoutX="1134.0" layoutY="356.0" onAction="#btnDeleteOnAction" prefHeight="31.0" prefWidth="102.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Delete" />

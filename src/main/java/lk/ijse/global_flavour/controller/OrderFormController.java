@@ -29,6 +29,7 @@ import lk.ijse.global_flavour.model.CashierCustomerModel;
 import lk.ijse.global_flavour.model.ItemModel;
 import lk.ijse.global_flavour.model.OrderModel;
 import lk.ijse.global_flavour.model.PlaceOrderModel;
+import lk.ijse.global_flavour.util.AlertController;
 import lk.ijse.global_flavour.util.ButtonColourController;
 
 import java.io.IOException;
@@ -251,12 +252,14 @@ public class OrderFormController implements Initializable {
     }
     private void setRemoveBtnOnAction(Button btn) {
         btn.setOnAction((e) -> {
-            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+           // ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+          //  ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
+            //Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
-            if (result.orElse(no) == yes) {
+            boolean ok = AlertController.okconfirmmessage("Are you sure to remove?\", yes, no");
+
+            if (ok) {
 
                 int index = mainCOMItem.getSelectionModel().getSelectedIndex();
                 obList.remove(index);

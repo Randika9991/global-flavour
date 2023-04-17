@@ -158,6 +158,7 @@ public class FogotYourPasswordController {
 
         Stage stage = new Stage();
         Parent root = null;
+        stage.setTitle("GLOBAL FLAVOUR");
         stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
         Scene scene = new Scene(root);
@@ -171,6 +172,7 @@ public class FogotYourPasswordController {
     public void ChangePasswordOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Parent root = null;
+        stage.setTitle("GLOBAL FLAVOUR");
         stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/changepassword.fxml"));
         Scene scene = new Scene(root);
