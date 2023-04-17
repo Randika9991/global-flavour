@@ -49,13 +49,13 @@ public class AlertController {
         alert.setTitle("Confirmation");
         alert.setHeaderText(null);
         alert.setContentText(msg);
-        alert.getDialogPane().setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+        alert.getDialogPane().setBackground(new Background(new BackgroundFill(null, null, null)));
 
         alert.getDialogPane().setPrefSize(300, 150); // Set the size of the alert dialog pane
 //            alert.getDialogPane().setMinSize(300, 150); // Set the minimum size of the alert dialog pane
 //            alert.getDialogPane().setMaxSize(300, 150); // Set the maximum size of the alert dialog pane
         //alert.getDialogPane().setStyle("-fx-background-color: #F8D7DA;"); // Set the background color of the alert dialog pane
-        alert.getDialogPane().setStyle("-fx-background-color: linear-gradient(to top right  ,#404040,#bcbcbc,#bcbcbc,#bcbcbc,#bcbcbc,#bcbcbc);");
+        alert.getDialogPane().setStyle("-fx-background-color: linear-gradient(to top right  ,#77c2bb,white,white,white,w,#77c2bb);");
         alert.getDialogPane().setHeaderText(null); // Remove the header text from the alert dialog pane
 
 

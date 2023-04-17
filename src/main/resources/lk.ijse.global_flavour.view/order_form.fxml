@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -14,7 +15,7 @@
 
 <AnchorPane fx:id="adminAncPane" prefHeight="846.0" prefWidth="1272.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.OrderFormController">
    <children>
-      <ImageView fitHeight="846.0" fitWidth="1272.0" layoutX="-11.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="846.0" fitWidth="1272.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../lk.ijse.global_flavour.assets/plain-smooth-green-paper-background.jpg" />
          </image>
@@ -24,7 +25,7 @@
             <Font size="29.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtQty" focusColor="WHITE" labelFloat="true" layoutX="1100.0" layoutY="260.0" onAction="#txtQtyOnAction" prefHeight="30.0" prefWidth="142.0" promptText="Qty" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtQty" focusColor="WHITE" labelFloat="true" layoutX="1100.0" layoutY="260.0" onAction="#txtQtyOnAction" prefHeight="30.0" prefWidth="142.0" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -49,7 +50,7 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></JFXButton>
-      <Label fx:id="lblOrderId" layoutX="276.0" layoutY="83.0" prefHeight="48.0" prefWidth="194.0" textFill="WHITE">
+      <Label fx:id="lblOrderId" layoutX="276.0" layoutY="83.0" prefHeight="48.0" prefWidth="194.0" textFill="#ffcaca">
          <font>
             <Font size="20.0" />
          </font>
@@ -162,6 +163,12 @@
       <Label layoutX="115.0" layoutY="710.0" text="Net Total:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="radioButton" layoutX="551.0" layoutY="98.0" onAction="#radioButtonOnAction" style="-fx-text-fill: white;" text="Deliver" />
+      <Label layoutX="1104.0" layoutY="214.0" text="Qty:" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
          </font>
       </Label>
    </children>

@@ -4,6 +4,7 @@ package lk.ijse.global_flavour.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,9 +14,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.global_flavour.dto.CashierCustomer;
 import lk.ijse.global_flavour.dto.Item;
 import lk.ijse.global_flavour.dto.OrderCartDTO;
@@ -37,6 +41,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class OrderFormController implements Initializable {
+
+    public static String generateNextOrderIdShireDeliveryController;
+
+    public static String getGenerateNextOrderIdShireDeliveryController() {
+        return generateNextOrderIdShireDeliveryController;
+    }
 
     @FXML
     private AnchorPane adminAncPane;
@@ -87,6 +97,9 @@ public class OrderFormController implements Initializable {
     private Label lblItemName;
 
     @FXML
+    private JFXRadioButton radioButton ;
+
+    @FXML
     private JFXComboBox cmbItemCode;
 
     @FXML
@@ -124,7 +137,10 @@ public class OrderFormController implements Initializable {
     private void generateNextOrderId() {
         try {
             String id = OrderModel.getNextOrderId();
+
             lblOrderId.setText(id);
+            generateNextOrderIdShireDeliveryController=id;
+
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
@@ -302,5 +318,20 @@ public class OrderFormController implements Initializable {
     void txtQtyOnAction(ActionEvent event) {
         btnAddToCartOnAction(event);
 
+    }
+
+    @FXML
+    void radioButtonOnAction(ActionEvent event) throws IOException {
+        if (radioButton.isSelected()) {
+            Stage stage = new Stage();
+            Parent root = null;
+            root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/delivery.fxml"));
+            Scene scene = new Scene(root);
+            stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-deliver-food-101.png"));
+            stage.setScene(scene);
+            stage.show();
+
+            System.out.println("Option 1 selected");
+        }
     }
 }

@@ -50,6 +50,11 @@ public class CreateNewAccountController {
 
     public void CreateOnAction(ActionEvent actionEvent) throws IOException {
 
+        if(cmbAdminCashiar.getValue()!="Admin"&&cmbAdminCashiar.getValue()!="Cashier"&&txtEnterName.getText().isEmpty()&&txtEnteremail.getText().isEmpty()&&txtPassword.getText().isEmpty()&&txtConfirmPassword.getText().isEmpty()){
+            new Alert(Alert.AlertType.ERROR, "Please fill the feald..").show();
+
+
+        }else {
             if (cmbAdminCashiar.getValue().equals("Admin") || cmbAdminCashiar.getValue().equals("Cashier")) {
                 if (txtEnterName.getText().isEmpty() && txtEnteremail.getText().isEmpty() && txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty()) {
                     new Alert(Alert.AlertType.ERROR, "Please fill the other feald..").show();
@@ -133,6 +138,7 @@ public class CreateNewAccountController {
                 return;
 
             }
+        }
 
     }
 

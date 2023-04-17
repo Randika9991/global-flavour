@@ -52,6 +52,14 @@ public class CashierDashboardController {
     private Label lblDate;
 
     @FXML
+    private JFXButton BtnSupplierLoad;
+
+    @FXML
+    void SupplierLoadOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
     void btnOnCustom(ActionEvent event) throws IOException {
         Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashiercustomer_form.fxml"));
         cashierAncPane.getChildren().clear();
