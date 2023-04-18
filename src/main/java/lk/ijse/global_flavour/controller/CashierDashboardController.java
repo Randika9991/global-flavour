@@ -115,7 +115,7 @@ public class CashierDashboardController {
     void BackOnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Parent root = null;
-        stage.setTitle("GLOBAL FLAVOUR");
+        stage.setTitle("SPICY FLAVOUR");
         stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
         Scene scene = new Scene(root);

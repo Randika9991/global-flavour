@@ -1,6 +1,7 @@
 package lk.ijse.global_flavour.model;
 
 import lk.ijse.global_flavour.db.DBConnection;
+import lk.ijse.global_flavour.dto.Delivery;
 import lk.ijse.global_flavour.dto.OrderCartDTO;
 import lk.ijse.global_flavour.dto.tm.OrderTM;
 
@@ -12,7 +13,9 @@ import java.util.List;
 
 public class PlaceOrderModel {
 
-    public static boolean placeOrder(String oId, String cId, double payment, List<OrderCartDTO> orderDTOList, OrderTM orderTM) throws SQLException{
+    private  static  Delivery delivery;
+
+    public static boolean placeOrder(String oId, String cId, double payment, List<OrderCartDTO> orderDTOList, OrderTM orderTM, boolean delivery) throws SQLException{
 
         Connection con = null;
         try {
@@ -22,15 +25,20 @@ public class PlaceOrderModel {
 
             boolean isSaved = OrderModel.save(oId, cId, payment, LocalDate.now(), LocalTime.now(), orderDTOList);
             if (isSaved) {
-
                 boolean isUpdate = ItemModel.updateQty(orderDTOList);
                 if (isUpdate) {
                     boolean isOrdered = OrderDetailModel.save(oId, orderDTOList);
-
                     if (isOrdered) {
-                        con.commit();
-                        return true;
-
+                        if(delivery){
+                            boolean isDelivered = DeliveryModel.save(PlaceOrderModel.delivery);
+                            if(isDelivered){
+                                con.commit();
+                                return true;
+                            }
+                        }else {
+                            con.commit();
+                            return true;
+                        }
                     }
                 }
             }
@@ -43,5 +51,10 @@ public class PlaceOrderModel {
         } finally {
             con.setAutoCommit(true);
         }
+    }
+
+    public static boolean saveDelivery(Delivery cus) {
+        delivery = cus;
+        return false;
     }
 }

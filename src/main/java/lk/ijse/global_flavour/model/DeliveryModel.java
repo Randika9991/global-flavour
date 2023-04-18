@@ -25,7 +25,7 @@ public class DeliveryModel {
             pstm.setString(5, delivery.getLocation());
             pstm.setString(6, delivery.getDeliverDate());
             pstm.setString(7, String.valueOf(delivery.getDueDate()));
-            pstm.setBoolean(8, true);
+            pstm.setBoolean(8, delivery.getDeliverStatus());
 
             return pstm.executeUpdate() > 0;
         }

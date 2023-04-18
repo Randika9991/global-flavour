@@ -39,12 +39,12 @@
             <Font size="22.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtsupContact" focusColor="WHITE" labelFloat="true" layoutX="188.0" layoutY="232.0" prefHeight="31.0" prefWidth="187.0" promptText="Contact" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtsupContact" focusColor="WHITE" labelFloat="true" layoutX="188.0" layoutY="232.0" onMouseClicked="#txtContactNumberOnMouseClick" prefHeight="31.0" prefWidth="187.0" promptText="Contact" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtsupEmail" focusColor="WHITE" labelFloat="true" layoutX="564.0" layoutY="232.0" prefHeight="31.0" prefWidth="187.0" promptText="E-mail" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtsupEmail" focusColor="WHITE" labelFloat="true" layoutX="564.0" layoutY="232.0" onMouseClicked="#txtemailOnMouseClick" prefHeight="31.0" prefWidth="187.0" promptText="E-mail" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font>
@@ -72,5 +72,7 @@
          </image>
       </ImageView>
       <Button layoutX="1197.0" layoutY="40.0" mnemonicParsing="false" onAction="#supIdOnActionSerch" opacity="0.0" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 15;" />
+      <Label fx:id="lblInvalidEmail" layoutX="563.0" layoutY="282.0" prefHeight="21.0" prefWidth="190.0" text="Invalid Email" textFill="#ffc9c9" />
+      <Label fx:id="lblInvalidContactNo" layoutX="187.0" layoutY="282.0" prefHeight="21.0" prefWidth="190.0" text="Invalid contact number" textFill="#ffc9c9" />
    </children>
 </AnchorPane>

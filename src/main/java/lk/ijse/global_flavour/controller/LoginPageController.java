@@ -26,7 +26,7 @@ import java.sql.SQLException;
 
 public class LoginPageController {
 
-    public static String emailShirePasswordConrollerAndChangePasswordController;
+    public static String emailShirePasswordConrollerAndChangePasswordController="";
     public static String adminShireChangePasswordController;
     public static String nameShireChangePasswordController;
 
@@ -106,7 +106,7 @@ public class LoginPageController {
                             Stage stage = new Stage();
                             Parent root = null;
                             stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
-                            stage.setTitle("GLOBAL FLAVOUR");
+                            stage.setTitle("SPICY FLAVOUR");
                             root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/admindashboard.fxml"));
                             Scene scene = new Scene(root);
                             stage.setScene(scene);
@@ -115,7 +115,7 @@ public class LoginPageController {
                         }else {
                             Stage stage = new Stage();
                             Parent root = null;
-                            stage.setTitle("GLOBAL FLAVOUR");
+                            stage.setTitle("SPICY FLAVOUR");
                             stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
                             root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashierdashboard.fxml"));
                             Scene scene = new Scene(root);
@@ -142,7 +142,7 @@ public class LoginPageController {
                             if(ok){
                                 Stage stage = new Stage();
                                 Parent root = null;
-                                stage.setTitle("GLOBAL FLAVOUR");
+                                stage.setTitle("SPICY FLAVOUR");
                                 stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
                                 root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/fogotpassworld.fxml"));
                                 Scene scene = new Scene(root);
@@ -168,7 +168,7 @@ public class LoginPageController {
 
         Stage stage = new Stage();
         Parent root = null;
-        stage.setTitle("GLOBAL FLAVOUR");
+        stage.setTitle("SPICY FLAVOUR");
         stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/fogotpassworld.fxml"));
         Scene scene = new Scene(root);
@@ -182,7 +182,7 @@ public class LoginPageController {
     public void dontHaveAccountOnActon(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Parent root = null;
-        stage.setTitle("GLOBAL FLAVOUR");
+        stage.setTitle("SPICY FLAVOUR");
         stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/createnewaccount.fxml"));
         Scene scene = new Scene(root);

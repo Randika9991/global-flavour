@@ -125,7 +125,7 @@ public class ChangePasswordController {
     void CloseOnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Parent root = null;
-        stage.setTitle("GLOBAL FLAVOUR");
+        stage.setTitle("SPICY FLAVOUR");
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);

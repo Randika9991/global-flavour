@@ -8,11 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.global_flavour.dto.AdminSalary;
 import lk.ijse.global_flavour.dto.Delivery;
 import lk.ijse.global_flavour.model.AdminSalaryModel;
 import lk.ijse.global_flavour.model.DeliveryModel;
 import lk.ijse.global_flavour.model.OrderModel;
+import lk.ijse.global_flavour.model.PlaceOrderModel;
 import lk.ijse.global_flavour.util.AlertController;
 
 import java.sql.SQLException;
@@ -39,6 +41,9 @@ public class DeliveryController {
 
     @FXML
     private DatePicker DPDueDate;
+
+    @FXML
+    private AnchorPane deliveryAncPane;
 
     @FXML
     void initialize() {
@@ -98,16 +103,17 @@ public class DeliveryController {
         Delivery cus = new Delivery(deliverId,employeId,orderId,vehiId,location,localTime,dueDate, true);
         System.out.println(deliverId+" "+employeId+" "+orderId+" "+vehiId+" "+location+" "+localTime+" "+dueDate+" "+true);
 
-        try {
-//
-            boolean isSaved = DeliveryModel.save(cus);
-            if (isSaved) {
-                AlertController.animationMesseageCorect("CONFIRMATION","Salary Save Success!");
-//                onActionGetAllSallary();
 
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
+
+
+       try {
+           PlaceOrderModel.saveDelivery(cus);
+           AlertController.animationMesseageCorect("CONFIRMATION","Delivery Save Success!");
+           deliveryAncPane.getScene().getWindow().hide();
+
+
+        } catch (Exception e) {
+//            System.out.println(e);
             AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 

@@ -144,7 +144,7 @@ public class OrderFormController implements Initializable {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
 
@@ -163,7 +163,7 @@ public class OrderFormController implements Initializable {
             cmbCustomerId.setItems(obList);
         } catch (SQLException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
     @FXML
@@ -175,7 +175,8 @@ public class OrderFormController implements Initializable {
             lblCustomerName.setText(customer.getCustomerName());
         } catch (SQLException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
+
         }
     }
     private void loadItemCodes() {
@@ -189,7 +190,7 @@ public class OrderFormController implements Initializable {
             cmbItemCode.setItems(obList);
         } catch (SQLException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
 
     }
@@ -203,7 +204,7 @@ public class OrderFormController implements Initializable {
             txtQty.requestFocus();
         } catch (SQLException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
     private void fillItemFields(Item item) {
@@ -290,6 +291,7 @@ public class OrderFormController implements Initializable {
         String oId = lblOrderId.getText();
         String cId = String.valueOf(cmbCustomerId.getValue());
         double payment = Double.parseDouble(lblNetTotal.getText());
+        boolean delivery= radioButton.isSelected();
 
         List<OrderCartDTO> orderDTOList = new ArrayList<>();
         OrderTM orderTM = null;
@@ -304,16 +306,16 @@ public class OrderFormController implements Initializable {
         }
 
         try {
-            boolean isSaved = PlaceOrderModel.placeOrder(oId,cId,payment,orderDTOList,orderTM);
+            boolean isSaved = PlaceOrderModel.placeOrder(oId,cId,payment,orderDTOList,orderTM,delivery);
             if(isSaved) {
                 generateNextOrderId();
-                new Alert(Alert.AlertType.ERROR, "selected...").show();
+                AlertController.animationMesseageCorect("CONFIRMATION","selected...");
            }
        }
         catch(Exception e) {
            e.printStackTrace();
             System.out.println(e);
-           new Alert(Alert.AlertType.ERROR, "SQL Error").show();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
        }
     }
 
@@ -334,7 +336,6 @@ public class OrderFormController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-            System.out.println("Option 1 selected");
         }
     }
 }

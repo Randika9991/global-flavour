@@ -33,7 +33,7 @@
          <font>
             <Font name="Baskerville Old Face" size="22.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtEmpNic" focusColor="WHITE" labelFloat="true" layoutX="940.0" layoutY="140.0" prefHeight="31.0" prefWidth="190.0" promptText="Employee NIC" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtEmpNic" focusColor="WHITE" labelFloat="true" layoutX="940.0" layoutY="140.0" onMouseClicked="#txtEmployeeNicOnMouseClick" prefHeight="31.0" prefWidth="190.0" promptText="Employee NIC" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font name="Baskerville Old Face" size="22.0" />
          </font></JFXTextField>
@@ -41,7 +41,7 @@
          <font>
             <Font size="22.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtEmpContact" focusColor="WHITE" labelFloat="true" layoutX="940.0" layoutY="218.0" prefHeight="31.0" prefWidth="190.0" promptText="Contact No" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtEmpContact" focusColor="WHITE" labelFloat="true" layoutX="940.0" layoutY="218.0" onMouseClicked="#txtContactNumberOnMouseClick" prefHeight="31.0" prefWidth="190.0" promptText="Contact No" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font name="Baskerville Old Face" size="22.0" />
          </font></JFXTextField>
@@ -49,7 +49,7 @@
          <font>
             <Font size="22.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txtEmpEmail" focusColor="WHITE" labelFloat="true" layoutX="560.0" layoutY="285.0" prefHeight="31.0" prefWidth="190.0" promptText="E-mail" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtEmpEmail" focusColor="WHITE" labelFloat="true" layoutX="560.0" layoutY="285.0" onMouseClicked="#txtemailOnMouseClick" prefHeight="31.0" prefWidth="190.0" promptText="E-mail" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font></JFXTextField>
@@ -80,5 +80,8 @@
          </image>
       </ImageView>
       <Button fx:id="searchBtn" layoutX="1209.0" layoutY="38.0" mnemonicParsing="false" onAction="#searchBtnOnClick" opacity="0.0" prefHeight="31.0" prefWidth="31.0" />
+      <Label fx:id="lblInvalidContactNo" layoutX="940.0" layoutY="264.0" prefHeight="21.0" prefWidth="190.0" text="Invalid contact number" textFill="#ffc9c9" />
+      <Label fx:id="lblInvalidEmail" layoutX="560.0" layoutY="335.0" prefHeight="21.0" prefWidth="190.0" text="Invalid Email" textFill="#ffc9c9" />
+      <Label fx:id="lblInvalidNicNo1" layoutX="940.0" layoutY="186.0" prefHeight="21.0" prefWidth="190.0" text="Invalid NIC " textFill="#ffc9c9" />
    </children>
 </AnchorPane>

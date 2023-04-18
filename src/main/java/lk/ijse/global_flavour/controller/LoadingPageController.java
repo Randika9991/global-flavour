@@ -53,7 +53,7 @@ public class LoadingPageController {
                 Platform.runLater(() -> {
                     Stage stage = new Stage();
                     Parent root = null;
-                    stage.setTitle("GLOBAL FLAVOUR");
+                    stage.setTitle("SPICY FLAVOUR");
                     stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
                     try {
                         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));

@@ -10,13 +10,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.global_flavour.dto.EmployeeSetAndGet;
 import lk.ijse.global_flavour.dto.tm.CashierCustomerTM;
 import lk.ijse.global_flavour.dto.tm.ItemTM;
 import lk.ijse.global_flavour.model.AdminSalaryModel;
 import lk.ijse.global_flavour.model.CashierCustomerModel;
 import lk.ijse.global_flavour.dto.CashierCustomer;
+import lk.ijse.global_flavour.model.EmployeeSetAndGetModel;
 import lk.ijse.global_flavour.model.ItemModel;
 import lk.ijse.global_flavour.util.AlertController;
+import lk.ijse.global_flavour.util.ValidateField;
 
 import java.sql.SQLException;
 import java.util.function.Predicate;
@@ -60,53 +63,92 @@ public class CashiercustomerFormController {
     private JFXTextField txtCusEmail1;
 
     @FXML
+    private Label lblInvalidContactNo;
+
+    @FXML
+    private Label lblInvalidEmail;
+
+    @FXML
     void buttonSaveOnACT(ActionEvent event) {
-        String CusId = txtCusId.getText();
-        String CusName = txtCusName.getText();
-        String CusContact = txtCusContact.getText();
-        String CusAddress = txtCusAddress.getText();
-        String CusEmail1 = txtCusEmail1.getText();
+        if(txtCusId.getText().isEmpty() || txtCusName.getText().isEmpty() || txtCusAddress.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Customer details not saved. \nPlease make sure to fill the request fields.");
+        }else {
+
+            if(ValidateField.contactCheck(txtCusContact.getText()) ||ValidateField.emailCheck(txtCusEmail1.getText())){
+                if(ValidateField.emailCheck(txtCusEmail1.getText())){
+                    if(ValidateField.contactCheck(txtCusContact.getText())){
+                        String CusId = txtCusId.getText();
+                        String CusName = txtCusName.getText();
+                        String CusContact = txtCusContact.getText();
+                        String CusAddress = txtCusAddress.getText();
+                        String CusEmail1 = txtCusEmail1.getText();
 
 
-        CashierCustomer allCustom = new CashierCustomer(CusId, CusName,CusContact,CusAddress,CusEmail1);
+                        CashierCustomer allCustom = new CashierCustomer(CusId, CusName,CusContact,CusAddress,CusEmail1);
 
-        try {
+                        try {
 //
-            boolean isSaved = CashierCustomerModel.save(allCustom);
-            if (isSaved) {
-                AlertController.animationMesseageCorect("CONFIRMATION","Customer Save Success!");
-                onActionGetAllCustom();
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-            AlertController.animationMesseagewrong("Error","something went wrong!");
-        }
+                            boolean isSaved = CashierCustomerModel.save(allCustom);
+                            if (isSaved) {
+                                AlertController.animationMesseageCorect("CONFIRMATION","Customer Save Success!");
+                                onActionGetAllCustom();
+                            }
+                        } catch (SQLException e) {
+                            System.out.println(e);
+                            AlertController.animationMesseagewrong("Error","something went wrong!");
+                        }
+                    }else {
+                        lblInvalidContactNo.setVisible(true);
+                    }
 
+                }else {
+                    lblInvalidEmail.setVisible(true);
+                }
+            }else {
+                lblInvalidContactNo.setVisible(true);
+                lblInvalidEmail.setVisible(true);
+
+            }
+        }
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-
-
-        if(txtCusId.getText().isEmpty()){
-
+        if(txtCusId.getText().isEmpty() || txtCusName.getText().isEmpty() || txtCusAddress.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Customer details not saved. \nPlease make sure to fill the request fields.");
         }else {
-            String CusId = txtCusId.getText();
-            String CusName = txtCusName.getText();
-            String CusContact = txtCusContact.getText();
-            String CusAddress = txtCusAddress.getText();
-            String CusEmail1 = txtCusEmail1.getText();
+
+            if(ValidateField.contactCheck(txtCusContact.getText()) ||ValidateField.emailCheck(txtCusEmail1.getText())){
+                if(ValidateField.emailCheck(txtCusEmail1.getText())){
+                    if(ValidateField.contactCheck(txtCusContact.getText())){
+                        String CusId = txtCusId.getText();
+                        String CusName = txtCusName.getText();
+                        String CusContact = txtCusContact.getText();
+                        String CusAddress = txtCusAddress.getText();
+                        String CusEmail1 = txtCusEmail1.getText();
 
 
-            CashierCustomer allCustom = new CashierCustomer(CusId, CusName,CusContact,CusAddress,CusEmail1);
+                        CashierCustomer allCustom = new CashierCustomer(CusId, CusName,CusContact,CusAddress,CusEmail1);
 
-            try {
-                boolean isUpdated = CashierCustomerModel.update(allCustom);
-                AlertController.animationMesseageCorect("CONFIRMATION","Customer updated!");
-                onActionGetAllCustom();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                AlertController.animationMesseagewrong("Error","something went wrong!");
+                        try {
+                            boolean isUpdated = CashierCustomerModel.update(allCustom);
+                            AlertController.animationMesseageCorect("CONFIRMATION","Customer updated!");
+                            onActionGetAllCustom();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            AlertController.animationMesseagewrong("Error","something went wrong!");
+                        }
+                    }else {
+                        lblInvalidContactNo.setVisible(true);
+                    }
+
+                }else {
+                    lblInvalidEmail.setVisible(true);
+                }
+            }else {
+                lblInvalidContactNo.setVisible(true);
+                lblInvalidEmail.setVisible(true);
+
             }
         }
     }
@@ -189,10 +231,24 @@ public class CashiercustomerFormController {
         txtCusEmail1.setText(columns.get(4).getCellData(row).toString());
 
     }
+
+    @FXML
+    void txtContactNumberOnMouseClick(MouseEvent event) {
+        lblInvalidContactNo.setVisible(false);
+    }
+
+    @FXML
+    void txtemailOnMouseClick(MouseEvent event) {
+        lblInvalidEmail.setVisible(false);
+
+    }
+
     @FXML
     void initialize() {
         onActionGetAllCustom();
         setCellValuefactory();
+        lblInvalidContactNo.setVisible(false);
+        lblInvalidEmail.setVisible(false);
     }
 
     void onActionGetAllCustom() {

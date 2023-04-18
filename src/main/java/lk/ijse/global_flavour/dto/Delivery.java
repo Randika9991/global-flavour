@@ -15,10 +15,10 @@ public class Delivery {
     private String location;
     private String deliverDate;
     private LocalDate dueDate;
-    private boolean deliverStatus;
+    private Boolean deliverStatus;
 
 
-    public Delivery(String deliverId, String empId, String orderId, String vehicalId, String location, String deliverDate, LocalDate dueDate, boolean deliverStatus) {
+    public Delivery(String deliverId, String empId, String orderId, String vehicalId, String location, String deliverDate, LocalDate dueDate, Boolean deliverStatus) {
         this.deliverId = deliverId;
         this.empId = empId;
         this.orderId = orderId;

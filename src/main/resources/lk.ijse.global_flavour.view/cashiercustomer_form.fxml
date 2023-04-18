@@ -34,7 +34,7 @@
             <Font size="22.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtCusContact" focusColor="WHITE" labelFloat="true" layoutX="930.0" layoutY="138.0" prefHeight="31.0" prefWidth="187.0" promptText="ContactNo" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtCusContact" focusColor="WHITE" labelFloat="true" layoutX="930.0" layoutY="138.0" onMouseClicked="#txtContactNumberOnMouseClick" prefHeight="31.0" prefWidth="187.0" promptText="ContactNo" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font>
@@ -67,10 +67,12 @@
          </image>
       </ImageView>
       <Button layoutX="1192.0" layoutY="39.0" mnemonicParsing="false" onAction="#CusIdOnActionSerch" opacity="0.0" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 15;" />
-      <JFXTextField fx:id="txtCusEmail1" focusColor="WHITE" labelFloat="true" layoutX="555.0" layoutY="231.0" prefHeight="31.0" prefWidth="187.0" promptText="Email" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtCusEmail1" focusColor="WHITE" labelFloat="true" layoutX="555.0" layoutY="231.0" onMouseClicked="#txtemailOnMouseClick" prefHeight="31.0" prefWidth="187.0" promptText="Email" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </JFXTextField>
+      <Label fx:id="lblInvalidContactNo" layoutX="929.0" layoutY="188.0" prefHeight="21.0" prefWidth="190.0" text="Invalid contact number" textFill="#ffc9c9" />
+      <Label fx:id="lblInvalidEmail" layoutX="555.0" layoutY="281.0" prefHeight="21.0" prefWidth="190.0" text="Invalid Email" textFill="#ffc9c9" />
    </children>
 </AnchorPane>

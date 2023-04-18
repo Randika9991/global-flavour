@@ -22,6 +22,7 @@ import lk.ijse.global_flavour.dto.tm.SuppliersTM;
 import lk.ijse.global_flavour.model.EmployeeSetAndGetModel;
 import lk.ijse.global_flavour.model.SuppliersModel;
 import lk.ijse.global_flavour.util.AlertController;
+import lk.ijse.global_flavour.util.ValidateField;
 
 public class SuppliersFormController {
 
@@ -71,50 +72,94 @@ public class SuppliersFormController {
     private TableColumn<?, ?> COMSupEmail;
 
     @FXML
+    private Label lblInvalidEmail;
+
+    @FXML
+    private Label lblInvalidContactNo;
+
+    @FXML
     void buttonSaveOnACT(ActionEvent event) {
-        String SupId = txtsupId.getText();
-        String SupName = txtsupName.getText();
-        String SupAddress = txtsupAddress.getText();
-        String supContact = txtsupContact.getText();
-        String supEmail = txtsupEmail.getText();
+        if(txtsupId.getText().isEmpty()||txtsupName.getText().isEmpty()||txtsupAddress.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Supplier details not saved. \nPlease make sure to fill the request fields.");
+        }else {
+            if(ValidateField.contactCheck(txtsupContact.getText()) ||ValidateField.emailCheck(txtsupEmail.getText())){
+                if(ValidateField.emailCheck(txtsupEmail.getText())){
+                    if(ValidateField.contactCheck(txtsupContact.getText())){
+                        String SupId = txtsupId.getText();
+                        String SupName = txtsupName.getText();
+                        String SupAddress = txtsupAddress.getText();
+                        String supContact = txtsupContact.getText();
+                        String supEmail = txtsupEmail.getText();
 
-        Suppliers itemSup = new Suppliers(SupId, SupName, SupAddress,supEmail,supContact);
+                        Suppliers itemSup = new Suppliers(SupId, SupName, SupAddress,supEmail,supContact);
 
-        try {
+                        try {
 //            boolean isSaved = ItemModel.save(code, description, unitPrice, qtyOnHand);
-            boolean isSaved = SuppliersModel.save(itemSup);
-            if (isSaved) {
-                AlertController.animationMesseageCorect("CONFIRMATION","Supplier Save Success!");
-                onActionGetAllSuppliers();
+                            boolean isSaved = SuppliersModel.save(itemSup);
+                            if (isSaved) {
+                                AlertController.animationMesseageCorect("CONFIRMATION","Supplier Save Success!");
+                                onActionGetAllSuppliers();
+                            }
+                        } catch (SQLException e) {
+                            System.out.println(e);
+                            AlertController.animationMesseagewrong("Error","something went wrong!");
+                        }
+
+                    }else {
+                        lblInvalidContactNo.setVisible(true);
+                    }
+
+                }else {
+                    lblInvalidEmail.setVisible(true);
+                }
+
+            }else {
+                lblInvalidContactNo.setVisible(true);
+                lblInvalidEmail.setVisible(true);
             }
-        } catch (SQLException e) {
-            System.out.println(e);
-            AlertController.animationMesseagewrong("Error","something went wrong!");
         }
+
 
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-
-        if(txtsupId.getText().isEmpty()){
-
+        if(txtsupId.getText().isEmpty()||txtsupName.getText().isEmpty()||txtsupAddress.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Supplier details not updated. \nPlease make sure to fill the request fields.");
         }else {
-            String SupId = txtsupId.getText();
-            String SupName = txtsupName.getText();
-            String SupAddress = txtsupAddress.getText();
-            String supContact = txtsupContact.getText();
-            String supEmail = txtsupEmail.getText();
+            if(ValidateField.contactCheck(txtsupContact.getText()) ||ValidateField.emailCheck(txtsupEmail.getText())){
+                if(ValidateField.emailCheck(txtsupEmail.getText())){
+                    if(ValidateField.contactCheck(txtsupContact.getText())){
 
-            Suppliers itemSup = new Suppliers(SupId, SupName, SupAddress, supEmail, supContact);
+                        String SupId = txtsupId.getText();
+                        String SupName = txtsupName.getText();
+                        String SupAddress = txtsupAddress.getText();
+                        String supContact = txtsupContact.getText();
+                        String supEmail = txtsupEmail.getText();
 
-            try {
-                boolean isUpdated = SuppliersModel.update(itemSup);
-                AlertController.animationMesseageCorect("CONFIRMATION","Supplier updated!");
-                onActionGetAllSuppliers();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                AlertController.animationMesseagewrong("Error","something went wrong!");
+                        Suppliers itemSup = new Suppliers(SupId, SupName, SupAddress, supEmail, supContact);
+
+                        try {
+                            boolean isUpdated = SuppliersModel.update(itemSup);
+                            AlertController.animationMesseageCorect("CONFIRMATION","Supplier updated!");
+                            onActionGetAllSuppliers();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            AlertController.animationMesseagewrong("Error","something went wrong!");
+                        }
+
+
+                    }else {
+                        lblInvalidContactNo.setVisible(true);
+                    }
+
+                }else {
+                    lblInvalidEmail.setVisible(true);
+                }
+
+            }else {
+                lblInvalidContactNo.setVisible(true);
+                lblInvalidEmail.setVisible(true);
             }
         }
     }
@@ -209,11 +254,22 @@ public class SuppliersFormController {
             AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
+    @FXML
+    void txtContactNumberOnMouseClick(MouseEvent event) {
+        lblInvalidContactNo.setVisible(false);
+    }
+
+    @FXML
+    void txtemailOnMouseClick(MouseEvent event) {
+        lblInvalidEmail.setVisible(false);
+    }
 
     @FXML
     void initialize() {
         onActionGetAllSuppliers();
         setCellValuefactory();
+        lblInvalidContactNo.setVisible(false);
+        lblInvalidEmail.setVisible(false);
 
     }
 

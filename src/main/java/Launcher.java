@@ -18,7 +18,7 @@ public class Launcher extends Application {
 
         stage.setScene(new Scene(load));
         stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
-        stage.setTitle("GLOBAL FLAVOUR");
+        stage.setTitle("SPICY FLAVOUR");
         stage.centerOnScreen();
         stage.show();
     }

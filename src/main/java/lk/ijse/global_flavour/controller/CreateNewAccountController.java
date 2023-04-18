@@ -18,6 +18,7 @@ import lk.ijse.global_flavour.model.UserCreateAcountSetAndGetModel;
 
 import lk.ijse.global_flavour.dto.LoginSetAndGet;
 import lk.ijse.global_flavour.model.LoginSetAndGetModel;
+import lk.ijse.global_flavour.util.AlertController;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -52,27 +53,25 @@ public class CreateNewAccountController {
     public void CreateOnAction(ActionEvent actionEvent) throws IOException {
 
         if(cmbAdminCashiar.getValue()!="Admin"&&cmbAdminCashiar.getValue()!="Cashier"&&txtEnterName.getText().isEmpty()&&txtEnteremail.getText().isEmpty()&&txtPassword.getText().isEmpty()&&txtConfirmPassword.getText().isEmpty()){
-            new Alert(Alert.AlertType.ERROR, "Please fill the feald..").show();
-
+            AlertController.animationMesseagewrong("Error","Please fill the feald..");
 
         }else {
             if (cmbAdminCashiar.getValue().equals("Admin") || cmbAdminCashiar.getValue().equals("Cashier")) {
                 if (txtEnterName.getText().isEmpty() && txtEnteremail.getText().isEmpty() && txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty()) {
-                    new Alert(Alert.AlertType.ERROR, "Please fill the other feald..").show();
-
+                    AlertController.animationMesseagewrong("Error","Please fill the other feald..");
                     return;
 
                 } else {
                     if (txtEnteremail.getText().isEmpty() && txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty()) {
-                        new Alert(Alert.AlertType.ERROR, "Please Enter email and Password").show();
+                        AlertController.animationMesseagewrong("Error","Please Enter email and Password");
                         return;
                     } else {
                         if (txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty()) {
-                            new Alert(Alert.AlertType.ERROR, "Please Enter Password").show();
+                            AlertController.animationMesseagewrong("Error","Please Enter Password");
                             return;
                         } else {
                             if (txtConfirmPassword.getText().isEmpty()) {
-                                new Alert(Alert.AlertType.ERROR, "Please Confirm your password").show();
+                                AlertController.animationMesseagewrong("Error","Please Confirm your password");
                                 return;
                             } else {
                                 if (txtPassword.getText().equals(txtConfirmPassword.getText())) {
@@ -91,11 +90,12 @@ public class CreateNewAccountController {
                                             emailUserInput= logSetGet.getEmail();
                                         }
                                     } catch (SQLException e) {
-                                        new Alert(Alert.AlertType.ERROR, "something happened!").show();
+                                        AlertController.animationMesseagewrong("Error","something happened!");
                                     }
 
                                     if(admincashiarUserInput.equals(cmbAdminCashiar.getValue())&&nameUserInput.equals(txtEnterName.getText())&&emailUserInput.equals(txtEnteremail.getText())){
-                                        new Alert(Alert.AlertType.ERROR, "Already Create this Account . try again").show();
+                                        AlertController.animationMesseagewrong("Error","Already Create this Account . try again");
+
                                         txtConfirmPassword.setText("");
 
                                         txtEnterName.setText("");
@@ -115,17 +115,19 @@ public class CreateNewAccountController {
 //            boolean isSaved = ItemModel.save(code, description, unitPrice, qtyOnHand);
                                             boolean isSaved = UserCreateAcountSetAndGetModel.save(cus);
                                             if (isSaved) {
-                                                new Alert(Alert.AlertType.CONFIRMATION, "Account Created !").show();
+                                                AlertController.animationMesseageCorect("CONFIRMATION","Account Created !");
                                             }
                                         } catch (SQLException e) {
                                             System.out.println(e);
-                                            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+
+                                            AlertController.animationMesseagewrong("Error","something went wrong!");
                                         }
                                     }
 
 
                                 } else {
-                                    new Alert(Alert.AlertType.ERROR, "Please Try your Confirm password").show();
+
+                                    AlertController.animationMesseagewrong("Error","Please Try your Confirm password");
                                     txtConfirmPassword.setText("");
                                     return;
                                 }
@@ -147,7 +149,7 @@ public class CreateNewAccountController {
     void buttonOnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Parent root = null;
-        stage.setTitle("GLOBAL FLAVOUR");
+        stage.setTitle("SPICY FLAVOUR");
         stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
         root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/loginpage.fxml"));
         Scene scene = new Scene(root);
