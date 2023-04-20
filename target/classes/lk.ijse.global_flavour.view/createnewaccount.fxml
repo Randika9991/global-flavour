@@ -78,6 +78,11 @@
                </image>
             </ImageView>
             <Button fx:id="btnSPSConform" layoutX="364.0" layoutY="299.0" mnemonicParsing="false" onAction="#ShowConformPasswordOnAction" onMouseEntered="#OnMouseConfrmPWD" onMouseExited="#OnMouseConfrmPWDExt" opacity="0.0" prefHeight="20.0" prefWidth="13.0" text="show" />
+            <Label fx:id="lblInvalidEmail" layoutX="101.0" layoutY="146.0" prefHeight="21.0" prefWidth="98.0" text="Invalid Email" textFill="#da0a0a" />
+            <Label fx:id="lblAlredyAddName" layoutX="101.0" layoutY="81.0" prefHeight="21.0" prefWidth="176.0" text="Alredy Added this name" textFill="#da0a0a" />
+            <Label fx:id="lblAlredyAddEmail" layoutX="101.0" layoutY="146.0" prefHeight="21.0" prefWidth="176.0" text="Alredy Added this Email" textFill="#da0a0a" />
+            <JFXButton layoutX="353.0" layoutY="98.0" onAction="#buttonCheckNameOnACT" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Check" />
+            <JFXButton layoutX="354.0" layoutY="167.0" onAction="#buttonCheckemailOnACT" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Check" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="44.0" fitWidth="57.0" layoutX="914.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">

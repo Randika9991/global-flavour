@@ -104,8 +104,11 @@ public class AdminDashboardController {
         ButtonColourController.btncolor(SalaryBtn1,adminAncPane);
     }
 
-    public void btnOnReport(ActionEvent actionEvent) {
-
+    public void btnOnReport(ActionEvent actionEvent) throws IOException {
+        Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/report_form.fxml"));
+        adminAncPane.getChildren().clear();
+        adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(RepotBtn,adminAncPane);
     }
     @FXML
     void BackOnAction(ActionEvent event) throws IOException {

@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.global_flavour.db.DBConnection;
 import lk.ijse.global_flavour.dto.CashierCustomer;
 import lk.ijse.global_flavour.dto.Item;
 import lk.ijse.global_flavour.dto.OrderCartDTO;
@@ -31,15 +32,18 @@ import lk.ijse.global_flavour.model.OrderModel;
 import lk.ijse.global_flavour.model.PlaceOrderModel;
 import lk.ijse.global_flavour.util.AlertController;
 import lk.ijse.global_flavour.util.ButtonColourController;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class OrderFormController implements Initializable {
 
@@ -116,6 +120,19 @@ public class OrderFormController implements Initializable {
     private Label lblNetTotal;
 
     private ObservableList<OrderTM> obList = FXCollections.observableArrayList();
+
+    @FXML
+    void newButtonOnAction(ActionEvent event) {
+        InputStream resource = this.getClass().getResourceAsStream("/lk.ijse.global_flavour.reports/orderPlace.jrxml");
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(resource);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     @FXML
@@ -308,8 +325,26 @@ public class OrderFormController implements Initializable {
         try {
             boolean isSaved = PlaceOrderModel.placeOrder(oId,cId,payment,orderDTOList,orderTM,delivery);
             if(isSaved) {
+                //String printcash = .getText();
+               // String balance = balancelbl.getText();
                 generateNextOrderId();
                 AlertController.animationMesseageCorect("CONFIRMATION","selected...");
+                boolean result = AlertController.okconfirmmessage("Do you want the bill ?");
+
+                if (result) {
+                    Map<String, Object> parameters = new HashMap<>();
+//                    parameters.put("param1", printcash);
+//                    parameters.put("param2", balance);
+
+                    InputStream resource = this.getClass().getResourceAsStream("/lk.ijse.global_flavour.reports/orderPlace.jrxml");
+                    try {
+                        JasperReport jasperReport = JasperCompileManager.compileReport(resource);
+                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, DBConnection.getInstance().getConnection());
+                        JasperViewer.viewReport(jasperPrint, false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
            }
        }
         catch(Exception e) {

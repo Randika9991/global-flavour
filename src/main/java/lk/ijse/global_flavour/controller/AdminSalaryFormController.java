@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.global_flavour.dto.AdminSalary;
 import lk.ijse.global_flavour.dto.Item;
 import lk.ijse.global_flavour.dto.tm.AdminSalaryTM;
@@ -29,6 +30,8 @@ import java.util.function.Predicate;
 
 
 public class AdminSalaryFormController {
+    @FXML
+    private AnchorPane adminAncPane;
 
     @FXML
     private JFXTextField txtSalaryId;

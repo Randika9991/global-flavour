@@ -11,14 +11,14 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.global_flavour.dto.LoginSetAndGet;
-import lk.ijse.global_flavour.dto.UserCreateAcountSetAndGet;
-import lk.ijse.global_flavour.model.LoginSetAndGetModel;
-import lk.ijse.global_flavour.model.UserCreateAcountSetAndGetModel;
+import lk.ijse.global_flavour.dto.*;
+import lk.ijse.global_flavour.model.*;
+import lk.ijse.global_flavour.model.CreateNewAccountModel;
 
 import lk.ijse.global_flavour.dto.LoginSetAndGet;
 import lk.ijse.global_flavour.model.LoginSetAndGetModel;
 import lk.ijse.global_flavour.util.AlertController;
+import lk.ijse.global_flavour.util.ValidateField;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -50,6 +50,84 @@ public class CreateNewAccountController {
     @FXML
     private AnchorPane txtcreateAcount;
 
+    @FXML
+    private Label lblInvalidEmail;
+
+    @FXML
+    private Label lblAlredyAddName;
+
+    @FXML
+    private Label lblAlredyAddEmail;
+
+    String nameUserInputPart2 = new String();
+    String emailUserInputPart2 = new String();
+
+    @FXML
+    void buttonCheckNameOnACT(ActionEvent event) {
+        if(txtEnterName.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Please Enter your name.");
+
+        }else {
+            String name = txtEnterName.getText();
+            String nameUserInput = new String();
+
+            try {
+                LoginSetAndGet logSetGet = LoginSetAndGetModel.search(name);
+                if (logSetGet != null) {
+                    nameUserInput = logSetGet.getUsrname();
+                }
+            } catch (SQLException e) {
+                AlertController.animationMesseagewrong("Error","something happened!");
+            }
+            if(nameUserInput.equals(txtEnterName.getText())){
+                lblAlredyAddName.setVisible(true);
+            }else {
+                System.out.println("naem");
+                nameUserInputPart2=txtEnterName.getText();
+                lblAlredyAddName.setVisible(false);
+
+            }
+        }
+
+    }
+
+    @FXML
+    void buttonCheckemailOnACT(ActionEvent event) {
+
+        if(txtEnterName.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Please Enter your email.");
+
+        }else {
+            String email = txtEnteremail.getText();
+            String emailUserInput = new String();
+
+            if(ValidateField.emailCheck(txtEnteremail.getText())){
+                lblInvalidEmail.setVisible(false);
+                try {
+                    CreateNewAccount item = CreateNewAccountModel.search(email);
+                    if (item != null) {
+                        emailUserInput=item.getEmail();
+                    }
+
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    AlertController.animationMesseagewrong("Error","something went wrong!");
+                }
+
+            }else {
+                lblInvalidEmail.setVisible(true);
+            }
+
+            if(emailUserInput.equals(txtEnteremail.getText())){
+                lblAlredyAddEmail.setVisible(true);
+            }else {
+                lblAlredyAddEmail.setVisible(false);
+                emailUserInputPart2=txtEnteremail.getText();
+            }
+        }
+    }
+
     public void CreateOnAction(ActionEvent actionEvent) throws IOException {
 
         if(cmbAdminCashiar.getValue()!="Admin"&&cmbAdminCashiar.getValue()!="Cashier"&&txtEnterName.getText().isEmpty()&&txtEnteremail.getText().isEmpty()&&txtPassword.getText().isEmpty()&&txtConfirmPassword.getText().isEmpty()){
@@ -59,20 +137,20 @@ public class CreateNewAccountController {
             if (cmbAdminCashiar.getValue().equals("Admin") || cmbAdminCashiar.getValue().equals("Cashier")) {
                 if (txtEnterName.getText().isEmpty() && txtEnteremail.getText().isEmpty() && txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty()) {
                     AlertController.animationMesseagewrong("Error","Please fill the other feald..");
-                    return;
+
 
                 } else {
                     if (txtEnteremail.getText().isEmpty() && txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty()) {
                         AlertController.animationMesseagewrong("Error","Please Enter email and Password");
-                        return;
+
                     } else {
                         if (txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty()) {
                             AlertController.animationMesseagewrong("Error","Please Enter Password");
-                            return;
+
                         } else {
                             if (txtConfirmPassword.getText().isEmpty()) {
                                 AlertController.animationMesseagewrong("Error","Please Confirm your password");
-                                return;
+
                             } else {
                                 if (txtPassword.getText().equals(txtConfirmPassword.getText())) {
 
@@ -96,20 +174,20 @@ public class CreateNewAccountController {
                                     if(admincashiarUserInput.equals(cmbAdminCashiar.getValue())&&nameUserInput.equals(txtEnterName.getText())&&emailUserInput.equals(txtEnteremail.getText())){
                                         AlertController.animationMesseagewrong("Error","Already Create this Account . try again");
 
-                                        txtConfirmPassword.setText("");
-
-                                        txtEnterName.setText("");
-                                        txtPassword.setText("");
-                                        txtConfirmPassword.setText("");
-                                        txtEnteremail.setText("");
+//                                        txtConfirmPassword.setText("");
+//
+//                                        txtEnterName.setText("");
+//                                        txtPassword.setText("");
+//                                        txtConfirmPassword.setText("");
+//                                        txtEnteremail.setText("");
 
                                     }else {
-                                        String nameInput = txtEnterName.getText();
+
                                         String password = txtPassword.getText();
                                         String email = txtEnteremail.getText();
                                         String tittle = String.valueOf(cmbAdminCashiar.getValue());
 
-                                        UserCreateAcountSetAndGet cus = new UserCreateAcountSetAndGet(nameInput, password, email, tittle);
+                                        UserCreateAcountSetAndGet cus = new UserCreateAcountSetAndGet(nameUserInputPart2, password, emailUserInputPart2, tittle);
 
                                         try {
 //            boolean isSaved = ItemModel.save(code, description, unitPrice, qtyOnHand);
@@ -120,7 +198,7 @@ public class CreateNewAccountController {
                                         } catch (SQLException e) {
                                             System.out.println(e);
 
-                                            AlertController.animationMesseagewrong("Error","something went wrong!");
+                                            AlertController.animationMesseagewrong("Error","Please check your name and email. \n press the CHECK button!");
                                         }
                                     }
 
@@ -129,7 +207,7 @@ public class CreateNewAccountController {
 
                                     AlertController.animationMesseagewrong("Error","Please Try your Confirm password");
                                     txtConfirmPassword.setText("");
-                                    return;
+
                                 }
 
                             }
@@ -138,7 +216,9 @@ public class CreateNewAccountController {
 
                 }
             } else {
-                return;
+                AlertController.animationMesseagewrong("Error","Please Change Admin or cashier");
+
+
 
             }
         }
@@ -170,6 +250,10 @@ public class CreateNewAccountController {
         cmbAdminCashiar.getItems().addAll("Admin","Cashier");
         txtPassword2.setVisible(false);
         txtConfirmPassword2.setVisible(false);
+
+        lblAlredyAddEmail.setVisible(false);
+        lblInvalidEmail.setVisible(false);
+        lblAlredyAddName.setVisible(false);
     }
 
     public void ShowPasswordEntOnAction(ActionEvent actionEvent) {
