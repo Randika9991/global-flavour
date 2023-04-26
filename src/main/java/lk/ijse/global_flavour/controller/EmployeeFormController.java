@@ -106,6 +106,9 @@ public class EmployeeFormController {
     private TextField txtsearchEmployee;
 
     @FXML
+    private Label lblInvalidEmployeeId;
+
+    @FXML
     void txtContactNumberOnMouseClick(MouseEvent event) {
         lblInvalidContactNo.setVisible(false);
 
@@ -124,38 +127,58 @@ public class EmployeeFormController {
         lblInvalidEmail.setVisible(false);
     }
 
+
+
     @FXML
     void buttonSaveOnACT(ActionEvent actionEvent) {
 
-        if(txtEmpId.getText().isEmpty() || txtEmpName.getText().isEmpty() || txtEmpJobTitle.getText().isEmpty() || txtEmpAddress.getText().isEmpty()){
+        if(txtEmpName.getText().isEmpty() || txtEmpJobTitle.getText().isEmpty() || txtEmpAddress.getText().isEmpty()){
             AlertController.animationMesseagewrong("Error","Employee details not saved. \nPlease make sure to fill the request fields.");
         }else {
 
-            if(ValidateField.nicCheck(txtEmpNic.getText()) || ValidateField.contactCheck(txtEmpContact.getText()) ||ValidateField.emailCheck(txtEmpEmail.getText())){
+            if(ValidateField.employeeCheck(txtEmpId.getText()) ||ValidateField.nicCheck(txtEmpNic.getText()) || ValidateField.contactCheck(txtEmpContact.getText()) ||ValidateField.emailCheck(txtEmpEmail.getText())){
                 if(ValidateField.emailCheck(txtEmpEmail.getText())){
                     if(ValidateField.contactCheck(txtEmpContact.getText())){
                         if(ValidateField.nicCheck(txtEmpNic.getText())){
-                            String employeeId = txtEmpId.getText();
-                            String employeeName = txtEmpName.getText();
-                            String employeeNic = txtEmpNic.getText();
-                            String employeeDOB = String.valueOf(txtEmpDOBBox.getValue());
-                            String employeeJobTittle = txtEmpJobTitle.getText();
-                            String employeeContact = txtEmpContact.getText();
-                            String employeeAddress = txtEmpAddress.getText();
-                            String employeeEmail = txtEmpEmail.getText();
+                            if(ValidateField.employeeCheck(txtEmpId.getText())){
+                                lblInvalidEmployeeId.setVisible(false);
 
-                            EmployeeSetAndGet cus = new EmployeeSetAndGet(employeeId, employeeName, employeeAddress, employeeDOB,employeeContact,employeeEmail,employeeNic,employeeJobTittle);
 
-                            try {
-                                boolean isSaved = EmployeeSetAndGetModel.save(cus);
-                                if (isSaved) {
-                                    AlertController.animationMesseageCorect("CONFIRMATION","Employee Save Success!");
-                                    onActionGetAllEmployee();
+                                String employeeId = txtEmpId.getText();
+                                String employeeName = txtEmpName.getText();
+                                String employeeNic = txtEmpNic.getText();
+                                String employeeDOB = String.valueOf(txtEmpDOBBox.getValue());
+                                String employeeJobTittle = txtEmpJobTitle.getText();
+                                String employeeContact = txtEmpContact.getText();
+                                String employeeAddress = txtEmpAddress.getText();
+                                String employeeEmail = txtEmpEmail.getText();
 
+                                System.out.println(employeeId);
+                                System.out.println(employeeName);
+                                System.out.println(employeeNic);
+                                System.out.println(employeeDOB);
+                                System.out.println(employeeJobTittle);
+                                System.out.println(employeeContact);
+                                System.out.println(employeeAddress);
+                                System.out.println(employeeEmail);
+
+
+                                EmployeeSetAndGet cus = new EmployeeSetAndGet(employeeId, employeeName, employeeAddress, employeeDOB,employeeContact,employeeEmail,employeeNic,employeeJobTittle);
+
+                                try {
+                                    boolean isSaved = EmployeeSetAndGetModel.save(cus);
+                                    if (isSaved) {
+                                        AlertController.animationMesseageCorect("CONFIRMATION","Employee Save Success!");
+                                        onActionGetAllEmployee();
+
+                                    }
+                                } catch (SQLException e) {
+                                    System.out.println(e);
+                                    AlertController.animationMesseagewrong("Error","Duplicate nic or contactNo!");
                                 }
-                            } catch (SQLException e) {
-                                System.out.println(e);
-                                AlertController.animationMesseagewrong("Error","something went wrong!");
+
+                            }else {
+                                lblInvalidEmployeeId.setVisible(true);
                             }
                         }else {
                             lblInvalidNicNo1.setVisible(true);
@@ -172,6 +195,8 @@ public class EmployeeFormController {
                 lblInvalidContactNo.setVisible(true);
                 lblInvalidEmail.setVisible(true);
                 lblInvalidNicNo1.setVisible(true);
+                lblInvalidEmployeeId.setVisible(true);
+
             }
         }
     }
@@ -337,6 +362,7 @@ public class EmployeeFormController {
         lblInvalidContactNo.setVisible(false);
         lblInvalidEmail.setVisible(false);
         lblInvalidNicNo1.setVisible(false);
+        lblInvalidEmployeeId.setVisible(false);
     }
 
     void setCellValuefactory(){
@@ -358,6 +384,18 @@ public class EmployeeFormController {
         } catch (SQLException e) {
             AlertController.animationMesseagewrong("Error","something went wrong!");
         }
+
+    }
+
+    public void lblClearAllOnAction(ActionEvent actionEvent) {
+        txtEmpId.setText("");
+        txtEmpName.setText("");
+        txtEmpAddress.setText("");
+        txtEmpDOBBox.setValue(LocalDate.parse(""));
+        txtEmpContact.setText("");
+        txtEmpEmail.setText("");
+        txtEmpNic.setText("");
+        txtEmpJobTitle.setText("");
 
     }
 }

@@ -29,7 +29,7 @@ import java.util.Optional;
 public class NewSupplyloadFormController {
 
     @FXML
-    private AnchorPane adminchangingPane;
+    private AnchorPane adminAncPane;
 
     @FXML
     private JFXComboBox cmbitemcode;
@@ -94,78 +94,80 @@ public class NewSupplyloadFormController {
     @FXML
     private JFXTextField txttotalprice;
 
+    private void setRemoveBtnOnAction(Button btn) {
+        btn.setOnAction((e) -> {
+
+            boolean ok = AlertController.okconfirmmessage("Are you sure to remove?\", yes, no");
+
+            if (ok) {
+
+                int index = colMainTable.getSelectionModel().getSelectedIndex();
+                obList.remove(index);
+
+                colMainTable.refresh();
+                //calculateNetTotal();
+            }
+
+        });
+    }
 
     private ObservableList<AddSupplyLoadTM> obList = FXCollections.observableArrayList();
     Button btnremove;
     @FXML
     void btnaddcartOnAction(ActionEvent event) {
-        try {
 
-            if (!supplyqty.getText().isEmpty()) {
-                if(ValidateField.numberCheck(supplyqty.getText())) {
-                    String itemcode = String.valueOf(cmbitemcode.getValue());
-                    String itemname = lblchangingitmname.getText();
-                    String category = lblchangingcategory.getText();
-                    Integer quantity = Integer.valueOf(supplyqty.getText());
-                    btnremove = new Button("Remove");
-                    btnremove.setCursor(Cursor.HAND);
+        if(QTYMyUse<Integer.parseInt((supplyqty.getText()))||QTYMyUse==0){
+            AlertController.animationMesseagewrong("Error","Low QTY. Can't add to card");
+        }else {
+            try {
 
-                    // setRemoveBtnOnAction(btnremove); /* set action to the btnRemove */
-                    if (!obList.isEmpty()) {
-                        for (int i = 0; i < colMainTable.getItems().size(); i++) {
-                            if (colitemcode.getCellData(i).equals(itemcode)) {
-                                quantity += (int) colquantity.getCellData(i);
+                if (!supplyqty.getText().isEmpty()) {
+                    if(ValidateField.numberCheck(supplyqty.getText())) {
+                        String itemcode = String.valueOf(cmbitemcode.getValue());
+                        String itemname = lblchangingitmname.getText();
+                        String category = lblchangingcategory.getText();
+                        Integer quantity = Integer.valueOf(supplyqty.getText());
+                        btnremove = new Button("Remove");
+                        btnremove.setCursor(Cursor.HAND);
 
-                                obList.get(i).setQuantity(quantity);
+                         setRemoveBtnOnAction(btnremove); /* set action to the btnRemove */
+                        if (!obList.isEmpty()) {
+                            for (int i = 0; i < colMainTable.getItems().size(); i++) {
+                                if (colitemcode.getCellData(i).equals(itemcode)) {
+                                    quantity += (int) colquantity.getCellData(i);
 
-                                colMainTable.refresh();
-                                return;
+                                    obList.get(i).setQuantity(quantity);
+
+                                    colMainTable.refresh();
+                                    return;
+                                }
                             }
                         }
+
+                        AddSupplyLoadTM tm = new AddSupplyLoadTM(itemcode, itemname, category, quantity, btnremove);
+
+                        obList.add(tm);
+                        colMainTable.setItems(obList);
+
+                        supplyqty.setText("");
                     }
-
-                    AddSupplyLoadTM tm = new AddSupplyLoadTM(itemcode, itemname, category, quantity, btnremove);
-
-                    obList.add(tm);
-                    colMainTable.setItems(obList);
-
-                    supplyqty.setText("");
+                    else{
+                        AlertController.animationMesseagewrong("Wrong" ,"Invalid input found in item quantity field.\nMake sure to input an integer value");
+                        supplyqty.setStyle("-fx-text-fill: red");
+                    }
+                } else {
+                    AlertController.animationMesseagewrong("Wrong","Quantity field can't be empty. " + "Please make sure to fill all fields the next time you try to add to the load ");
                 }
-                else{
-                    AlertController.animationMesseagewrong("Wrong" ,"Invalid input found in item quantity field.\nMake sure to input an integer value");
-                    supplyqty.setStyle("-fx-text-fill: red");
-                }
-            } else {
-                AlertController.animationMesseagewrong("Wrong","Quantity field can't be empty. " + "Please make sure to fill all fields the next time you try to add to the load ");
+
+                setRemoveBtnOnAction(btnremove);
+
+            }catch(Exception e){
+                System.out.println(e);
+                System.out.println("btnAddToCart");
             }
-            /////////
-            btnremove.setOnAction(e -> {
-                // Get the row that contains the button
-                TableRow row = (TableRow) btnremove.getParent().getParent();
-                int index = colMainTable.getItems().indexOf(row.getItem());
-                colMainTable.getSelectionModel().select(index);
 
-               // ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-                //ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-                boolean ok = AlertController.okconfirmmessage("Are you sure to remove?\", yes, no");
-
-
-                //Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
-
-                if (ok) {
-                    int index1 = colMainTable.getSelectionModel().getSelectedIndex();
-                    obList.remove(index1);
-
-                    colMainTable.refresh();
-                }
-
-            });
-            ///////////////
-        }catch(Exception e){
-            System.out.println(e);
-            System.out.println("btnAddToCart");
         }
+
 
     }
 
@@ -236,6 +238,7 @@ public class NewSupplyloadFormController {
     }
 
     Item item;
+    int QTYMyUse;
     @FXML
     void cmbitemcodeOnAction(ActionEvent event) {
         String itemcode= String.valueOf(cmbitemcode.getValue());
@@ -244,8 +247,8 @@ public class NewSupplyloadFormController {
             item = ItemModel.findById(itemcode);
             lblchangingitmname.setText(item.getItemName());
             lblchangingcategory.setText(item.getCategory());
-
             lblchangingqtyonhands.setText(String.valueOf(item.getQty()));
+            QTYMyUse= Integer.parseInt(item.getQty());
         } catch (Exception e) {
 
         }

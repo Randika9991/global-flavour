@@ -23,7 +23,7 @@ public class PlaceOrderModel {
             con = DBConnection.getInstance().getConnection();
             con.setAutoCommit(false);
 
-            boolean isSaved = OrderModel.save(oId, cId, payment, LocalDate.now(), LocalTime.now(), orderDTOList);
+            boolean isSaved = OrderModel.save(oId, cId, payment, LocalDate.now(), LocalTime.now(), orderDTOList,delivery);
             if (isSaved) {
                 boolean isUpdate = ItemModel.updateQty(orderDTOList);
                 if (isUpdate) {

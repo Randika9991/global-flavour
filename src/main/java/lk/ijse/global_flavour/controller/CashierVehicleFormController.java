@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.global_flavour.dto.CashierVehicle;
 import lk.ijse.global_flavour.dto.tm.CashierVehicleTM;
 import lk.ijse.global_flavour.dto.tm.ItemTM;
@@ -20,6 +21,9 @@ import java.sql.SQLException;
 import java.util.function.Predicate;
 
 public class CashierVehicleFormController {
+
+    @FXML
+    private AnchorPane adminAncPane;
 
     @FXML
     private JFXTextField txtVehiId;
@@ -192,4 +196,9 @@ public class CashierVehicleFormController {
 
     }
 
+    public void lblClearAllOnAction(ActionEvent actionEvent) {
+        txtVehiId.setText("");
+        txtVehiNo.setText("");
+        txtVehitype.setText("");
+    }
 }

@@ -64,6 +64,8 @@ public class AdminDashboardController {
         Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/home_form.fxml"));
         adminAncPane.getChildren().clear();
         adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(HomeBtn,adminAncPane);
+
     }
 
     @FXML

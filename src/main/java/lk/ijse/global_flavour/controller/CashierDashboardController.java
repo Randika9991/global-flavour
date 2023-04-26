@@ -20,6 +20,7 @@ import java.util.Date;
 
 public class CashierDashboardController {
 
+
     @FXML
     public JFXButton vehicalBtn1;
 
@@ -27,7 +28,7 @@ public class CashierDashboardController {
     private AnchorPane cashieranchorpane;
 
     @FXML
-    private AnchorPane cashierAncPane;
+    private AnchorPane adminAncPane;
 
     @FXML
     private JFXButton HomeBtn;
@@ -57,8 +58,11 @@ public class CashierDashboardController {
     private JFXButton BtnSupplierLoad;
 
     @FXML
-    void btnOnHome(ActionEvent event) {
-
+    void btnOnHome(ActionEvent event) throws IOException {
+        Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/home_form.fxml"));
+        adminAncPane.getChildren().clear();
+        adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(HomeBtn,adminAncPane);
     }
 
     @FXML
@@ -69,46 +73,50 @@ public class CashierDashboardController {
     @FXML
     void btnOnCustom(ActionEvent event) throws IOException {
         Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashiercustomer_form.fxml"));
-        cashierAncPane.getChildren().clear();
-        cashierAncPane.getChildren().add(load);
-        ButtonColourController.btncolor(CustBtn,cashierAncPane);
+        adminAncPane.getChildren().clear();
+        adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(CustBtn,adminAncPane);
     }
 
     @FXML
     void btnOnItem(ActionEvent event) throws IOException {
         Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/item_form.fxml"));
-        cashierAncPane.getChildren().clear();
-        cashierAncPane.getChildren().add(load);
-        ButtonColourController.btncolor(ItmBtn,cashierAncPane);
+        adminAncPane.getChildren().clear();
+        adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(ItmBtn,adminAncPane);
     }
 
     @FXML
     void btnOnOrder(ActionEvent event) throws IOException {
         Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/order_form.fxml"));
-        cashierAncPane.getChildren().clear();
-        cashierAncPane.getChildren().add(load);
-        ButtonColourController.btncolor(OrderBtn,cashierAncPane);
+        adminAncPane.getChildren().clear();
+        adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(OrderBtn,adminAncPane);
     }
 
     @FXML
     void SupplierLoadOnAction(ActionEvent event) throws IOException {
         Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/newsupplyload_form.fxml"));
-        cashierAncPane.getChildren().clear();
-        cashierAncPane.getChildren().add(load);
-        ButtonColourController.btncolor(BtnSupplierLoad,cashierAncPane);
+        adminAncPane.getChildren().clear();
+        adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(BtnSupplierLoad,adminAncPane);
     }
 
     @FXML
-    void btnOnDeliver(ActionEvent event) {
+    void btnOnDeliver(ActionEvent event) throws IOException {
+        Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/Deliver_form.fxml"));
+        adminAncPane.getChildren().clear();
+        adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(deliverBtn,adminAncPane);
 
     }
 
     @FXML
     public void btnOnVehical(ActionEvent actionEvent) throws IOException {
         Parent load = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashiervehicle_form.fxml"));
-        cashierAncPane.getChildren().clear();
-        cashierAncPane.getChildren().add(load);
-        ButtonColourController.btncolor(vehicalBtn1,cashierAncPane);
+        adminAncPane.getChildren().clear();
+        adminAncPane.getChildren().add(load);
+        ButtonColourController.btncolor(vehicalBtn1,adminAncPane);
     }
 
     @FXML
@@ -121,7 +129,7 @@ public class CashierDashboardController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        cashierAncPane.getScene().getWindow().hide();
+        adminAncPane.getScene().getWindow().hide();
     }
 
     @FXML

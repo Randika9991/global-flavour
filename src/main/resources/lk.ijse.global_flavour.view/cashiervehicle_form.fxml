@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="846.0" prefWidth="1272.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.CashierVehicleFormController">
+<AnchorPane fx:id="adminAncPane" prefHeight="846.0" prefWidth="1272.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.CashierVehicleFormController">
    <children>
       <ImageView fitHeight="846.0" fitWidth="1272.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -61,5 +60,11 @@
          </image>
       </ImageView>
       <Button layoutX="1192.0" layoutY="39.0" mnemonicParsing="false" onAction="#CusIdOnActionSerch" opacity="0.0" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 15;" />
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="772.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk.ijse.global_flavour.assets/refresh2.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="772.0" layoutY="356.0" mnemonicParsing="false" onAction="#lblClearAllOnAction" opacity="0.0" prefHeight="31.0" prefWidth="31.0" />
    </children>
 </AnchorPane>

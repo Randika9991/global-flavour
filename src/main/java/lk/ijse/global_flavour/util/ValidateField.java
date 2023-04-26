@@ -56,4 +56,42 @@ public class ValidateField {
         ValidationResult result = validator.apply(null, nic);
         return result.getErrors().isEmpty();
     }
+    public static boolean employeeCheck(String input) {
+        if (input.matches("^(E)[0-9]{3}$")) {
+            return true; // Input contains only numeric characters, including up to two decimal points
+        } else {
+            return false; // Input contains non-numeric characters or invalid decimal points
+        }
+    }
+    public static boolean SupplierCheck(String input) {
+        if (input.matches("^(S)[0-9]{3}$")) {
+            return true; // Input contains only numeric characters, including up to two decimal points
+        } else {
+            return false; // Input contains non-numeric characters or invalid decimal points
+        }
+    }
+
+    public static boolean SalaryCheck(String input) {
+        if (input.matches("^(SAL-)[0-9]{3}$")) {
+            return true; // Input contains only numeric characters, including up to two decimal points
+        } else {
+            return false; // Input contains non-numeric characters or invalid decimal points
+        }
+    }
+
+    public static boolean ItemCodeCheck(String input) {
+        if (input.matches("^(IT-)[0-9]{3}$")) {
+            return true; // Input contains only numeric characters, including up to two decimal points
+        } else {
+            return false; // Input contains non-numeric characters or invalid decimal points
+        }
+    }
+
+    public static boolean CustomerIdCheck(String input) {
+        if (input.matches("^(CUS-)[0-9]{3}$")) {
+            return true; // Input contains only numeric characters, including up to two decimal points
+        } else {
+            return false; // Input contains non-numeric characters or invalid decimal points
+        }
+    }
 }

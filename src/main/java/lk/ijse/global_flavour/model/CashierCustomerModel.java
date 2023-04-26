@@ -7,6 +7,7 @@ import lk.ijse.global_flavour.dto.CashierCustomer;
 import lk.ijse.global_flavour.dto.Item;
 import lk.ijse.global_flavour.dto.tm.CashierCustomerTM;
 import lk.ijse.global_flavour.dto.tm.ItemTM;
+import lk.ijse.global_flavour.util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -108,5 +109,27 @@ public class CashierCustomerModel {
             data.add(resultSet.getString(1));
         }
         return data;
+    }
+
+    public static int getTotCustomers() throws SQLException, ClassNotFoundException {
+        String sql="SELECT COUNT(custId) FROM Customer";
+        ResultSet resultSet= CrudUtil.execute(sql);
+        int count=0;
+        while (resultSet.next()){
+            count=resultSet.getInt(1);
+        }
+        return count;
+
+    }
+
+    public static int getTotEmployee() throws SQLException, ClassNotFoundException {
+        String sql="SELECT COUNT(empId) FROM employee";
+        ResultSet resultSet= CrudUtil.execute(sql);
+        int count=0;
+        while (resultSet.next()){
+            count=resultSet.getInt(1);
+        }
+        return count;
+
     }
 }

@@ -83,5 +83,12 @@
       <Label fx:id="lblInvalidContactNo" layoutX="940.0" layoutY="264.0" prefHeight="21.0" prefWidth="190.0" text="Invalid contact number" textFill="#ffc9c9" />
       <Label fx:id="lblInvalidEmail" layoutX="560.0" layoutY="335.0" prefHeight="21.0" prefWidth="190.0" text="Invalid Email" textFill="#ffc9c9" />
       <Label fx:id="lblInvalidNicNo1" layoutX="940.0" layoutY="186.0" prefHeight="21.0" prefWidth="190.0" text="Invalid NIC " textFill="#ffc9c9" />
+      <Label fx:id="lblInvalidEmployeeId" layoutX="180.0" layoutY="186.0" prefHeight="21.0" prefWidth="271.0" text="Invalid EmployeeId Please Enter &quot;E001&quot; " textFill="#ffc9c9" />
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="778.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk.ijse.global_flavour.assets/refresh2.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="778.0" layoutY="361.0" mnemonicParsing="false" onAction="#lblClearAllOnAction" opacity="0.0" prefHeight="31.0" prefWidth="31.0" />
    </children>
 </AnchorPane>

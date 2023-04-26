@@ -18,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.global_flavour.db.DBConnection;
@@ -61,6 +63,9 @@ public class OrderFormController implements Initializable {
 
     @FXML
     private JFXButton btnNewCustom;
+
+    @FXML
+    private JFXTextField txtInputCash;
 
     @FXML
     private TableView<OrderTM> mainCOMItem;
@@ -119,6 +124,21 @@ public class OrderFormController implements Initializable {
     @FXML
     private Label lblNetTotal;
 
+    @FXML
+    private Label lblLowAmount;
+
+    @FXML
+    private Label txtOutBalence;
+
+    @FXML
+    private Label lblLowABS;
+
+    @FXML
+    private JFXButton btnPlaceOrder;
+
+    @FXML
+    private ImageView lblImage;
+
     private ObservableList<OrderTM> obList = FXCollections.observableArrayList();
 
     @FXML
@@ -142,6 +162,8 @@ public class OrderFormController implements Initializable {
         loadCustomerIds();
         loadItemCodes();
         setCellValueFactory();
+
+        lblLowAmount.setVisible(false);
     }
     void setCellValueFactory() {
         colItemCode.setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -224,56 +246,57 @@ public class OrderFormController implements Initializable {
             AlertController.animationMesseagewrong("Error","something went wrong!");
         }
     }
+    int QTYMyUse;
     private void fillItemFields(Item item) {
         lblItemName.setText(item.getItemName());
         lblUnitPrice.setText(item.getUnitPrice());
         lblCategory.setText(item.getCategory());
+        QTYMyUse= Integer.parseInt(item.getQty());
         lblQtyOnHand.setText(item.getQty());
     }
 
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
-        String code = String.valueOf(cmbItemCode.getValue());
-        String itemName = lblItemName.getText();
-        double unitPrice = Double.parseDouble(lblUnitPrice.getText());
-        String category = lblCategory.getText();
-        int qty = Integer.parseInt(txtQty.getText());
-        double total = qty * unitPrice;
-        Button btnRemove = new Button("Remove");
-        btnRemove.setCursor(Cursor.HAND);
+        if(QTYMyUse<Integer.parseInt((txtQty.getText()))||QTYMyUse==0){
+            AlertController.animationMesseagewrong("Error","Low QTY. Can't add to card");
+        }else {
+            String code = String.valueOf(cmbItemCode.getValue());
+            String itemName = lblItemName.getText();
+            double unitPrice = Double.parseDouble(lblUnitPrice.getText());
+            String category = lblCategory.getText();
+            int qty = Integer.parseInt(txtQty.getText());
+            double total = qty * unitPrice;
+            Button btnRemove = new Button("Remove");
+            btnRemove.setCursor(Cursor.HAND);
 
-        setRemoveBtnOnAction(btnRemove); /* set action to the btnRemove */
+            setRemoveBtnOnAction(btnRemove); /* set action to the btnRemove */
 
-        if (!obList.isEmpty()) {
-            for (int i = 0; i < mainCOMItem.getItems().size(); i++) {
-                if (colItemCode.getCellData(i).equals(code)) {
-                    qty += (int) colItemQty.getCellData(i);
-                    total = qty * unitPrice;
+            if (!obList.isEmpty()) {
+                for (int i = 0; i < mainCOMItem.getItems().size(); i++) {
+                    if (colItemCode.getCellData(i).equals(code)) {
+                        qty += (int) colItemQty.getCellData(i);
+                        total = qty * unitPrice;
 
-                    obList.get(i).setQty(qty);
-                    obList.get(i).setTotal(total);
+                        obList.get(i).setQty(qty);
+                        obList.get(i).setTotal(total);
 
-                    mainCOMItem.refresh();
-                    calculateNetTotal();
-                    return;
+                        mainCOMItem.refresh();
+                        calculateNetTotal();
+                        return;
+                    }
                 }
             }
+            OrderTM tm = new OrderTM(code,itemName, category, qty, unitPrice, total, btnRemove);
+
+            obList.add(tm);
+            mainCOMItem.setItems(obList);
+            calculateNetTotal();
+
+            txtQty.setText("");
         }
-        OrderTM tm = new OrderTM(code,itemName, category, qty, unitPrice, total, btnRemove);
-
-        obList.add(tm);
-        mainCOMItem.setItems(obList);
-        calculateNetTotal();
-
-        txtQty.setText("");
-
     }
     private void setRemoveBtnOnAction(Button btn) {
         btn.setOnAction((e) -> {
-           // ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-          //  ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-            //Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
             boolean ok = AlertController.okconfirmmessage("Are you sure to remove?\", yes, no");
 
@@ -288,6 +311,7 @@ public class OrderFormController implements Initializable {
 
         });
     }
+    double balance ;
     private void calculateNetTotal() {
         double netTotal = 0.0;
         for (int i = 0; i < mainCOMItem.getItems().size(); i++) {
@@ -295,6 +319,7 @@ public class OrderFormController implements Initializable {
             netTotal += total;
         }
         lblNetTotal.setText(String.valueOf(netTotal));
+        balance=netTotal;
     }
 
     @FXML
@@ -305,59 +330,68 @@ public class OrderFormController implements Initializable {
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
-        String oId = lblOrderId.getText();
-        String cId = String.valueOf(cmbCustomerId.getValue());
-        double payment = Double.parseDouble(lblNetTotal.getText());
-        boolean delivery= radioButton.isSelected();
+        if(txtInputCash.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Please Enter Amount!");
 
-        List<OrderCartDTO> orderDTOList = new ArrayList<>();
-        OrderTM orderTM = null;
-        for (int i = 0; i < mainCOMItem.getItems().size(); i++) {
-            orderTM = obList.get(i);
-            OrderCartDTO cartDTO = new OrderCartDTO(
-                    orderTM.getCode(),
-                    orderTM.getQty(),
-                    orderTM.getUnitPrice()
-            );
-            orderDTOList.add(cartDTO);
-        }
+        }else {
+            String oId = lblOrderId.getText();
+            String cId = String.valueOf(cmbCustomerId.getValue());
+            double payment = Double.parseDouble(lblNetTotal.getText());
+            boolean delivery= radioButton.isSelected();
 
-        try {
-            boolean isSaved = PlaceOrderModel.placeOrder(oId,cId,payment,orderDTOList,orderTM,delivery);
-            if(isSaved) {
-                //String printcash = .getText();
-               // String balance = balancelbl.getText();
-                generateNextOrderId();
-                AlertController.animationMesseageCorect("CONFIRMATION","selected...");
-                boolean result = AlertController.okconfirmmessage("Do you want the bill ?");
+            List<OrderCartDTO> orderDTOList = new ArrayList<>();
+            OrderTM orderTM = null;
+            for (int i = 0; i < mainCOMItem.getItems().size(); i++) {
+                orderTM = obList.get(i);
+                OrderCartDTO cartDTO = new OrderCartDTO(
+                        orderTM.getCode(),
+                        orderTM.getQty(),
+                        orderTM.getUnitPrice()
+                );
+                orderDTOList.add(cartDTO);
+            }
 
-                if (result) {
-                    Map<String, Object> parameters = new HashMap<>();
-//                    parameters.put("param1", printcash);
-//                    parameters.put("param2", balance);
+            try {
+                boolean isSaved = PlaceOrderModel.placeOrder(oId,cId,payment,orderDTOList,orderTM,delivery);
+                if(isSaved) {
+                    double printcash = Double.parseDouble(txtInputCash.getText());
+                    Double finalTotal= printcash-balance;
 
-                    InputStream resource = this.getClass().getResourceAsStream("/lk.ijse.global_flavour.reports/orderPlace.jrxml");
-                    try {
-                        JasperReport jasperReport = JasperCompileManager.compileReport(resource);
-                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, DBConnection.getInstance().getConnection());
-                        JasperViewer.viewReport(jasperPrint, false);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    // String balance = balancelbl.getText();
+                    generateNextOrderId();
+                    AlertController.animationMesseageCorect("CONFIRMATION","selected...");
+                    boolean result = AlertController.okconfirmmessage("Do you want the bill ?");
+
+                    if (result) {
+                        Map<String, Object> parameters = new HashMap<>();
+                        parameters.put("param1", printcash);
+                        parameters.put("param2", finalTotal);
+
+                        InputStream resource = this.getClass().getResourceAsStream("/lk.ijse.global_flavour.reports/orderPlace.jrxml");
+                        try {
+                            JasperReport jasperReport = JasperCompileManager.compileReport(resource);
+                            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, DBConnection.getInstance().getConnection());
+                            JasperViewer.viewReport(jasperPrint, false);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-           }
-       }
-        catch(Exception e) {
-           e.printStackTrace();
-            System.out.println(e);
-            AlertController.animationMesseagewrong("Error","something went wrong!");
-       }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+                System.out.println(e);
+                AlertController.animationMesseagewrong("Error","something went wrong!");
+            }
+
+        }
+
+
     }
 
     @FXML
     void txtQtyOnAction(ActionEvent event) {
         btnAddToCartOnAction(event);
-
     }
 
     @FXML
@@ -370,6 +404,29 @@ public class OrderFormController implements Initializable {
             stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-deliver-food-101.png"));
             stage.setScene(scene);
             stage.show();
+
+        }
+    }
+
+
+    public void AmountKeyType(KeyEvent keyEvent) {
+        double balance=(Double.parseDouble(txtInputCash.getText())-Double.parseDouble(lblNetTotal.getText()));
+        if(balance>=0){
+            txtOutBalence.setText(String.valueOf(balance));
+            lblLowAmount.setVisible(false);
+            lblLowABS.setVisible(false);
+            txtOutBalence.setVisible(true);
+            btnPlaceOrder.setVisible(true);
+            lblImage.setVisible(true);
+
+        }else {
+            String positBalance = String.valueOf(Math.abs(balance));
+            lblLowABS.setText(positBalance);
+            lblLowAmount.setVisible(true);
+            lblLowABS.setVisible(true);
+            txtOutBalence.setVisible(false);
+            btnPlaceOrder.setVisible(false);
+            lblImage.setVisible(false);
 
         }
     }

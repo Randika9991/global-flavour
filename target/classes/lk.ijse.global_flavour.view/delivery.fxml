@@ -22,9 +22,9 @@
             <Font size="29.0" />
          </font>
       </Label>
-      <ImageView fitHeight="353.0" fitWidth="733.0" layoutX="50.0" layoutY="140.0" opacity="0.12" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="484.0" fitWidth="647.0" layoutX="152.0" layoutY="11.0" opacity="0.12" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lk.ijse.global_flavour.assets/car-146185_1280.png" />
+            <Image url="@../lk.ijse.global_flavour.assets/result7.png" />
          </image>
       </ImageView>
       <Label fx:id="lblOrderId" layoutX="171.0" layoutY="108.0" prefHeight="48.0" prefWidth="194.0" textFill="#ffcaca">
@@ -67,10 +67,10 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cmbEmpId" focusColor="WHITE" layoutX="547.0" layoutY="203.0" onAction="#cmbEmpIdOnAction" prefHeight="48.0" prefWidth="179.0" />
-      <JFXComboBox fx:id="cmbVehiId" focusColor="WHITE" layoutX="525.0" layoutY="299.0" onAction="#cmbVehiIdOnAction" prefHeight="48.0" prefWidth="179.0" />
+      <JFXComboBox fx:id="cmbEmpId" focusColor="WHITE" layoutX="547.0" layoutY="209.0" onAction="#cmbEmpIdOnAction" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: white;" />
+      <JFXComboBox fx:id="cmbVehiId" focusColor="WHITE" layoutX="547.0" layoutY="305.0" onAction="#cmbVehiIdOnAction" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: white;" />
       <JFXButton layoutX="527.0" layoutY="419.0" onAction="#buttonSaveOnACT" prefHeight="31.0" prefWidth="194.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(10,10,10,0.6), 10, 0, 0, 10);" text="Add new Delivery" />
-      <JFXTextField fx:id="txtLocation" focusColor="WHITE" layoutX="172.0" layoutY="204.0" prefHeight="21.0" prefWidth="187.0" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtLocation" focusColor="WHITE" layoutX="181.0" layoutY="203.0" prefHeight="21.0" prefWidth="187.0" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE">
          <font>
             <Font size="22.0" />
          </font>

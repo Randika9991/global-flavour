@@ -23,6 +23,7 @@ import lk.ijse.global_flavour.model.AdminSalaryModel;
 import lk.ijse.global_flavour.model.CashierCustomerModel;
 import lk.ijse.global_flavour.model.ItemModel;
 import lk.ijse.global_flavour.util.AlertController;
+import lk.ijse.global_flavour.util.ValidateField;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -76,29 +77,44 @@ public class AdminSalaryFormController {
     private JFXComboBox CBMPayM;
 
     @FXML
+    private Label lblInvalidsalary;
+
+    @FXML
     void salIdOnAction(ActionEvent event) {
 
     }
 
     @FXML
     void salarySaveONAct(ActionEvent event) {
-        String employeId = String.valueOf(COBEmployeEmpId.getValue());
-        String salaryId = txtSalaryId.getText();
-        String salaryAmount = txtSalaryAmountId.getText();
-        String salaryPayment = String.valueOf(CBMPayM.getValue());
 
-        AdminSalary cus = new AdminSalary(salaryId,employeId,salaryAmount,salaryPayment);
+        if(txtSalaryId.getText().isEmpty()||txtSalaryAmountId.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Employee details not saved. \nPlease make sure to fill the request fields.");
+        }else {
 
-        try {
+            if(ValidateField.SalaryCheck(txtSalaryId.getText())){
+                lblInvalidsalary.setVisible(false);
+                String employeId = String.valueOf(COBEmployeEmpId.getValue());
+                String salaryId = txtSalaryId.getText();
+                String salaryAmount = txtSalaryAmountId.getText();
+                String salaryPayment = String.valueOf(CBMPayM.getValue());
+
+                AdminSalary cus = new AdminSalary(salaryId,employeId,salaryAmount,salaryPayment);
+
+                try {
 //
-            boolean isSaved = AdminSalaryModel.save(cus);
-            if (isSaved) {
-                AlertController.animationMesseageCorect("CONFIRMATION","Salary Save Success!");
-                onActionGetAllSallary();
+                    boolean isSaved = AdminSalaryModel.save(cus);
+                    if (isSaved) {
+                        AlertController.animationMesseageCorect("CONFIRMATION","Salary Save Success!");
+                        onActionGetAllSallary();
 
+                    }
+                } catch (SQLException e) {
+                    AlertController.animationMesseagewrong("Error","something went wrong!");
+                }
+            }else {
+                lblInvalidsalary.setVisible(true);
             }
-        } catch (SQLException e) {
-            AlertController.animationMesseagewrong("Error","something went wrong!");
+
         }
 
     }
@@ -106,19 +122,24 @@ public class AdminSalaryFormController {
     @FXML
     void salaryUpdateONAct(ActionEvent event) {
         String employeId = String.valueOf(COBEmployeEmpId.getValue());
-        String empID = txtSalaryId.getText();
+        String salId = txtSalaryId.getText();
         String salaryAmount = txtSalaryAmountId.getText();
         String salaryPayment = String.valueOf(CBMPayM.getValue());
 
-        AdminSalary addSalary=new AdminSalary(employeId,empID, salaryAmount, salaryPayment);
+        AdminSalary addSalary=new AdminSalary(salId,employeId, salaryAmount, salaryPayment);
         try {
-
-            boolean isUpdated = AdminSalaryModel.change(addSalary);
-            AlertController.animationMesseageCorect("CONFIRMATION","Salary updated!");
-            onActionGetAllSallary();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            boolean isUpdated = AdminSalaryModel.update(addSalary);
+            if(isUpdated){
+                AlertController.animationMesseageCorect("CONFIRMATION","Salary updated!");
+                onActionGetAllSallary();
+            }
+        }
+        catch (SQLException throwables) {
             AlertController.animationMesseagewrong("Error","something went wrong!");
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            AlertController.animationMesseagewrong("Error","something went wrong!");
+            e.printStackTrace();
         }
 
     }
@@ -190,8 +211,8 @@ public class AdminSalaryFormController {
                 public boolean test(AdminSalaryTM itemTM) {
                     return String.valueOf(itemTM.getSalaryId()).toLowerCase().contains(searchValue.toLowerCase());        }
             });
-            COBEmployeEmpId.setItems(filteredData);} else {
-            COBEmployeEmpId.setItems(obList);
+            TBLsalary.setItems(filteredData);} else {
+            TBLsalary.setItems(obList);
         }
     }
 
@@ -201,6 +222,7 @@ public class AdminSalaryFormController {
         CBMPayM.getItems().addAll("Cash","Card");
         onActionGetAllSallary();
         setCellValuefactory();
+        lblInvalidsalary.setVisible(false);
     }
     void setCellValuefactory(){
         tabColumEmployeID.setCellValueFactory(new PropertyValueFactory<>("employId"));
@@ -227,5 +249,12 @@ public class AdminSalaryFormController {
         } catch (SQLException e) {
             AlertController.animationMesseagewrong("Error","something went wrong!");
         }
+    }
+
+    public void lblClearAllOnAction(ActionEvent actionEvent) {
+        COBEmployeEmpId.setValue("");
+        txtSalaryId.setText("");
+        txtSalaryAmountId.setText("");
+        CBMPayM.setValue("");
     }
 }

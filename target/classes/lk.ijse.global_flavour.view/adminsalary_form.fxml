@@ -57,7 +57,14 @@
          </image>
       </ImageView>
       <Button fx:id="searchBtnSalary" layoutX="1208.0" layoutY="39.0" mnemonicParsing="false" onAction="#searchSalaryBtnOnClick" opacity="0.0" prefHeight="31.0" prefWidth="31.0" />
-      <JFXComboBox fx:id="COBEmployeEmpId" focusColor="#f5f5f5" labelFloat="true" layoutX="362.0" layoutY="163.0" prefHeight="43.0" prefWidth="190.0" promptText="Employee Id" style="-fx-text-fill: white;" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE" />
-      <JFXComboBox fx:id="CBMPayM" focusColor="WHITE" labelFloat="true" layoutX="767.0" layoutY="268.0" prefHeight="31.0" prefWidth="190.0" promptText="Payment Method" style="-fx-text-fill: white;" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE" />
+      <JFXComboBox fx:id="COBEmployeEmpId" focusColor="#f5f5f5" layoutX="362.0" layoutY="175.0" prefHeight="31.0" prefWidth="190.0" promptText="Employee Id" style="-fx-background-color: white;" styleClass="EmloyeeTxtColour" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE" />
+      <JFXComboBox fx:id="CBMPayM" focusColor="WHITE" layoutX="767.0" layoutY="268.0" prefHeight="31.0" prefWidth="190.0" promptText="Payment Method" style="-fx-background-color: white;" stylesheets="@../lk.ijse.global_flavour.styles/style.css" unFocusColor="WHITE" />
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="777.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk.ijse.global_flavour.assets/refresh2.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="777.0" layoutY="362.0" mnemonicParsing="false" onAction="#lblClearAllOnAction" opacity="0.0" prefHeight="31.0" prefWidth="31.0" />
+      <Label fx:id="lblInvalidsalary" layoutX="767.0" layoutY="206.0" prefHeight="21.0" prefWidth="271.0" text="Invalid Salary Id Please Enter &quot;SAL-001&quot; " textFill="#ffc9c9" />
    </children>
 </AnchorPane>

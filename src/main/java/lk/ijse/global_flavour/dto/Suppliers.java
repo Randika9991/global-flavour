@@ -12,8 +12,8 @@ public class Suppliers {
     private String SupplierId;
     private String SupplierName;
     private String SupplierAddress;
-    private String SupplierCotact;
     private String SupplierEmail;
+    private String SupplierCotact;
 }
 
 

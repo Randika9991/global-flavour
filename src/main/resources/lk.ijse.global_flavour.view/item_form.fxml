@@ -72,5 +72,12 @@
          </image>
       </ImageView>
       <Button layoutX="1201.0" layoutY="42.0" mnemonicParsing="false" onAction="#itemIdOnActionSerch" opacity="0.0" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 15;" />
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="785.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk.ijse.global_flavour.assets/refresh2.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="785.0" layoutY="358.0" mnemonicParsing="false" onAction="#lblClearAllOnAction" opacity="0.0" prefHeight="31.0" prefWidth="31.0" />
+      <Label fx:id="lblInvalidItemCode" layoutX="198.0" layoutY="189.0" prefHeight="21.0" prefWidth="282.0" text="Invalid ItemCode Please Enter &quot;IT-001&quot; " textFill="#ffc9c9" />
    </children>
 </AnchorPane>

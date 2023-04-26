@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="cashieranchorpane" prefHeight="732.0" prefWidth="1502.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.global_flavour.controller.CashierDashboardController">
    <children>
-      <AnchorPane fx:id="cashierAncPane" layoutX="248.0" layoutY="-2.0" prefHeight="728.0" prefWidth="1217.0">
+      <AnchorPane fx:id="adminAncPane" layoutX="248.0" layoutY="-2.0" prefHeight="728.0" prefWidth="1217.0">
          <children>
             <ImageView fitHeight="761.0" fitWidth="1255.0" layoutX="13.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="-36.7608642578125" AnchorPane.topAnchor="1.0">
                <image>

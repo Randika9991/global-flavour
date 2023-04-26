@@ -1,5 +1,6 @@
 package lk.ijse.global_flavour.model;
 
+import javafx.scene.chart.XYChart;
 import lk.ijse.global_flavour.db.DBConnection;
 import lk.ijse.global_flavour.dto.OrderCartDTO;
 import lk.ijse.global_flavour.util.CrudUtil;
@@ -27,18 +28,18 @@ public class OrderModel {
 
     private static String splitOrderId(String currentId) {
         if(currentId != null) {
-            String[] strings = currentId.split("D0");
+            String[] strings = currentId.split("ORD-");
             int id = Integer.parseInt(strings[1]);
             id++;
-            return "D0" + id;
+            return "ORD-" + id;
         }
-        return "D001";
+        return "ORD-001";
     }
 
 
-        public static boolean save(String oId, String cId, double payment, LocalDate date, LocalTime time, List<OrderCartDTO> orderDTOList) throws SQLException {
+        public static boolean save(String oId, String cId, double payment, LocalDate date, LocalTime time, List<OrderCartDTO> orderDTOList, boolean delivery) throws SQLException {
             for(OrderCartDTO dto : orderDTOList) {
-                if(!save(oId,cId,payment,date,time,dto)) {
+                if(!save(oId,cId,payment,date,time,dto,delivery)) {
 
                     return false;
 
@@ -47,7 +48,7 @@ public class OrderModel {
             }
             return true;
         }
-        private static boolean save(String oId,String cId, double payment,LocalDate date,LocalTime time,OrderCartDTO dto) throws SQLException {
+        private static boolean save(String oId, String cId, double payment, LocalDate date, LocalTime time, OrderCartDTO dto, boolean delivery) throws SQLException {
 
             String sql = "INSERT INTO orders(orderId, custId, payment,time,date,deliveryStatus) VALUES(?, ?, ?, ?, ?,?)";
 
@@ -58,9 +59,30 @@ public class OrderModel {
                     payment,
                     time,
                     date,
-                    dto.getDeliverStatus()
+                    delivery
 
             );
         }
+
+    public static int getTotalSales() throws SQLException, ClassNotFoundException {
+        String sql="SELECT count(orderId) FROM orders WHERE date =curdate()";
+        ResultSet resultSet= CrudUtil.execute(sql);
+        int count=0;
+        while (resultSet.next()){
+            count=resultSet.getInt(1);
+        }
+        return count;
+    }
+
+    public static XYChart.Series lineChartData() throws SQLException, ClassNotFoundException {
+        String sql="SELECT MONTHNAME(date),sum(payment) from orders group by MONTHNAME(date)";
+        ResultSet resultSet=CrudUtil.execute(sql);
+        XYChart.Series series=new XYChart.Series();
+        while (resultSet.next()){
+            series.getData().add(new XYChart.Data(resultSet.getString(1),resultSet.getInt(2)));
+        }
+        return series;
+
+    }
 }
 

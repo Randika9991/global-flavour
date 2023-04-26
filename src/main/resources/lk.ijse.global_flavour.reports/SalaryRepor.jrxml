@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SalaryRepor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5941e737-1c25-461a-beab-49d6a6b9cdd6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[select * from Salary;]]>
+	</queryString>
+	<field name="salaryId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="salaryId"/>
+		<property name="com.jaspersoft.studio.field.label" value="salaryId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="salary"/>
+	</field>
+	<field name="empId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="empId"/>
+		<property name="com.jaspersoft.studio.field.label" value="empId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="salary"/>
+	</field>
+	<field name="amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="salary"/>
+	</field>
+	<field name="paymentmethod" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="paymentmethod"/>
+		<property name="com.jaspersoft.studio.field.label" value="paymentmethod"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="salary"/>
+	</field>
+	<group name="salaryId">
+		<groupExpression><![CDATA[$F{salaryId}]]></groupExpression>
+	</group>
+	<group name="empId">
+		<groupExpression><![CDATA[$F{empId}]]></groupExpression>
+	</group>
+	<group name="amount">
+		<groupExpression><![CDATA[$F{amount}]]></groupExpression>
+	</group>
+	<group name="paymentmethod">
+		<groupExpression><![CDATA[$F{paymentmethod}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="142" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="0" width="595" height="140" backcolor="#626378" uuid="62c229cd-c900-4350-b383-8133a1070207"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="20" width="200" height="40" uuid="31b29125-0f75-4ced-bd5a-9744fd8721d5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Showcard Gothic" size="22"/>
+				</textElement>
+				<text><![CDATA[SPICY FLAVOUR]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="21" width="37" height="34" uuid="97b4645d-5229-4154-9409-b2ce7fde71ee"/>
+				<imageExpression><![CDATA["C:/Users/Dulaksha/FP/src/main/resources/lk.ijse.global_flavour.assets/icons8-chilli-100.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="-24" y="44" width="264" height="16" uuid="c7c6b923-c624-477c-a910-343385e385e9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="12" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[146,Darmashoka Mawatha, Galle ,Sri Lanka]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="60" width="100" height="20" uuid="4a5efa4e-1c83-46f3-af06-f4fef467a880"/>
+				<text><![CDATA[TEL : 0915611689]]></text>
+			</staticText>
+			<textField pattern="HH:mm">
+				<reportElement x="440" y="44" width="104" height="16" uuid="599b66c3-3f3a-42d6-94ab-26ed32b78d09"/>
+				<textElement textAlignment="Left">
+					<font fontName="Franklin Gothic Heavy" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="440" y="23" width="114" height="20" uuid="d989155f-4453-4098-8821-58a44a5203b9"/>
+				<textElement textAlignment="Left">
+					<font fontName="Franklin Gothic Heavy" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="197" y="10" width="171" height="30" forecolor="#030303" uuid="360e7321-aaa4-425f-8896-3c7c5e61d469"/>
+				<textElement>
+					<font fontName="Modern No. 20" size="20"/>
+				</textElement>
+				<text><![CDATA[SALARY  REPORT]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="40" y="15" width="79" height="30" uuid="b159b4e1-0a59-4b5a-ae55-585467bc033d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c1231cf5-11b6-47d6-995f-2ca903380d8f"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Elephant" size="14"/>
+				</textElement>
+				<text><![CDATA[salaryId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="15" width="79" height="30" uuid="e5ed2268-f9ff-4a90-a793-1970a43ad5cb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="746cf59c-6ef1-4dfe-abb7-8dccf55b1f24"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Elephant" size="14"/>
+				</textElement>
+				<text><![CDATA[empId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="15" width="80" height="30" uuid="c221e390-dc35-40a6-a4e3-2328930cb907">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ec6be3e7-b2a4-4a1c-b434-8d7f6a8e59aa"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Elephant" size="14"/>
+				</textElement>
+				<text><![CDATA[amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="15" width="114" height="30" uuid="3d0b849c-4207-48c7-be9a-d6cc0bb7fd24">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97e9e520-2a2a-4fdc-b76d-961d0900cb8f"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Elephant" size="14"/>
+				</textElement>
+				<text><![CDATA[paymentmethod]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="8" width="79" height="30" uuid="8993ce69-6c26-4f57-bdaa-c5af2bb57ee6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c1231cf5-11b6-47d6-995f-2ca903380d8f"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salaryId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="161" y="8" width="79" height="30" uuid="2221b37c-2a6c-4888-926e-832d1e122a77">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="746cf59c-6ef1-4dfe-abb7-8dccf55b1f24"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="8" width="80" height="30" uuid="b2b32443-f74c-4d13-8e7c-9a2cca8155e6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ec6be3e7-b2a4-4a1c-b434-8d7f6a8e59aa"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="8" width="80" height="30" uuid="2d85e462-79fb-40a7-9696-cf45c8f46ea0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97e9e520-2a2a-4fdc-b76d-961d0900cb8f"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paymentmethod}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="16" width="595" height="15" backcolor="#626378" uuid="d29d41b0-3828-4f52-a5ed-bec783fb41ac"/>
+			</rectangle>
+		</band>
+	</pageFooter>
+</jasperReport>

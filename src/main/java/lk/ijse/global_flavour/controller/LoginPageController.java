@@ -99,64 +99,72 @@ public class LoginPageController {
             }else if (COMAdminCashierlogin.getValue()!="Admin"&&COMAdminCashierlogin.getValue()!="Cashier"){
                 AlertController.animationMesseagewrong("Error","Please Change admin or Cashier!");
             }else {
-                if(admincashiarUserInput.equals("Admin")||admincashiarUserInput.equals("Cashier")){
-                    if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)&&txtLogPassword.getText().equals(passwordUserInput)){
-                        if(admincashiar.equals("Admin")){
-                            AlertController.notificationBar("SPICY FLAVOUR ","Login Success!");
-                            Stage stage = new Stage();
-                            Parent root = null;
-                            stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
-                            stage.setTitle("SPICY FLAVOUR");
-                            root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/admindashboard.fxml"));
-                            Scene scene = new Scene(root);
-                            stage.setScene(scene);
-                            stage.show();
-                            loginAncPane.getScene().getWindow().hide();
-                        }else {
-                            Stage stage = new Stage();
-                            Parent root = null;
-                            stage.setTitle("SPICY FLAVOUR");
-                            stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
-                            root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashierdashboard.fxml"));
-                            Scene scene = new Scene(root);
-                            stage.setTitle("GLOBAL FLAVOUR");
-                            stage.setScene(scene);
-                            stage.show();
-                            loginAncPane.getScene().getWindow().hide();
-                        }
-                    }else if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)&&txtLogPassword.getText().isEmpty()){
 
-                        AlertController.animationMesseagewrong("Error","Please Enter password!");
-                    }else if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)&&txtLogPassword.getText()!=(passwordUserInput)){
-                        i++;
-
-                        if(i==4){
-                            i=0;
-                            emailShirePasswordConrollerAndChangePasswordController=emailUserInput;
-                            adminShireChangePasswordController=admincashiarUserInput;
-                            nameShireChangePasswordController=nameUserInput;
-
-                            boolean ok = AlertController.okconfirmmessage("forgot your password. Do you want change password");
-
-
-                            if(ok){
+                    if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)){
+                        if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)&&txtLogPassword.getText().equals(passwordUserInput)){
+                            if(admincashiar.equals("Admin")){
+                                AlertController.notificationBar("SPICY FLAVOUR ","Login Success!");
                                 Stage stage = new Stage();
                                 Parent root = null;
-                                stage.setTitle("SPICY FLAVOUR");
                                 stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
-                                root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/fogotpassworld.fxml"));
+                                stage.setTitle("SPICY FLAVOUR");
+                                root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/admindashboard.fxml"));
                                 Scene scene = new Scene(root);
                                 stage.setScene(scene);
                                 stage.show();
                                 loginAncPane.getScene().getWindow().hide();
-
+                            }else {
+                                Stage stage = new Stage();
+                                Parent root = null;
+                                stage.setTitle("SPICY FLAVOUR");
+                                stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
+                                root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/cashierdashboard.fxml"));
+                                Scene scene = new Scene(root);
+                                stage.setTitle("GLOBAL FLAVOUR");
+                                stage.setScene(scene);
+                                stage.show();
+                                loginAncPane.getScene().getWindow().hide();
                             }
-                        }else {
-                            AlertController.animationMesseagewrong("Error","Wrong Password Please try again!");
-                        }
+                        }else if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)&&txtLogPassword.getText().isEmpty()){
 
+                            AlertController.animationMesseagewrong("Error","Please Enter password!");
+                        }else if(admincashiar.equals(admincashiarUserInput)&&txtUserName.getText().equals(nameUserInput)&&txtLogPassword.getText()!=(passwordUserInput)){
+                            i++;
+
+                            if(i==4){
+                                i=0;
+                                emailShirePasswordConrollerAndChangePasswordController=emailUserInput;
+                                adminShireChangePasswordController=admincashiarUserInput;
+                                nameShireChangePasswordController=nameUserInput;
+
+                                boolean ok = AlertController.okconfirmmessage("forgot your password. Do you want change password");
+
+
+                                if(ok){
+                                    Stage stage = new Stage();
+                                    Parent root = null;
+                                    stage.setTitle("SPICY FLAVOUR");
+                                    stage.getIcons().add(new Image("lk.ijse.global_flavour.assets/icons8-chilli-100.png"));
+                                    root = FXMLLoader.load(getClass().getResource("/lk.ijse.global_flavour.view/fogotpassworld.fxml"));
+                                    Scene scene = new Scene(root);
+                                    stage.setScene(scene);
+                                    stage.show();
+                                    loginAncPane.getScene().getWindow().hide();
+
+                                }
+                            }else {
+                                AlertController.animationMesseagewrong("Error","Wrong Password Please try again!");
+                            }
+
+                        }
+                    }else {
+                        AlertController.animationMesseagewrong("Error","Wrong user Name and Password.Please try again!");
                     }
-                }
+
+
+
+
+
             }
         }
     }

@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.global_flavour.dto.EmployeeSetAndGet;
 import lk.ijse.global_flavour.dto.tm.CashierCustomerTM;
 import lk.ijse.global_flavour.dto.tm.ItemTM;
@@ -25,6 +26,9 @@ import java.sql.SQLException;
 import java.util.function.Predicate;
 
 public class CashiercustomerFormController {
+
+    @FXML
+    private AnchorPane adminAncPane;
 
     @FXML
     private JFXTextField txtCusId;
@@ -69,33 +73,21 @@ public class CashiercustomerFormController {
     private Label lblInvalidEmail;
 
     @FXML
+    private Label lblInvalidCustomID;
+
+    @FXML
     void buttonSaveOnACT(ActionEvent event) {
-        if(txtCusId.getText().isEmpty() || txtCusName.getText().isEmpty() || txtCusAddress.getText().isEmpty()){
+        if(txtCusId.getText().isEmpty() || txtCusName.getText().isEmpty() || txtCusAddress.getText().isEmpty() ||txtCusContact.getText().isEmpty()||txtCusEmail1.getText().isEmpty()){
             AlertController.animationMesseagewrong("Error","Customer details not saved. \nPlease make sure to fill the request fields.");
         }else {
 
-            if(ValidateField.contactCheck(txtCusContact.getText()) ||ValidateField.emailCheck(txtCusEmail1.getText())){
+            if(ValidateField.CustomerIdCheck(txtCusId.getText()) ||ValidateField.contactCheck(txtCusContact.getText()) ||ValidateField.emailCheck(txtCusEmail1.getText())){
                 if(ValidateField.emailCheck(txtCusEmail1.getText())){
                     if(ValidateField.contactCheck(txtCusContact.getText())){
-                        String CusId = txtCusId.getText();
-                        String CusName = txtCusName.getText();
-                        String CusContact = txtCusContact.getText();
-                        String CusAddress = txtCusAddress.getText();
-                        String CusEmail1 = txtCusEmail1.getText();
+                        if(ValidateField.CustomerIdCheck(txtCusId.getText())){
 
-
-                        CashierCustomer allCustom = new CashierCustomer(CusId, CusName,CusContact,CusAddress,CusEmail1);
-
-                        try {
-//
-                            boolean isSaved = CashierCustomerModel.save(allCustom);
-                            if (isSaved) {
-                                AlertController.animationMesseageCorect("CONFIRMATION","Customer Save Success!");
-                                onActionGetAllCustom();
-                            }
-                        } catch (SQLException e) {
-                            System.out.println(e);
-                            AlertController.animationMesseagewrong("Error","something went wrong!");
+                        }else {
+                            lblInvalidCustomID.setVisible(true);
                         }
                     }else {
                         lblInvalidContactNo.setVisible(true);
@@ -107,6 +99,7 @@ public class CashiercustomerFormController {
             }else {
                 lblInvalidContactNo.setVisible(true);
                 lblInvalidEmail.setVisible(true);
+                lblInvalidCustomID.setVisible(true);
 
             }
         }
@@ -249,6 +242,7 @@ public class CashiercustomerFormController {
         setCellValuefactory();
         lblInvalidContactNo.setVisible(false);
         lblInvalidEmail.setVisible(false);
+        lblInvalidCustomID.setVisible(false);
     }
 
     void onActionGetAllCustom() {
@@ -271,5 +265,11 @@ public class CashiercustomerFormController {
     }
 
 
-
+    public void lblClearAllOnAction(ActionEvent actionEvent) {
+       txtCusId.setText("");
+       txtCusName.setText("");
+       txtCusContact.setText("");
+       txtCusAddress.setText("");
+       txtCusEmail1.setText("");
+    }
 }

@@ -18,6 +18,43 @@ public class ReportFormController {
     private AnchorPane adminAncPane;
 
     @FXML
+    void SupplyLoadOnAction(ActionEvent event) {
+        InputStream resource = this.getClass().getResourceAsStream("/lk.ijse.global_flavour.reports/SupplyLoadDetail.jrxml");
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(resource);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void SalOnAction(ActionEvent event) {
+        InputStream resource = this.getClass().getResourceAsStream("/lk.ijse.global_flavour.reports/SalaryRepor.jrxml");
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(resource);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    @FXML
+    void EmpOnAction(ActionEvent event) {
+        InputStream resource = this.getClass().getResourceAsStream("/lk.ijse.global_flavour.reports/Employee.jrxml");
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(resource);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
     void supOnAction(ActionEvent event) {
         InputStream resource = this.getClass().getResourceAsStream("/lk.ijse.global_flavour.reports/SuplierReport.jrxml");
         try {
@@ -27,8 +64,6 @@ public class ReportFormController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
 }

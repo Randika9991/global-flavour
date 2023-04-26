@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import lk.ijse.global_flavour.db.DBConnection;
 import lk.ijse.global_flavour.dto.AdminSalary;
 import lk.ijse.global_flavour.dto.tm.AdminSalaryTM;
+import lk.ijse.global_flavour.util.CrudUtil;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,17 +63,16 @@ public class AdminSalaryModel {
         }
     }
 
-    public static boolean change(AdminSalary addSalary) throws SQLException {
-        String sql = "UPDATE salary SET empId = ?,amount = ?,paymentmethod = ? WHERE salaryId = ?";
-        try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
-
-            pstm.setString(1, addSalary.getEmployId());
-            pstm.setString(2, addSalary.getAmount());
-            pstm.setString(3, addSalary.getPayment());
-            pstm.setString(4, addSalary.getSalaryId());
-
-            return pstm.executeUpdate() > 0;
-        }
+    public static boolean update(AdminSalary adminSalary) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE salary SET empId =?, amount =?, paymentmethod =? " +
+                "WHERE salaryId =?";
+        return CrudUtil.execute(
+                sql,
+                adminSalary.getEmployId(),
+                adminSalary.getAmount(),
+                adminSalary.getPayment(),
+                adminSalary.getSalaryId()
+        );
     }
 
    public static AdminSalary search(String salId) throws SQLException {
