@@ -19,6 +19,16 @@
                   <Image url="@../lk.ijse.global_flavour.assets/top-view-indian-seasonings-spices-table.jpg" />
                </image>
             </ImageView>
+            <Label layoutX="262.0" layoutY="338.0" prefHeight="98.0" prefWidth="578.0" text="WELCOME TO SPICY FLAVOUR  " textFill="WHITE">
+               <font>
+                  <Font name="Bernard MT Condensed" size="48.0" />
+               </font>
+            </Label>
+            <Label layoutX="530.0" layoutY="436.0" prefHeight="98.0" prefWidth="578.0" text="MANAGEMENT SYSTEM ." textFill="WHITE">
+               <font>
+                  <Font name="Bernard MT Condensed" size="48.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="-3.0" prefHeight="768.0" prefWidth="332.0" styleClass="adminDashBordLeftSlide" stylesheets="@../lk.ijse.global_flavour.styles/style.css" AnchorPane.bottomAnchor="-7.0">

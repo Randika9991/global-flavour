@@ -31,7 +31,7 @@ public class OrderModel {
             String[] strings = currentId.split("ORD-");
             int id = Integer.parseInt(strings[1]);
             id++;
-            return "ORD-" + id;
+            return "ORD-00" + id;
         }
         return "ORD-001";
     }
@@ -65,7 +65,7 @@ public class OrderModel {
         }
 
     public static int getTotalSales() throws SQLException, ClassNotFoundException {
-        String sql="SELECT count(orderId) FROM orders WHERE date =curdate()";
+        String sql="SELECT count(orderId) FROM orders ";
         ResultSet resultSet= CrudUtil.execute(sql);
         int count=0;
         while (resultSet.next()){

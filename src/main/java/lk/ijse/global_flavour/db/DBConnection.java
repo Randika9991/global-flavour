@@ -9,11 +9,7 @@ public class DBConnection {
     private Connection con;
 
     private DBConnection() throws SQLException {
-        con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/spicy_flavour",
-                "root",
-                "1234"
-        );
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spicy_flavour", "root", "1234");
     }
 
     public static DBConnection getInstance() throws SQLException {

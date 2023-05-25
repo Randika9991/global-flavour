@@ -273,9 +273,6 @@ public class EmployeeFormController {
                 }
             }
         }
-
-
-
     }
 
     @FXML
@@ -391,11 +388,12 @@ public class EmployeeFormController {
         txtEmpId.setText("");
         txtEmpName.setText("");
         txtEmpAddress.setText("");
-        txtEmpDOBBox.setValue(LocalDate.parse(""));
+
         txtEmpContact.setText("");
         txtEmpEmail.setText("");
         txtEmpNic.setText("");
         txtEmpJobTitle.setText("");
+        txtEmpDOBBox.setValue(null);
 
     }
 }

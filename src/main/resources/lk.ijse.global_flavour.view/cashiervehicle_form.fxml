@@ -19,7 +19,7 @@
             <Image url="@../lk.ijse.global_flavour.assets/plain-smooth-green-paper-background.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="532.0" layoutY="32.0" prefHeight="43.0" prefWidth="271.0" text="VEHIClE DETAILS" textFill="WHITE">
+      <Label layoutX="532.0" layoutY="32.0" prefHeight="43.0" prefWidth="271.0" text="VEHICLE DETAILS" textFill="WHITE">
          <font>
             <Font size="29.0" />
          </font>
@@ -66,5 +66,6 @@
          </image>
       </ImageView>
       <Button layoutX="772.0" layoutY="356.0" mnemonicParsing="false" onAction="#lblClearAllOnAction" opacity="0.0" prefHeight="31.0" prefWidth="31.0" />
+      <Label fx:id="lblInvalidVehical" layoutX="179.0" layoutY="189.0" prefHeight="21.0" prefWidth="310.0" text="Invalid VehicaleId Please Enter &quot;VEHI-001&quot; " textFill="#ffc9c9" />
    </children>
 </AnchorPane>

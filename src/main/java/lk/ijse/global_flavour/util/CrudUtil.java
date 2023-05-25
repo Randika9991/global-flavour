@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class CrudUtil {
-    public static <T>T execute(String sql , Object...args) throws SQLException, SQLException {
-
+    public static <T>T execute(String sql , Object...args) throws SQLException {
+                                                                                                                       //prmitive data type walata poduwe bawitha karna ekak
         PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
 
         for (int i = 0; i < args.length; i++) {
@@ -16,11 +16,9 @@ public class CrudUtil {
         }
         if (sql.startsWith("SELECT") || sql.startsWith("select")) {
             return (T) pstm.executeQuery();
-        } else {
-            return (T) (Boolean) (pstm.executeUpdate() > 0);
         }
 
-
+            return (T) (Boolean) (pstm.executeUpdate() > 0);
 
     }
 }

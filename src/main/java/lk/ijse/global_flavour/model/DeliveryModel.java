@@ -131,7 +131,7 @@ public class DeliveryModel {
 
     public static boolean change(DeliverForm deliverForm) throws SQLException {
 
-        String sql = "UPDATE delivey SET empId = ?,orderId = ?, vehiId = ?,location = ?, deliveryDate = ?,dueDate = ?,deliveryStatus = ? WHERE deliveryId = ?";
+        String sql = "UPDATE delivery SET empId = ?,orderId = ?, vehiId = ?,location = ?, deliveryDate = ?,dueDate = ?,deliveryStatus = ? WHERE deliveryId = ?";
 
         try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
 
@@ -162,6 +162,16 @@ public class DeliveryModel {
 
             }
             return dataList;
+        }
+    }
+
+    public static boolean delete(String id) throws SQLException {
+        String sql = "DELETE FROM delivery WHERE deliveryId = ?";
+
+        try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
+
+            pstm.setString(1, id);
+            return pstm.executeUpdate() > 0;
         }
     }
 }

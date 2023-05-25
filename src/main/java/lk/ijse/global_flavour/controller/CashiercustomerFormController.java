@@ -3,6 +3,7 @@ package lk.ijse.global_flavour.controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import lk.ijse.global_flavour.util.AlertController;
 import lk.ijse.global_flavour.util.ValidateField;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.function.Predicate;
 
 public class CashiercustomerFormController {
@@ -76,6 +78,13 @@ public class CashiercustomerFormController {
     private Label lblInvalidCustomID;
 
     @FXML
+    private Label lblAlredyAdded;
+
+    @FXML
+    private Label lblAlredyAddedContact;
+
+
+    @FXML
     void buttonSaveOnACT(ActionEvent event) {
         if(txtCusId.getText().isEmpty() || txtCusName.getText().isEmpty() || txtCusAddress.getText().isEmpty() ||txtCusContact.getText().isEmpty()||txtCusEmail1.getText().isEmpty()){
             AlertController.animationMesseagewrong("Error","Customer details not saved. \nPlease make sure to fill the request fields.");
@@ -85,6 +94,32 @@ public class CashiercustomerFormController {
                 if(ValidateField.emailCheck(txtCusEmail1.getText())){
                     if(ValidateField.contactCheck(txtCusContact.getText())){
                         if(ValidateField.CustomerIdCheck(txtCusId.getText())){
+                            if(preContact.equals(txtCusContact.getText())){
+                                lblAlredyAddedContact.setVisible(true);
+
+                            }else {
+                                lblInvalidCustomID.setVisible(false);
+                                String CusId = txtCusId.getText();
+                                String CusName = txtCusName.getText();
+                                String CusContact = txtCusContact.getText();
+                                String CusAddress = txtCusAddress.getText();
+                                String CusEmail1 = txtCusEmail1.getText();
+
+
+                                CashierCustomer allCustom = new CashierCustomer(CusId, CusName,CusContact,CusAddress,CusEmail1);
+
+                                try {
+//
+                                    boolean isSaved = CashierCustomerModel.save(allCustom);
+                                    if (isSaved) {
+                                        AlertController.animationMesseageCorect("CONFIRMATION","Customer Save Success!");
+                                        onActionGetAllCustom();
+                                    }
+                                } catch (SQLException e) {
+                                    System.out.println(e);
+                                    AlertController.animationMesseagewrong("Error","something went wrong!");
+                                }
+                            }
 
                         }else {
                             lblInvalidCustomID.setVisible(true);
@@ -236,13 +271,54 @@ public class CashiercustomerFormController {
 
     }
 
+    String preContact;
+    private void loadCustomerContact() {
+        try {
+            ObservableList<String> obList = FXCollections.observableArrayList();
+            List<String> ids = CashierCustomerModel.loadContact();
+
+            for (String id : ids) {
+                obList.add(id);
+            }
+            //cmbCustomerId.setItems(obList);
+            preContact= String.valueOf(obList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
+        }
+    }
+
+    String preemail;
+    private void loadCustomeremail() {
+        try {
+            ObservableList<String> obList = FXCollections.observableArrayList();
+            List<String> ids = CashierCustomerModel.loademail();
+
+            for (String id : ids) {
+                obList.add(id);
+            }
+            //cmbCustomerId.setItems(obList);
+            preemail= String.valueOf(obList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            AlertController.animationMesseagewrong("Error","something went wrong!");
+        }
+    }
+
+
+
     @FXML
     void initialize() {
+        loadCustomeremail();
+        loadCustomerContact();
         onActionGetAllCustom();
         setCellValuefactory();
         lblInvalidContactNo.setVisible(false);
         lblInvalidEmail.setVisible(false);
         lblInvalidCustomID.setVisible(false);
+
+        lblAlredyAdded.setVisible(false);
+        lblAlredyAddedContact.setVisible(false);
     }
 
     void onActionGetAllCustom() {

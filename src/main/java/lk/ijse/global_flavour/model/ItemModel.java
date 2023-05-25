@@ -133,7 +133,6 @@ public class ItemModel {
                 dto.getQty(),
                 dto.getCode()
         );
-
     }
 
     public static Item findById(String itemcode) throws SQLException {

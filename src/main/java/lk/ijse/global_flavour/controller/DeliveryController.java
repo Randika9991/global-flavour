@@ -91,30 +91,36 @@ public class DeliveryController {
 
     @FXML
     void buttonSaveOnACT(ActionEvent event) {
-        String orderId = String.valueOf(OrderFormController.getGenerateNextOrderIdShireDeliveryController());
-        String deliverId = String.valueOf(idShireSave);
-        String location = txtLocation.getText();
-        String employeId = String.valueOf(cmbEmpId.getValue());
-        LocalDate dueDate = DPDueDate.getValue();
-        String localTime = String.valueOf(LocalDate.now());
-        String vehiId = String.valueOf(cmbVehiId.getValue());
-        //boolean status = true;
 
-        Delivery cus = new Delivery(deliverId,employeId,orderId,vehiId,location,localTime,dueDate, true);
-        System.out.println(deliverId+" "+employeId+" "+orderId+" "+vehiId+" "+location+" "+localTime+" "+dueDate+" "+true);
+        if(txtLocation.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Delivery details not saved. \nPlease make sure to fill the request fields.");
+        }else {
+            String orderId = String.valueOf(OrderFormController.getGenerateNextOrderIdShireDeliveryController());
+            String deliverId = String.valueOf(idShireSave);
+            String location = txtLocation.getText();
+            String employeId = String.valueOf(cmbEmpId.getValue());
+            LocalDate dueDate = DPDueDate.getValue();
+            String localTime = String.valueOf(LocalDate.now());
+            String vehiId = String.valueOf(cmbVehiId.getValue());
+            //boolean status = true;
 
-
-
-
-       try {
-           PlaceOrderModel.saveDelivery(cus);
-           AlertController.animationMesseageCorect("CONFIRMATION","Delivery Save Success!");
-           deliveryAncPane.getScene().getWindow().hide();
+            Delivery cus = new Delivery(deliverId,employeId,orderId,vehiId,location,localTime,dueDate, true);
+            System.out.println(deliverId+" "+employeId+" "+orderId+" "+vehiId+" "+location+" "+localTime+" "+dueDate+" "+true);
 
 
-        } catch (Exception e) {
+
+
+            try {
+                PlaceOrderModel.saveDelivery(cus);
+                AlertController.animationMesseageCorect("CONFIRMATION","Delivery Save Success!");
+                deliveryAncPane.getScene().getWindow().hide();
+
+
+            } catch (Exception e) {
 //            System.out.println(e);
-            AlertController.animationMesseagewrong("Error","something went wrong!");
+                AlertController.animationMesseagewrong("Error","something went wrong!");
+            }
+
         }
 
     }

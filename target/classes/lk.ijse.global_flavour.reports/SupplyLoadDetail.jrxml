@@ -209,7 +209,7 @@
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{supId}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="MMM d, yyyy">
 				<reportElement x="264" y="10" width="60" height="30" uuid="eabd1a30-ae50-4dc0-83a1-69770fb856e8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="005a1a47-c652-495a-8b29-8d3ca8bd00e8"/>
 				</reportElement>
@@ -230,7 +230,7 @@
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="h:mm a">
 				<reportElement x="485" y="10" width="50" height="30" uuid="faa64abb-1b1e-4568-9609-4eefec592d65">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="59a7a37e-aef1-49b5-a7ce-3469ea00a156"/>
 				</reportElement>

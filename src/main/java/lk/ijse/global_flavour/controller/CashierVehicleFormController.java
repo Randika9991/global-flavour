@@ -16,6 +16,7 @@ import lk.ijse.global_flavour.dto.tm.ItemTM;
 import lk.ijse.global_flavour.model.CashierVehicleModel;
 import lk.ijse.global_flavour.model.ItemModel;
 import lk.ijse.global_flavour.util.AlertController;
+import lk.ijse.global_flavour.util.ValidateField;
 
 import java.sql.SQLException;
 import java.util.function.Predicate;
@@ -49,23 +50,40 @@ public class CashierVehicleFormController {
     @FXML
     private TextField txtsearchVehical;
 
+
+    @FXML
+    private Label lblInvalidVehical;
+
     @FXML
     void buttonSaveOnACT(ActionEvent event) {
-        String vehiId = txtVehiId.getText();
-        String vehiNo = txtVehiNo.getText();
-        String vehitype = txtVehitype.getText();
+        if(txtVehiId.getText().isEmpty()||txtVehiNo.getText().isEmpty()||txtVehitype.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Vehicle details not saved. \nPlease make sure to fill the request fields.");
 
-        CashierVehicle allvehi = new CashierVehicle(vehiId, vehiNo,vehitype);
+        }else {
 
-        try {
-            boolean isSaved = CashierVehicleModel.save(allvehi);
-            if (isSaved) {
-                AlertController.animationMesseageCorect("CONFIRMATION","Vehicle Save Success!");
-                onActionGetAllItem();
+            if(ValidateField.VehicalIdCheck(txtVehiId.getText())){
+                lblInvalidVehical.setVisible(false);
+                String vehiId = txtVehiId.getText();
+                String vehiNo = txtVehiNo.getText();
+                String vehitype = txtVehitype.getText();
+
+                CashierVehicle allvehi = new CashierVehicle(vehiId, vehiNo,vehitype);
+
+                try {
+                    boolean isSaved = CashierVehicleModel.save(allvehi);
+                    if (isSaved) {
+                        AlertController.animationMesseageCorect("CONFIRMATION","Vehicle Save Success!");
+                        onActionGetAllItem();
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e);
+                    AlertController.animationMesseagewrong("Error","something went wrong!");
+                }
+
+            }else {
+                lblInvalidVehical.setVisible(true);
             }
-        } catch (SQLException e) {
-            System.out.println(e);
-            AlertController.animationMesseagewrong("Error","something went wrong!");
+
         }
 
     }
@@ -73,7 +91,8 @@ public class CashierVehicleFormController {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
 
-        if(txtVehiId.getText().isEmpty()){
+        if(txtVehiId.getText().isEmpty()||txtVehiNo.getText().isEmpty()||txtVehitype.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Vehicle details not updated. \nPlease make sure to fill the request fields.");
 
         }else {
             String vehiId = txtVehiId.getText();
@@ -84,8 +103,11 @@ public class CashierVehicleFormController {
 
             try {
                 boolean isUpdated = CashierVehicleModel.update(allvehi);
-                AlertController.animationMesseageCorect("CONFIRMATION","Vehicle updated!");
-                onActionGetAllItem();
+                if(isUpdated){
+                    AlertController.animationMesseageCorect("CONFIRMATION","Vehicle updated!");
+                    onActionGetAllItem();
+                }
+
             } catch (SQLException e) {
                 e.printStackTrace();
                 AlertController.animationMesseagewrong("Error","something went wrong!");
@@ -174,6 +196,7 @@ public class CashierVehicleFormController {
     void initialize() {
         onActionGetAllItem();
         setCellValuefactory();
+        lblInvalidVehical.setVisible(false);
 
     }
 

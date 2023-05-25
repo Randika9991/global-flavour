@@ -142,20 +142,6 @@ public class OrderFormController implements Initializable {
     private ObservableList<OrderTM> obList = FXCollections.observableArrayList();
 
     @FXML
-    void newButtonOnAction(ActionEvent event) {
-        InputStream resource = this.getClass().getResourceAsStream("/lk.ijse.global_flavour.reports/orderPlace.jrxml");
-        try {
-            JasperReport jasperReport = JasperCompileManager.compileReport(resource);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
-            JasperViewer.viewReport(jasperPrint, false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateNextOrderId();
         setOrderDate();
@@ -231,7 +217,6 @@ public class OrderFormController implements Initializable {
             e.printStackTrace();
             AlertController.animationMesseagewrong("Error","something went wrong!");
         }
-
     }
     @FXML
     void cmbItemOnAction(ActionEvent event) {
@@ -247,8 +232,10 @@ public class OrderFormController implements Initializable {
         }
     }
     int QTYMyUse;
+    String ItemName;
     private void fillItemFields(Item item) {
         lblItemName.setText(item.getItemName());
+        ItemName=item.getItemName();
         lblUnitPrice.setText(item.getUnitPrice());
         lblCategory.setText(item.getCategory());
         QTYMyUse= Integer.parseInt(item.getQty());
@@ -257,46 +244,60 @@ public class OrderFormController implements Initializable {
 
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
-        if(QTYMyUse<Integer.parseInt((txtQty.getText()))||QTYMyUse==0){
-            AlertController.animationMesseagewrong("Error","Low QTY. Can't add to card");
+        if(txtQty.getText().isEmpty()&&lblCustomerName.getText().isEmpty()){
+            AlertController.animationMesseagewrong("Error","Please fill the field.");
+
         }else {
-            String code = String.valueOf(cmbItemCode.getValue());
-            String itemName = lblItemName.getText();
-            double unitPrice = Double.parseDouble(lblUnitPrice.getText());
-            String category = lblCategory.getText();
-            int qty = Integer.parseInt(txtQty.getText());
-            double total = qty * unitPrice;
-            Button btnRemove = new Button("Remove");
-            btnRemove.setCursor(Cursor.HAND);
+            if(lblCustomerName.getText().isEmpty()){
+                AlertController.animationMesseagewrong("Error","Please Select customer");
+            }else {
+                if(txtQty.getText().isEmpty()){
+                    AlertController.animationMesseagewrong("Error","Please add QTY field.");
 
-            setRemoveBtnOnAction(btnRemove); /* set action to the btnRemove */
+                }else {
+                    if(QTYMyUse<Integer.parseInt((txtQty.getText()))||QTYMyUse==0){
+                        AlertController.animationMesseagewrong("Error",ItemName+" has a Low QTY. Can't add to card");
+                    }else {
+                        String code = String.valueOf(cmbItemCode.getValue());
+                        String itemName = lblItemName.getText();
+                        double unitPrice = Double.parseDouble(lblUnitPrice.getText());
+                        String category = lblCategory.getText();
+                        int qty = Integer.parseInt(txtQty.getText());
+                        double total = qty * unitPrice;
+                        Button btnRemove = new Button("Remove");
+                        btnRemove.setCursor(Cursor.HAND);
 
-            if (!obList.isEmpty()) {
-                for (int i = 0; i < mainCOMItem.getItems().size(); i++) {
-                    if (colItemCode.getCellData(i).equals(code)) {
-                        qty += (int) colItemQty.getCellData(i);
-                        total = qty * unitPrice;
+                        setRemoveBtnOnAction(btnRemove); /* set action to the btnRemove */
 
-                        obList.get(i).setQty(qty);
-                        obList.get(i).setTotal(total);
+                        if (!obList.isEmpty()) {
+                            for (int i = 0; i < mainCOMItem.getItems().size(); i++) {
+                                if (colItemCode.getCellData(i).equals(code)) {
+                                    qty += (int) colItemQty.getCellData(i);
+                                    total = qty * unitPrice;
 
-                        mainCOMItem.refresh();
+                                    obList.get(i).setQty(qty);
+                                    obList.get(i).setTotal(total);
+
+                                    mainCOMItem.refresh();
+                                    calculateNetTotal();
+                                    return;
+                                }
+                            }
+                        }
+                        OrderTM tm = new OrderTM(code,itemName, category, qty, unitPrice, total, btnRemove);
+
+                        obList.add(tm);
+                        mainCOMItem.setItems(obList);
                         calculateNetTotal();
-                        return;
+
+                        txtQty.setText("");
                     }
                 }
             }
-            OrderTM tm = new OrderTM(code,itemName, category, qty, unitPrice, total, btnRemove);
-
-            obList.add(tm);
-            mainCOMItem.setItems(obList);
-            calculateNetTotal();
-
-            txtQty.setText("");
         }
     }
     private void setRemoveBtnOnAction(Button btn) {
-        btn.setOnAction((e) -> {
+        btn.setOnAction((e) -> {//lamda exprtion ekak
 
             boolean ok = AlertController.okconfirmmessage("Are you sure to remove?\", yes, no");
 
@@ -351,6 +352,7 @@ public class OrderFormController implements Initializable {
                 orderDTOList.add(cartDTO);
             }
 
+
             try {
                 boolean isSaved = PlaceOrderModel.placeOrder(oId,cId,payment,orderDTOList,orderTM,delivery);
                 if(isSaved) {
@@ -359,7 +361,7 @@ public class OrderFormController implements Initializable {
 
                     // String balance = balancelbl.getText();
                     generateNextOrderId();
-                    AlertController.animationMesseageCorect("CONFIRMATION","selected...");
+                    AlertController.animationMesseageCorect("CONFIRMATION","Order completed...");
                     boolean result = AlertController.okconfirmmessage("Do you want the bill ?");
 
                     if (result) {

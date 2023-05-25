@@ -154,7 +154,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Elephant" size="14"/>
 				</textElement>
-				<text><![CDATA[addrsss]]></text>
+				<text><![CDATA[address]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="210" y="6" width="68" height="30" uuid="5812d309-d1cc-4adb-8017-e793d827ec21">
@@ -166,7 +166,7 @@
 				<text><![CDATA[dob]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="302" y="6" width="68" height="30" uuid="af257d78-aee5-43e5-8a0a-d38e879d49b8">
+				<reportElement x="300" y="6" width="80" height="30" uuid="af257d78-aee5-43e5-8a0a-d38e879d49b8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a2f14911-57d7-40f5-9b2c-27c633fefd58"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -175,7 +175,7 @@
 				<text><![CDATA[contactNo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="371" y="6" width="67" height="30" uuid="2595a873-e3e3-4620-8587-3077403a0e82">
+				<reportElement x="380" y="6" width="60" height="30" uuid="2595a873-e3e3-4620-8587-3077403a0e82">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9604417b-b3d9-43e0-a782-531d2bdd8288"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -238,7 +238,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{addrsss}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="MMM d, yyyy">
 				<reportElement x="210" y="10" width="69" height="30" uuid="44d2304a-635c-4a89-8666-513fe4b16d82">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fd06e273-d42c-489e-92bf-34daf8fea132"/>
 				</reportElement>

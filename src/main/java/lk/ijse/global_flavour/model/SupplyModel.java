@@ -94,7 +94,7 @@ public class SupplyModel {
             if(isSaved) {
                 boolean isUpdated = ItemModel.addQty(placeSupplyLoadList);
                 if(isUpdated) {
-                    con.commit();
+                    con.commit();                                                                                                                                                 //database ekata save eka
                     return true;
                 }
             }
@@ -116,7 +116,6 @@ public class SupplyModel {
             }
         }
         return true;
-
     }
     private static boolean savesupplyloaddetails(String loadid, String suppid, String totalprice, LocalDate now, LocalTime now1, PlaceSupplyLoad placeSupplyLoad) throws SQLException {
         String sql = "INSERT INTO SupplyLoadDetail(loadId,supId,itemCode,qty,date,time,price)" +

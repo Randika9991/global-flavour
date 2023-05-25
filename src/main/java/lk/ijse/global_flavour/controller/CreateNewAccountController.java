@@ -210,6 +210,8 @@ public class CreateNewAccountController {
                                                                         txtEnteremail.setText("");
                                                                         txtPassword.setText("");
                                                                         txtConfirmPassword.setText("");
+                                                                        cmbAdminCashiar.setValue(null);
+
                                                                     }
                                                                 } catch (SQLException e) {
                                                                     System.out.println(e);

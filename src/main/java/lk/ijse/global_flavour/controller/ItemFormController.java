@@ -71,7 +71,7 @@ public class ItemFormController {
     void buttonSaveOnACT(ActionEvent event) {
 
             if(txtItemId.getText().isEmpty()||txtItemName.getText().isEmpty()||txtItemPrice.getText().isEmpty()||txtItemCatogory.getText().isEmpty()||txtItemQTY.getText().isEmpty()){
-                AlertController.animationMesseagewrong("Error","Employee details not saved. \nPlease make sure to fill the request fields.");
+                AlertController.animationMesseagewrong("Error","Item details not saved. \nPlease make sure to fill the request fields.");
             }else {
                 if(ValidateField.ItemCodeCheck(txtItemId.getText())){
                     lblInvalidItemCode.setVisible(false);
@@ -103,16 +103,13 @@ public class ItemFormController {
 
 
             }
-
-
-
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws AWTException {
 
 
-        if(txtItemId.getText().isEmpty()){
+        if(txtItemId.getText().isEmpty()||txtItemName.getText().isEmpty()||txtItemPrice.getText().isEmpty()||txtItemCatogory.getText().isEmpty()||txtItemQTY.getText().isEmpty()){
 
         }else {
             boolean ok = AlertController.okconfirmmessage("Are you Sure. Do you wont Delete item");
@@ -140,7 +137,7 @@ public class ItemFormController {
 
     void btnUpdateOnAction(ActionEvent event) {
 
-        if(txtItemId.getText().isEmpty()){
+        if(txtItemId.getText().isEmpty()||txtItemName.getText().isEmpty()||txtItemPrice.getText().isEmpty()||txtItemCatogory.getText().isEmpty()||txtItemQTY.getText().isEmpty()){
 
         }else {
             String itemId = txtItemId.getText();

@@ -81,5 +81,7 @@
       </ImageView>
       <Button layoutX="761.0" layoutY="356.0" mnemonicParsing="false" onAction="#lblClearAllOnAction" opacity="0.0" prefHeight="31.0" prefWidth="31.0" />
       <Label fx:id="lblInvalidCustomID" layoutX="179.0" layoutY="188.0" prefHeight="21.0" prefWidth="283.0" text="Invalid Customer Id Please Enter &quot;CUS-001&quot; " textFill="#ffc9c9" />
+      <Label fx:id="lblAlredyAdded" layoutX="555.0" layoutY="302.0" prefHeight="21.0" prefWidth="190.0" text="Alredy added Email" textFill="#ffc9c9" />
+      <Label fx:id="lblAlredyAddedContact" layoutX="929.0" layoutY="209.0" prefHeight="21.0" prefWidth="190.0" text="Alredy added Contact" textFill="#ffc9c9" />
    </children>
 </AnchorPane>

@@ -70,6 +70,8 @@ public class LoginPageController {
     @FXML
     void loginPageOnAction(ActionEvent event) throws IOException, AWTException {
 
+        //kumara
+
         String name = txtUserName.getText();
 
 

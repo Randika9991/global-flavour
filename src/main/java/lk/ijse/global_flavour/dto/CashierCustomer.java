@@ -14,6 +14,8 @@ public class CashierCustomer {
     private String ContactNo;
     private String Address;
     private String email;
+
+
 }
 
 

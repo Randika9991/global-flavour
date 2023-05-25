@@ -51,7 +51,7 @@ public class CashierVehicleModel {
         try (PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql)) {
 
             pstm.setString(1, vehiAdd.getVehicleNo());
-            pstm.setString(2, vehiAdd.getVehicleNo());
+            pstm.setString(2, vehiAdd.getVehicleType());
             pstm.setString(3, vehiAdd.getVehicleId());
 
             return pstm.executeUpdate() > 0;

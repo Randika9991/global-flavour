@@ -94,4 +94,12 @@ public class ValidateField {
             return false; // Input contains non-numeric characters or invalid decimal points
         }
     }
+
+    public static boolean VehicalIdCheck(String input) {
+        if (input.matches("^(VEHI-)[0-9]{3}$")) {
+            return true; // Input contains only numeric characters, including up to two decimal points
+        } else {
+            return false; // Input contains non-numeric characters or invalid decimal points
+        }
+    }
 }

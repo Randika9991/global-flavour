@@ -53,8 +53,8 @@ public class PlaceOrderModel {
         }
     }
 
-    public static boolean saveDelivery(Delivery cus) {
+    public static void saveDelivery(Delivery cus) {
         delivery = cus;
-        return false;
+
     }
 }

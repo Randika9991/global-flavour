@@ -7,8 +7,6 @@ import lk.ijse.global_flavour.dto.EmployeeSetAndGet;
 import lk.ijse.global_flavour.dto.tm.EmployeeTM;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EmployeeSetAndGetModel {
     public static boolean save(EmployeeSetAndGet EmployeeAdd) throws SQLException {  //data baes ekata dana set eka
